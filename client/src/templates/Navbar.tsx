@@ -13,7 +13,7 @@ function Navbar() {
   const toggleSidebar = () => setSidebarOpen((prev) => !prev);
 
   return (
-    <nav className="relative h-20 inset-x-0 top-0 px-4 w-full bg-slate-800 text-white border-b-2 border-white">
+    <nav className="relative h-20 inset-x-0 top-0 px-4 w-full bg-slate-800 text-white border-b-2 border-orange-500">
       <MaxWidthWrapper>
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center gap-2">
@@ -35,18 +35,10 @@ function Navbar() {
 
             <NavHamBtn isOpen={isSidebarOpen} onClick={toggleSidebar} />
 
-            <div>
-              {/* <Tally1 size={34} /> */}
-              <div className="border-1 h-10"/>
-            </div>
+            <div className="border-1 h-10" />
 
             <div className="hidden lg:flex">
-              <Button
-                className={cn(
-                  buttonVariants({ size: "sm", variant: "outline" }),
-                  "bg-slate-800 text-2xl border-orange-500"
-                )}
-              >
+              <Button className="bg-slate-800 text-2xl hover:bg-slate-700 outline-none">
                 <p className="text-orange-500 font-semibold">Login</p>
               </Button>
             </div>
@@ -66,13 +58,8 @@ function Navbar() {
           isSidebarOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex flex-col gap-4 p-4 mt-6">
-          <Button
-            className={cn(
-              buttonVariants({ size: "sm", variant: "outline" }),
-              "bg-slate-800 text-2xl border-orange-500"
-            )}
-          >
+        <div className="flex flex-col gap-4 p-4 mt-2">
+          <Button className="bg-slate-800 text-2xl hover:bg-slate-700 outline-none">
             <p className="text-orange-500 font-semibold">Login</p>
           </Button>
 
@@ -86,10 +73,7 @@ function Navbar() {
 
       {/* background overlay */}
       {isSidebarOpen && (
-        <div
-          className="fixed inset-0  z-0 lg:hidden"
-          onClick={toggleSidebar}
-        />
+        <div className="fixed inset-0  z-0 lg:hidden" onClick={toggleSidebar} />
       )}
     </nav>
   );

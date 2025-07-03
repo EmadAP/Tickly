@@ -1,4 +1,5 @@
 "use client";
+import { Menu, X } from "lucide-react";
 import React from "react";
 
 interface NavHamBtnProps {
@@ -8,25 +9,22 @@ interface NavHamBtnProps {
 
 function NavHamBtn({ onClick, isOpen }: NavHamBtnProps) {
   return (
-    <div className="flex lg:hidden w-11 h-11 justify-center items-center">
+    <div className="flex lg:hidden w-11 h-11 justify-center items-center hover:bg-slate-700 rounded-full cursor-pointer">
       <button
         onClick={onClick}
         type="button"
-        className="w-6 h-6 flex justify-around flex-col z-20 cursor-pointer"
+        className="z-20 "
       >
-        <div
-          className={`bg-orange-500 w-6 h-[0.35rem] rounded transition-all origin-[1px] ${
-            isOpen ? "rotate-45" : "rotate-0"
+        <Menu
+          size={30}
+          className={`text-orange-500 w-full h-full ${
+            isOpen ? "hidden" : "flex"
           }`}
         />
-        <div
-          className={`bg-orange-500 w-6 h-[0.35rem] rounded transition-all origin-[1px] ${
-            isOpen ? "opacity-0 translate-x-4" : "opacity-100"
-          }`}
-        />
-        <div
-          className={`bg-orange-500 w-6 h-[0.35rem] rounded transition-all origin-[1px] ${
-            isOpen ? "-rotate-45" : "rotate-0"
+        <X
+          size={30}
+          className={`text-orange-500 w-full h-full ${
+            isOpen ? "flex" : "hidden"
           }`}
         />
       </button>

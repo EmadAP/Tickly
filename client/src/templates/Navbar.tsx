@@ -1,10 +1,9 @@
 "use client";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import NavDropdown from "@/components/NavDropdown";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { ChevronRight, ShoppingCart, Tally1, Tickets } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ShoppingCart, Tickets } from "lucide-react";
 import React, { useState } from "react";
-import { cn } from "@/lib/utils";
 import NavHamBtn from "@/components/NavHamBtn";
 
 function Navbar() {
@@ -54,7 +53,7 @@ function Navbar() {
 
       {/* Mobile Sidebar Overlay */}
       <div
-        className={`fixed inset-y-0 right-0 top-19 w-64 bg-slate-800 text-white transform transition-transform duration-300 ease-in-out z-10 lg:hidden shadow-lg ${
+        className={`fixed inset-y-0 z-20 right-0 top-19 w-64 bg-slate-800 text-white transform transition-transform duration-300 ease-in-out lg:hidden shadow-lg ${
           isSidebarOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

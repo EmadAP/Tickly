@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-          {/* <AppSidebar /> */}
+      {/* <AppSidebar /> */}
       <body
         className={`${robotoSans.variable} ${robotoMono.variable} antialiased`}
       >

@@ -3,11 +3,10 @@ import MainBanner from "@/templates/MainBanner";
 
 export default function Home() {
   return (
-    <div className="bg-slate-700 text-white">
-      <MaxWidthWrapper >
-        <div>
-          <MainBanner />
-        </div>
+    <div className="bg-slate-800 text-white">
+      <MainBanner />
+      <MaxWidthWrapper>
+        <div></div>
       </MaxWidthWrapper>
     </div>
   );

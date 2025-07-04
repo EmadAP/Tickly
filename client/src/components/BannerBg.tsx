@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 const backgroundImages = [
@@ -17,21 +18,14 @@ function BannerBg() {
   }, []);
 
   return (
-    // <div
-    //   className="absolute inset-0 z-0"
-    //   style={{
-    //     backgroundImage: `url(${bgImage})`,
-    //     backgroundSize: "cover",
-    //     backgroundPosition: "center",
-    //     overflow: "hidden",
-    //   }}
-    // ></div>
     <div className="absolute inset-0">
       <div className="absolute inset-0 bg-black/30 z-0" />
-      <img
+      <Image
         src={bgImage}
-        className="w-full h-full object-cover"
         alt="Background"
+        fill
+        sizes="100%"
+        className="object-cover"
       />
     </div>
   );

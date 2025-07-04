@@ -5,7 +5,7 @@ import React from "react";
 
 function MainBanner() {
   return (
-    <div className="relative w-full text-center border-b-2 border-orange-500">
+    <div className="relative w-full text-center border-b-2 border-orange-500 bg-slate-950">
       <BannerBg />
       <MaxWidthWrapper>
         <div className="flex flex-col relative z-10 bg-transparent">

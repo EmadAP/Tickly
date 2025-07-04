@@ -10,7 +10,7 @@ interface NavHamBtnProps {
 function NavHamBtn({ onClick, isOpen }: NavHamBtnProps) {
   return (
     <div className="flex lg:hidden w-11 h-11 justify-center items-center hover:bg-slate-700 rounded-full cursor-pointer">
-      <button onClick={onClick} type="button" className="z-20 ">
+      <button onClick={onClick} type="button" className="z-20 cursor-pointer ">
         <Menu
           size={30}
           className={`text-orange-500 w-full h-full ${

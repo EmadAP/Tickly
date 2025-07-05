@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
 
+import userAuthRoutes from "./routes/userAuth";
 import { MONGO_URI, PORT } from "./util/config";
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 //Routes
+app.use("/api", userAuthRoutes);
 
 // Connect DB and Start Server
 mongoose

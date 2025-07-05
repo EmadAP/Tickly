@@ -6,9 +6,12 @@ import { ShoppingCart, Tickets } from "lucide-react";
 import React, { useState } from "react";
 import NavHamBtn from "@/components/NavHamBtn";
 import Link from "next/link";
+import NavAuth from "@/components/NavAuth";
+import Popup from "@/components/Popup";
 
 function Navbar() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [isLoginOpen, setLoginOpen] = useState(false);
 
   const toggleSidebar = () => setSidebarOpen((prev) => !prev);
 
@@ -38,8 +41,11 @@ function Navbar() {
             <div className="border-1 h-10" />
 
             <div className="hidden lg:flex">
-              <Button className="bg-slate-800 text-2xl hover:bg-slate-700 outline-none cursor-pointer">
-                <p className="text-orange-500 font-semibold">Login</p>
+              <Button
+                onClick={() => setLoginOpen(true)}
+                className="text-orange-500 font-semibold bg-slate-800 text-2xl hover:bg-slate-700 outline-none cursor-pointer"
+              >
+                Login
               </Button>
             </div>
 
@@ -57,8 +63,11 @@ function Navbar() {
           }`}
         >
           <div className="flex flex-col gap-4 p-4 mt-2">
-            <Button className="bg-slate-800 text-2xl hover:bg-slate-700 outline-none cursor-pointer">
-              <p className="text-orange-500 font-semibold">Login</p>
+            <Button
+              onClick={() => setLoginOpen(true)}
+              className="text-orange-500 font-semibold bg-slate-800 text-2xl hover:bg-slate-700 outline-none cursor-pointer"
+            >
+              Login
             </Button>
 
             <Button className="bg-slate-800 text-2xl hover:bg-slate-700 outline-none w-full cursor-pointer">
@@ -77,6 +86,9 @@ function Navbar() {
           />
         )}
       </MaxWidthWrapper>
+      <Popup isOpen={isLoginOpen} onClose={() => setLoginOpen(false)}>
+        <NavAuth onClose={() => setLoginOpen(false)} />
+      </Popup>
     </nav>
   );
 }

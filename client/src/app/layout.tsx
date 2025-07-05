@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { Roboto_Mono } from "next/font/google";
 import "./globals.css";
+import QueryProvider from "@/lib/context/QueryProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 const robotoSans = Roboto({
   variable: "--font-roboto-sans",
@@ -25,11 +27,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* <AppSidebar /> */}
       <body
         className={`${robotoSans.variable} ${robotoMono.variable} antialiased`}
       >
-        {children}
+        <QueryProvider>{children}</QueryProvider>
+        <Toaster />
       </body>
     </html>
   );

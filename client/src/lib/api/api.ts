@@ -20,5 +20,14 @@ export const LoginUserFc = async (data: loginProps) => {
 };
 
 export const LogoutUserFc = async () => {
-  await api.post("/api/logout");
+  const res = await api.post("/api/logout");
+  return res.data;
+};
+
+export const ProfileUserFc = async () => {
+  if (!document.cookie.includes("token=")) {
+    return null;
+  }
+  const res = await api.get("/api/profile");
+  return res.data;
 };

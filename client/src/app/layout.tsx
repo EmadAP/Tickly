@@ -4,6 +4,7 @@ import { Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "@/lib/context/QueryProvider";
 import { Toaster } from "@/components/ui/sonner";
+import { UserProvider } from "@/lib/context/UserContext";
 
 const robotoSans = Roboto({
   variable: "--font-roboto-sans",
@@ -30,7 +31,9 @@ export default function RootLayout({
       <body
         className={`${robotoSans.variable} ${robotoMono.variable} antialiased`}
       >
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <UserProvider>{children}</UserProvider>
+        </QueryProvider>
         <Toaster />
       </body>
     </html>

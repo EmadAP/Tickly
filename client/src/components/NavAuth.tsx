@@ -13,12 +13,14 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LoginUser, SignupUser } from "@/lib/api/auth/mutations";
 import { loginProps, SignupProps } from "@/lib/types/types";
+import { useUser } from "@/lib/context/UserContext";
 
 type NavAuthProps = {
   onClose: () => void;
 };
 
 function NavAuth({ onClose }: NavAuthProps) {
+  const { refetch } = useUser();
   const { mutate: signup } = SignupUser();
   const { mutate: login } = LoginUser();
   const [signupData, setSignupData] = useState<SignupProps>({
@@ -35,6 +37,7 @@ function NavAuth({ onClose }: NavAuthProps) {
     e.preventDefault();
     signup(signupData, {
       onSuccess: () => {
+        refetch();
         onClose();
       },
     });
@@ -44,6 +47,7 @@ function NavAuth({ onClose }: NavAuthProps) {
     e.preventDefault();
     login(loginData, {
       onSuccess: () => {
+        refetch();
         onClose();
       },
     });

@@ -1,17 +1,47 @@
+import BarChartComp from "@/components/BarChartComp";
+import LineChartComp from "@/components/LineChartComp";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import UsersChartTemp from "@/templates/UsersChartTemp";
+import {
+  CategorySalesData,
+  MonthlyRevenueData,
+  TopEventsData,
+  UsersData,
+  CategorySalesDataProps,
+  MonthlyRevenueDataProps,
+  TopEventsDataProps,
+  UserDataProps
+} from "@/lib/mock/mock";
+import ChartTemplate from "@/templates/ChartTemplate";
 
 export default function Home() {
   return (
-    <div className="bg-slate-900 text-white">
+    <div className="bg-slate-900 text-white py-10">
       <MaxWidthWrapper>
-        <div className="min-h-screen grid gap-4 grid-cols-1 lg:grid-cols-4">
-          <div className="lg:col-span-2">
-            <UsersChartTemp />
+        <div className=" grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="col-span-1 md:col-span-2 lg:col-span-1  ">
+            <div className="flex flex-col md:flex-row lg:flex-col w-full gap-10">
+              <ChartTemplate title="Sales by Category">
+                <BarChartComp
+                  data={CategorySalesData}
+                  dataKey="tickets"
+                  xKey="category"
+                />
+              </ChartTemplate>
+              <ChartTemplate title="Top Events by Sales">
+                <BarChartComp data={TopEventsData} dataKey="ticketsSold" />
+              </ChartTemplate>
+            </div>
           </div>
-          <div className="lg:col-span-2">second</div>
-          <div className="lg:col-span-4">third</div>
-          <div className="lg:col-span-4">forth</div>
+          <div className="col-span-1 md:col-span-2 lg:col-span-2">
+            <div className="flex flex-col gap-10">
+              <ChartTemplate title="Monthly Revenue">
+                <LineChartComp data={MonthlyRevenueData} dataKey="revenue" />
+              </ChartTemplate>
+              <ChartTemplate title="User Growth">
+                <LineChartComp data={UsersData} dataKey="pv" />
+              </ChartTemplate>
+            </div>
+          </div>
         </div>
       </MaxWidthWrapper>
     </div>

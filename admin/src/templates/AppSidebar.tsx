@@ -26,53 +26,30 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-// Menu items.
-const items = [
-  {
-    title: "Home",
-    url: "/",
-    icon: Home,
-  },
-  {
-    title: "Users Table",
-    url: "#",
-    icon: UserRoundSearch,
-  },
-  {
-    title: "Ticket Table",
-    url: "#",
-    icon: Tags,
-  },
-];
-const tickets = [
-  {
-    title: "Create Ticket",
-    url: "/CreateTibkrt",
-    icon: Pencil,
-  },
-  {
-    title: "Edit Ticket",
-    url: "#",
-    icon: PencilLine,
-  },
-];
-
-const admins = [
-  {
-    title: "Create Admin",
-    url: "#",
-    icon: UserRoundPlus,
-  },
-  {
-    title: "Edit admin",
-    url: "#",
-    icon: UserRoundCog,
-  },
-];
+import AppSidebarHeader from "@/components/AppSidebarHeader";
+import AppSidebarContent from "@/components/AppSidebarContent";
+import AppSidebarFooter from "@/components/AppSidebarFooter";
 
 function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
+      <SidebarHeader className="h-20 bg-slate-800 text-white w-full">
+        <AppSidebarHeader />
+      </SidebarHeader>
+      <SidebarContent className="bg-slate-800 text-white ">
+        <AppSidebarContent />
+      </SidebarContent>
+      <SidebarFooter className="bg-slate-900 text-white">
+        <AppSidebarFooter />
+      </SidebarFooter>
+    </Sidebar>
+  );
+}
+
+export default AppSidebar;
+
+{
+  /* <Sidebar collapsible="icon">
       <SidebarHeader className="h-20 bg-slate-800 text-white w-full">
         <SidebarMenu className="flex items-center h-full w-full  ">
           <SidebarMenuItem className="flex items-center h-full w-full justify-between">
@@ -155,8 +132,5 @@ function AppSidebar() {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
-    </Sidebar>
-  );
+    </Sidebar> */
 }
-
-export default AppSidebar;

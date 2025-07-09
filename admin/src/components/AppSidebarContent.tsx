@@ -11,15 +11,10 @@ import {
   Tags,
   Home,
   UserRoundSearch,
-  Search,
-  Settings,
-  User,
   Pencil,
   PencilLine,
-  PencilOff,
   UserRoundPlus,
   UserRoundCog,
-  LogOut,
 } from "lucide-react";
 
 // Menu items.
@@ -56,7 +51,7 @@ const tickets = [
 const admins = [
   {
     title: "Create Admin",
-    url: "#",
+    url: "/createAdmin",
     icon: UserRoundPlus,
   },
   {
@@ -106,7 +101,7 @@ function AppSidebarContent() {
         </SidebarGroupContent>
       </SidebarGroup>
       <SidebarGroup>
-        <SidebarGroupLabel className="text-white">Ticket</SidebarGroupLabel>
+        <SidebarGroupLabel className="text-white">Admin</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
             {admins.map((admin) => (

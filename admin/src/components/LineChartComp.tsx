@@ -6,7 +6,6 @@ import {
   Line,
   LineChart,
   ResponsiveContainer,
-  Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
@@ -17,7 +16,11 @@ interface LineChartCompProps<T> {
   xKey?: keyof T;
 }
 
-function LineChartComp<T>({ data, dataKey, xKey = "name" as keyof T } :LineChartCompProps<T>) {
+function LineChartComp<T>({
+  data,
+  dataKey,
+  xKey = "name" as keyof T,
+}: LineChartCompProps<T>) {
   return (
     <ResponsiveContainer>
       <LineChart

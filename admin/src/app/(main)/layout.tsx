@@ -6,9 +6,9 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <SidebarProvider>
-        <main className="min-h-screen w-full flex flex-row">
+        <main className="w-full flex flex-row">
           <AppSidebar />
-          <div className="flex flex-col   w-full">
+          <div className="flex flex-col w-full">
             <div className="flex flex-row">
               <div className="bg-slate-900 border-b-2 border-blue-500 p-2 outline-none flex items-center z-20 sticky inset-x-0">
                 <SidebarTrigger
@@ -20,9 +20,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                 <Navbar />
               </div>
             </div>
-            <div className="flex-1 flex flex-col h-full ">
-              {children}
-            </div>
+            <div className="flex-1 flex flex-col h-screen">{children}</div>
           </div>
         </main>
       </SidebarProvider>

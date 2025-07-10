@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { LoginAdminFc, SignupAdminFc } from "../api";
+import { LoginAdminFc, LogoutAdminFc, SignupAdminFc } from "../api";
 import { toast } from "sonner";
 
 export const SignupAdmin = () => {
@@ -16,7 +16,7 @@ export const SignupAdmin = () => {
   });
 };
 
-export const LoginUser = () => {
+export const LoginAdmin = () => {
   return useMutation({
     mutationFn: LoginAdminFc,
     onSuccess: () => {
@@ -30,16 +30,16 @@ export const LoginUser = () => {
   });
 };
 
-// export const LogoutUser = () => {
-//   return useMutation({
-//     mutationFn: LogoutUserFc,
-//     onSuccess: () => {
-//       toast.success("You’ve successfully logged out!");
-//     },
-//     onError: (error: Error) => {
-//       toast.error("Logout failed!", {
-//         description: error.message,
-//       });
-//     },
-//   });
-// };
+export const LogoutAdmin = () => {
+  return useMutation({
+    mutationFn: LogoutAdminFc,
+    onSuccess: () => {
+      toast.success("You’ve successfully logged out!");
+    },
+    onError: (error: Error) => {
+      toast.error("Logout failed!", {
+        description: error.message,
+      });
+    },
+  });
+};

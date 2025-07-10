@@ -14,8 +14,6 @@ export const SignupAdminFc = async (data: SignupProps) => {
   formData.append("username", data.username);
   formData.append("email", data.email);
   formData.append("password", data.password);
-
-  // Add image file (not base64 preview)
   if (data.image) {
     formData.append("image", data.image);
   }
@@ -29,19 +27,21 @@ export const SignupAdminFc = async (data: SignupProps) => {
 };
 
 export const LoginAdminFc = async (data: loginProps) => {
-  const res = await admin.post("/admin/login", data);
+  const res = await admin.post("/admin/login", data, {
+    withCredentials: true,
+  });
   return res.data;
 };
 
-// export const LogoutUserFc = async () => {
-//   const res = await admin.post("/admin/logout");
-//   return res.data;
-// };
+export const LogoutAdminFc = async () => {
+  const res = await admin.post("/admin/logout");
+  return res.data;
+};
 
-export const ProfileUserFc = async () => {
-  if (!document.cookie.includes("token=")) {
-    return null;
-  }
+export const ProfileAdminFc = async () => {
+  // if (!document.cookie.includes("token=")) {
+  //   return null;
+  // }
   const res = await admin.get("/admin/profile");
   return res.data;
 };

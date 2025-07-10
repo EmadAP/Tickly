@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   SidebarHeader,
@@ -7,8 +8,10 @@ import {
 } from "./ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { User } from "lucide-react";
+import { useAdmin } from "@/lib/context/AdminContext";
 
 function AppSidebarHeader() {
+  const { admin } = useAdmin();
   return (
     <SidebarHeader>
       <SidebarMenu className="flex items-center h-full w-full  ">
@@ -16,13 +19,13 @@ function AppSidebarHeader() {
           <SidebarMenuButton className="">
             <Avatar className="">
               <AvatarImage
-                src="https://github.com/shadcn.png"
+                src={admin?.image}
                 className="size-12 object-cover"
               />
-              <AvatarFallback className="">username</AvatarFallback>
+              <AvatarFallback className="">cf</AvatarFallback>
             </Avatar>
             <User />
-            <span className="text-lg text-white">username</span>
+            <span className="text-lg text-white">{admin?.username}</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>

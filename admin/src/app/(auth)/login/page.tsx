@@ -1,11 +1,34 @@
+"use client";
+
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { LoginAdmin } from "@/lib/api/auth/mutations";
+import { useAdmin } from "@/lib/context/AdminContext";
+import { loginProps } from "@/lib/type";
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 function Page() {
+  const router = useRouter();
+  const { refetch } = useAdmin();
+  const { mutate: login } = LoginAdmin();
+  const [loginData, setLoginData] = useState<loginProps>({
+    username: "",
+    password: "",
+  });
+
+  const handleLoginSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    login(loginData, {
+      onSuccess: () => {
+        router.push("/");
+        refetch();
+      },
+    });
+  };
   return (
     <div className="bg-slate-900 h-screen w-full text-white">
       <MaxWidthWrapper className="flex flex-col gap-10 items-center">
@@ -24,7 +47,10 @@ function Page() {
           </div>
 
           <div className="lg:w-1/2 w-full h-full flex items-center justify-center">
-            <form className="bg-slate-800 flex flex-col justify-around w-full max-w-md p-6 gap-6 rounded-xl shadow-lg">
+            <form
+              onSubmit={handleLoginSubmit}
+              className="bg-slate-800 flex flex-col justify-around w-full max-w-md p-6 gap-6 rounded-xl shadow-lg"
+            >
               <div className="flex flex-col gap-4">
                 <label className="text-xl flex flex-row items-center">
                   <span>Username </span>
@@ -34,15 +60,21 @@ function Page() {
                   type="text"
                   name="username"
                   className="bg-slate-900 border-0"
+                  onChange={(e) =>
+                    setLoginData({ ...loginData, username: e.target.value })
+                  }
                 />
                 <label className="text-xl flex flex-row items-center">
                   <span>Password </span>
                   <ChevronDown />
                 </label>
                 <Input
-                  type="text"
+                  type="password"
                   name="password"
                   className="bg-slate-900 border-0"
+                  onChange={(e) =>
+                    setLoginData({ ...loginData, password: e.target.value })
+                  }
                 />
               </div>
               <Button className="bg-green-500 hover:bg-green-600 text-lg font-semibold">

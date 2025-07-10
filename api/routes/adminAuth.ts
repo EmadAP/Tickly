@@ -132,46 +132,46 @@ router.post(
   }
 );
 
-// router.get("/profile", async (req: Request, res: Response) => {
-//   const token = req.cookies?.token;
-//   if (!token) {
-//     res.status(401).json({ message: "Unauthorized: No token" });
-//     return;
-//   }
-//   jwt.verify(token, SECRET, {}, async (err, decoded) => {
-//     if (err || !decoded) {
-//       res.status(401).json({ message: "Unauthorized: Invalid token" });
-//       return;
-//     }
+router.get("/profile", async (req: Request, res: Response) => {
+  const token = req.cookies?.token;
+  if (!token) {
+    res.status(401).json({ message: "Unauthorized: No token" });
+    return;
+  }
+  jwt.verify(token, SECRET, {}, async (err, decoded) => {
+    if (err || !decoded) {
+      res.status(401).json({ message: "Unauthorized: Invalid token" });
+      return;
+    }
 
-//     const { id } = decoded as JwtPayload;
+    const { id } = decoded as JwtPayload;
 
-//     try {
-//       const user = await Admin.findById(id).select("username email _id");
-//       if (!user) {
-//         res.status(404).json({ message: "User not found" });
-//         return;
-//       }
-//       res.status(200).json({
-//         id: user._id,
-//         username: user.username,
-//         email: user.email,
-//       });
-//     } catch (err) {
-//       console.error("Error fetching user profile:", err);
-//       res.status(500).json({ message: "Server error" });
-//     }
-//   });
-// });
+    try {
+      const admin = await Admin.findById(id).select("username email _id");
+      if (!admin) {
+        res.status(404).json({ message: "User not found" });
+        return;
+      }
+      res.status(200).json({
+        id: admin._id,
+        username: admin.username,
+        email: admin.email,
+      });
+    } catch (err) {
+      console.error("Error fetching user profile:", err);
+      res.status(500).json({ message: "Server error" });
+    }
+  });
+});
 
-// router.post("/logout", (req: Request, res: Response) => {
-//   res
-//     .clearCookie("token", {
-//       // httpOnly: true,
-//       sameSite: "lax",
-//       secure: false,
-//     })
-//     .json({ message: "Logged out successfully" });
-// });
+router.post("/logout", (req: Request, res: Response) => {
+  res
+    .clearCookie("token", {
+      // httpOnly: true,
+      sameSite: "lax",
+      secure: false,
+    })
+    .json({ message: "Logged out successfully" });
+});
 
 export default router;

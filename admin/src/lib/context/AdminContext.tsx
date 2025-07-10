@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ProfileUserFc } from "../api/api";
+import { ProfileAdminFc } from "../api/api";
 import { Admin, AdminContextType } from "../type";
 
 const AdminContext = createContext<AdminContextType>({
@@ -19,7 +19,7 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
     refetch,
   } = useQuery<Admin, Error>({
     queryKey: ["profile"],
-    queryFn: ProfileUserFc,
+    queryFn: ProfileAdminFc,
     retry: false,
   });
 

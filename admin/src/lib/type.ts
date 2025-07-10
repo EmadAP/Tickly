@@ -21,12 +21,29 @@ export interface Ticket {
   updatedAt?: string;
 }
 
-export interface AdminSignUp {
+export interface Admin {
   id: string;
   username: string;
-  password: string;
   email: string;
-  picture: string;
+  image: string;
   createdAt?: string;
   updatedAt?: string;
 }
+export interface AdminContextType {
+  admin: Admin | null;
+  isLoading: boolean;
+  error: Error | null;
+  refetch: () => void;
+}
+
+export type SignupProps = {
+  username: string;
+  email: string;
+  password: string;
+  image: File | null;
+};
+
+export type loginProps = {
+  username: string;
+  password: string;
+};

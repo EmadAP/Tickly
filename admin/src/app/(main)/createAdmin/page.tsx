@@ -3,16 +3,37 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { SignupAdmin } from "@/lib/api/auth/mutations";
+import { SignupProps } from "@/lib/type";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { ChevronDown } from "lucide-react";
 import React, { useState } from "react";
 
 function Page() {
+  const { mutate: signup } = SignupAdmin();
   const [preview, setPreview] = useState<string | null>(null);
+  const [signupData, setSignupData] = useState<SignupProps>({
+    username: "",
+    email: "",
+    password: "",
+    image: null,
+  });
+
+  const handleSignupSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    signup(signupData, {
+      onSuccess: () => {
+        window.alert("login successful");
+        console.log("login successful");
+      },
+    });
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setSignupData({ ...signupData, image: file });
+
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreview(reader.result as string);
@@ -24,7 +45,10 @@ function Page() {
   return (
     <div className="bg-slate-900 py-10 text-white min-h-screen">
       <MaxWidthWrapper>
-        <form className="flex flex-col items-center justify-center">
+        <form
+          onSubmit={handleSignupSubmit}
+          className="flex flex-col items-center justify-center"
+        >
           <div className="border-b-2 border-blue-500 w-full text-center pb-10">
             <h1 className="text-4xl font-bold">Admin Signup</h1>
           </div>
@@ -62,6 +86,9 @@ function Page() {
                   type="text"
                   name="username"
                   placeholder="Enter username"
+                  onChange={(e) =>
+                    setSignupData({ ...signupData, username: e.target.value })
+                  }
                   className="bg-slate-800 border border-slate-700"
                 />
               </div>
@@ -75,6 +102,9 @@ function Page() {
                   type="password"
                   name="password"
                   placeholder="Enter password"
+                  onChange={(e) =>
+                    setSignupData({ ...signupData, password: e.target.value })
+                  }
                   className="bg-slate-800 border border-slate-700"
                 />
               </div>
@@ -88,6 +118,9 @@ function Page() {
                   type="email"
                   name="email"
                   placeholder="Enter email"
+                  onChange={(e) =>
+                    setSignupData({ ...signupData, email: e.target.value })
+                  }
                   className="bg-slate-800 border border-slate-700 "
                 />
               </div>

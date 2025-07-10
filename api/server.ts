@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import path from "path";
 
 import userAuthRoutes from "./routes/userAuth";
+import adminAuthRoutes from "./routes/adminAuth";
 import { MONGO_URI, PORT } from "./util/config";
 
 const app = express();
@@ -12,7 +13,7 @@ const app = express();
 //Middleware
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "http://localhost:4000"],
     credentials: true,
   })
 );
@@ -21,6 +22,7 @@ app.use(cookieParser());
 
 //Routes
 app.use("/api", userAuthRoutes);
+app.use("/admin", adminAuthRoutes);
 
 // Connect DB and Start Server
 mongoose

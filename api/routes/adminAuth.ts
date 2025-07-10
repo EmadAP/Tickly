@@ -147,7 +147,7 @@ router.get("/profile", async (req: Request, res: Response) => {
     const { id } = decoded as JwtPayload;
 
     try {
-      const admin = await Admin.findById(id).select("username email _id");
+      const admin = await Admin.findById(id).select("username email image _id");
       if (!admin) {
         res.status(404).json({ message: "User not found" });
         return;
@@ -156,6 +156,7 @@ router.get("/profile", async (req: Request, res: Response) => {
         id: admin._id,
         username: admin.username,
         email: admin.email,
+        image: admin.image,
       });
     } catch (err) {
       console.error("Error fetching user profile:", err);

@@ -39,9 +39,9 @@ export const LogoutAdminFc = async () => {
 };
 
 export const ProfileAdminFc = async () => {
-  // if (!document.cookie.includes("token=")) {
-  //   return null;
-  // }
+  if (!document.cookie.includes("token=")) {
+    return null;
+  }
   const res = await admin.get("/admin/profile");
   return res.data;
 };

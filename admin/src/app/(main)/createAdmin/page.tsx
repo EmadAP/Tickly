@@ -56,9 +56,9 @@ function Page() {
           <div className="grid grid-cols-1 md:grid-cols-2 w-full pt-10 gap-8">
             {/* Avatar + Upload */}
             <div className="flex flex-col gap-6 items-center">
-              <Avatar className="w-52 h-52 rounded-full border-4 border-blue-500 shadow-lg">
+              <Avatar className="w-52 h-52 rounded-full border-4 border-blue-500 shadow-lg overflow-hidden">
                 <AvatarImage
-                  className="rounded-full object-cover"
+                  className="rounded-full object-cover w-full h-full"
                   src={preview || "https://github.com/shadcn.png"}
                 />
                 <AvatarFallback>AD</AvatarFallback>

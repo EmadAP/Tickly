@@ -13,7 +13,7 @@ import AppSidebarFooter from "@/components/AppSidebarFooter";
 function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader className="h-20 bg-slate-800 text-white w-full">
+      <SidebarHeader className="bg-slate-900 text-white w-full">
         <AppSidebarHeader />
       </SidebarHeader>
       <SidebarContent className="bg-slate-800 text-white ">

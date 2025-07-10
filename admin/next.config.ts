@@ -5,9 +5,12 @@ const nextConfig: NextConfig = {
   experimental: {
     webpackMemoryOptimizations: true,
     preloadEntriesOnStart: false,
-    cpus:1,
+    cpus: 1,
     workerThreads: false,
-  }
+  },
+  images: {
+    domains: ["localhost"],
+  },
 };
 
 export default nextConfig;

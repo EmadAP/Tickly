@@ -8,7 +8,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     <>
       <RequireAdmin>
         <SidebarProvider>
-          <main className="w-full flex flex-row">
+          <main className="w-full flex flex-row ">
             <AppSidebar />
             <div className="flex flex-col w-full">
               <div className="flex flex-row">
@@ -22,7 +22,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                   <Navbar />
                 </div>
               </div>
-              <div className="flex-1 flex flex-col h-screen">{children}</div>
+              <div className="flex flex-col ">{children}</div>
             </div>
           </main>
         </SidebarProvider>

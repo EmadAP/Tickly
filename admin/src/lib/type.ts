@@ -10,13 +10,13 @@ export interface Ticket {
     | "Workshop"
     | "Seminar"
     | string;
-  location: string;
+  coordinates: [number, number];
   imageUrl: string;
   eventDate: string; // ISO string like "2025-08-01T19:00:00Z"
   price: number;
   quantity: number; // total tickets available
-  onSell: boolean;
-  off: number;
+  onSell?: boolean;
+  off?: number;
   createdAt?: string;
   updatedAt?: string;
 }

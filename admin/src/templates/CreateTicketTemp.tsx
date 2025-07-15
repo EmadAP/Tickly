@@ -4,41 +4,79 @@ import CategoryCreateTicket from "@/components/CategoryCreateTicket";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ChevronDown } from "lucide-react";
-import Image from "next/image";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { Calendar } from "@/components/ui/calendar";
 import OnSellSection from "@/components/OnSellCreateTicket";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { CreateTicket } from "@/lib/api/main/mutations";
 const LocationPicker = dynamic(() => import("@/components/LocationPicker"), {
   ssr: false,
 });
 
 function CreateTicketTemp() {
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    coordinates: "",
-    price: "",
-    quantity: "",
-    onSell: false,
-    off: "",
-  });
+  const formRef = useRef<HTMLFormElement>(null);
+  const [coordinates, setCoordinates] = useState<[number, number] | null>(null);
   const [date, setDate] = React.useState<Date | undefined>(new Date());
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [category, setCategory] = useState<string>("");
+  const [onSell, setOnSell] = useState<boolean>(false);
+  const [offValue, setOffValue] = useState<string>("");
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: name === "onSell" ? value === "true" : value,
-    }));
+  const { mutate: createTicket } = CreateTicket();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    const formData = new FormData(formRef.current);
+
+    if (selectedFile) {
+      formData.set("image", selectedFile);
+    }
+    if (coordinates) {
+      formData.set("coordinates", JSON.stringify(coordinates));
+    }
+    if (date) {
+      formData.set("eventDate", date.toISOString().split("T")[0]);
+    }
+    formData.set("category", category);
+    formData.set("onSell", onSell.toString());
+    if (offValue) {
+      formData.set("off", offValue);
+    }
+
+    createTicket(formData, {
+      onSuccess: () => {
+        window.alert("ticket created successful");
+        console.log("ticket created successful");
+      },
+    });
   };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
-    <div className="">
-      <form className="flex flex-col gap-4 items-center justify-center">
-        <div className="grid grid-cols-3 w-full gap-4 ">
-          <div className=" gap-4 col-span-3 md:col-span-1 flex flex-col items-center justify-start w-full ">
+    <div>
+      <form
+        ref={formRef}
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 items-center justify-center"
+      >
+        <div className="grid grid-cols-3 w-full gap-4">
+          <div className="gap-4 col-span-3 md:col-span-1 flex flex-col items-center justify-start w-full">
             {/* Title */}
             <div className="w-full flex flex-col gap-2">
               <label className="text-xl flex flex-row items-center">
@@ -51,6 +89,7 @@ function CreateTicketTemp() {
                 className="bg-slate-800 border-0"
               />
             </div>
+
             {/* Description */}
             <div className="w-full flex flex-col gap-2">
               <label className="text-xl flex flex-row items-center">
@@ -59,6 +98,7 @@ function CreateTicketTemp() {
               </label>
               <Textarea name="description" className="bg-slate-800 border-0" />
             </div>
+
             {/* Price */}
             <div className="w-full flex flex-col gap-2">
               <label className="text-xl flex flex-row items-center">
@@ -69,7 +109,6 @@ function CreateTicketTemp() {
                 type="number"
                 name="price"
                 className="bg-slate-800 border-0"
-                onChange={handleInputChange}
               />
             </div>
 
@@ -83,71 +122,74 @@ function CreateTicketTemp() {
                 type="number"
                 name="quantity"
                 className="bg-slate-800 border-0"
-                onChange={handleInputChange}
               />
             </div>
 
+            {/* OnSell Section */}
             <div className="w-full">
               <OnSellSection
-                value={formData.onSell}
-                onChange={(val) =>
-                  setFormData((prev) => ({ ...prev, onSell: val }))
-                }
-                offValue={formData.off}
-                onOffChange={(val) =>
-                  setFormData((prev) => ({ ...prev, off: val }))
-                }
+                value={onSell}
+                onChange={setOnSell}
+                offValue={offValue}
+                onOffChange={setOffValue}
               />
+              <Input
+                type="hidden"
+                name="onSell"
+                value={onSell ? "true" : "false"}
+              />
+              <Input type="hidden" name="off" value={offValue} />
             </div>
+
+            {/* Category */}
             <div className="w-full">
-              <CategoryCreateTicket />
+              <CategoryCreateTicket onCategoryChange={setCategory} />
+              <Input type="hidden" name="category" value={category} />
             </div>
           </div>
-          <div className="col-span-3 md:col-span-2 h-full flex flex-col gap-4 justify-center items-center w-full">
+
+          <div className="col-span-3 md:col-span-2 flex flex-col gap-4 items-center w-full">
+            {/* Location */}
             <div className="w-full flex flex-col gap-2">
               <label className="text-xl flex flex-row items-center">
                 <span>Location </span>
                 <ChevronDown />
               </label>
-              <LocationPicker
-                onLocationSelect={(coords) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    coordinates: JSON.stringify(coords),
-                  }))
-                }
-              />
-              <input
+              <LocationPicker onLocationSelect={setCoordinates} />
+              <Input
                 type="hidden"
-                onChange={handleInputChange}
                 name="coordinates"
-                value={formData.coordinates}
+                value={coordinates ? JSON.stringify(coordinates) : ""}
               />
             </div>
+
+            {/* Image Upload */}
             <div className="w-full flex flex-col xl:flex-row items-center gap-4">
               <div className="w-full h-full flex flex-col gap-2">
                 <label className="text-xl flex flex-row items-center">
                   <span>Ticket Background </span>
                   <ChevronDown />
                 </label>
-                <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-xl ">
-                  <Image
-                    src="/images.jpg"
-                    alt="img"
-                    fill
-                    className="object-cover"
+                <Avatar className="w-full h-[470px] rounded-lg overflow-hidden">
+                  <AvatarImage
+                    className="rounded-lg object-cover w-full h-full"
+                    src={previewImage || "https://github.com/shadcn.png"}
                   />
-                </div>
+                  <AvatarFallback>AD</AvatarFallback>
+                </Avatar>
                 <label className="text-center relative mt-2 cursor-pointer bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg shadow transition-colors">
                   Upload image
                   <Input
+                    name="image"
                     type="file"
                     accept="image/*"
                     className="absolute inset-0 opacity-0 cursor-pointer"
+                    onChange={handleFileChange}
                   />
                 </label>
               </div>
 
+              {/* Date */}
               <div className="w-full flex flex-col gap-2">
                 <label className="text-xl flex flex-row items-center">
                   <span>Event Date </span>
@@ -163,6 +205,14 @@ function CreateTicketTemp() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="mt-20 mb-10 flex justify-end w-full">
+          <Button
+            type="submit"
+            className="bg-green-500 hover:bg-green-600 text-xl"
+          >
+            Create
+          </Button>
         </div>
       </form>
     </div>

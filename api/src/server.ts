@@ -25,7 +25,7 @@ app.use("/uploads", express.static(path.resolve("uploads")));
 //Routes
 app.use("/api", userAuthRoutes);
 app.use("/admin", adminAuthRoutes);
-app.use("/tickets", adminTicketRoutes);
+app.use("/admin", adminTicketRoutes);
 
 // Connect DB and Start Server
 mongoose

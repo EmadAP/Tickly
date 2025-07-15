@@ -3,12 +3,10 @@ import { loginProps, SignupProps } from "../type";
 
 const admin = axios.create({
   baseURL: "http://localhost:5000",
-  headers: {
-    "Content-Type": "application/json",
-  },
   withCredentials: true,
 });
 
+// Admin Signup
 export const SignupAdminFc = async (data: SignupProps) => {
   const formData = new FormData();
   formData.append("username", data.username);
@@ -26,22 +24,33 @@ export const SignupAdminFc = async (data: SignupProps) => {
   return res.data;
 };
 
+// Admin Login
 export const LoginAdminFc = async (data: loginProps) => {
-  const res = await admin.post("/admin/login", data, {
-    withCredentials: true,
-  });
+  const res = await admin.post("/admin/login", data);
   return res.data;
 };
 
+// Admin Logout
 export const LogoutAdminFc = async () => {
   const res = await admin.post("/admin/logout");
   return res.data;
 };
 
+// Admin Profile
 export const ProfileAdminFc = async () => {
   if (!document.cookie.includes("token=")) {
     return null;
   }
   const res = await admin.get("/admin/profile");
+  return res.data;
+};
+
+// Create Ticket
+export const CreateTicketFc = async (formData: FormData) => {
+  const res = await admin.post("/admin/tickets", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return res.data;
 };

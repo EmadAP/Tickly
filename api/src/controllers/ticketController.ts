@@ -17,17 +17,30 @@ export const createTicket = async (req: Request, res: Response) => {
       imageUrl,
     } = req.body;
 
+    const parsedCoordinates =
+      typeof coordinates === "string" ? JSON.parse(coordinates) : coordinates;
+
+    const parsedPrice = Number(price);
+    const parsedQuantity = Number(quantity);
+    const parsedOff = off ? Number(off) : undefined;
+    const parsedOnSell = onSell === "true";
+
+    if (!imageUrl) {
+      res.status(400).json({ message: "Image upload failed" });
+      return;
+    }
+
     const ticket = await Ticket.create({
       creator: admin.id,
       title,
       description,
       category,
-      coordinates,
+      coordinates: parsedCoordinates,
       eventDate,
-      price,
-      quantity,
-      onSell: onSell === "true",
-      off: off ? Number(off) : undefined,
+      price: parsedPrice,
+      quantity: parsedQuantity,
+      onSell: parsedOnSell,
+      off: parsedOff,
       imageUrl,
     });
 

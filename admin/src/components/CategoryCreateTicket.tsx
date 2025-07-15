@@ -10,7 +10,11 @@ const categoryOptions = [
   { id: "Seminar", label: "Seminar" },
 ];
 
-function CategoryCreateTicket() {
+function CategoryCreateTicket({
+  onCategoryChange,
+}: {
+  onCategoryChange: (val: string) => void;
+}) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-row items-center justify-start">
@@ -25,6 +29,7 @@ function CategoryCreateTicket() {
               type="radio"
               name="category"
               value={item.id}
+              onChange={() => onCategoryChange(item.id)}
               className="peer hidden"
             />
 

@@ -22,8 +22,10 @@ export const createTicket = async (req: Request, res: Response) => {
 
     const parsedPrice = Number(price);
     const parsedQuantity = Number(quantity);
-    const parsedOff = off ? Number(off) : undefined;
-    const parsedOnSell = onSell === "true";
+    const parsedOnSell =
+      onSell === true || onSell === "true" || onSell === "1" || onSell === 1;
+    const parsedOff = parsedOnSell && off ? Number(off) : undefined;
+    const parsedEventDate = String(eventDate).slice(0, 10);
 
     if (!imageUrl) {
       res.status(400).json({ message: "Image upload failed" });
@@ -36,7 +38,7 @@ export const createTicket = async (req: Request, res: Response) => {
       description,
       category,
       coordinates: parsedCoordinates,
-      eventDate,
+      eventDate: parsedEventDate,
       price: parsedPrice,
       quantity: parsedQuantity,
       onSell: parsedOnSell,

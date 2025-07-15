@@ -40,7 +40,10 @@ function CreateTicketTemp() {
       formData.set("coordinates", JSON.stringify(coordinates));
     }
     if (date) {
-      formData.set("eventDate", date.toISOString().split("T")[0]);
+      const localDateStr = `${date.getFullYear()}-${String(
+        date.getMonth() + 1
+      ).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+      formData.set("eventDate", localDateStr);
     }
     formData.set("category", category);
     formData.set("onSell", onSell.toString());

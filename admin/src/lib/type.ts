@@ -47,3 +47,20 @@ export type loginProps = {
   username: string;
   password: string;
 };
+
+export type TicketTable = {
+  id: string;
+  title: string;
+  category:
+    | "Concert"
+    | "Sports"
+    | "Theater"
+    | "Comedy"
+    | "Workshop"
+    | "Seminar"
+    | string;
+  eventDate: string;
+  price: number;
+  quantity: number;
+  onSell: boolean;
+};

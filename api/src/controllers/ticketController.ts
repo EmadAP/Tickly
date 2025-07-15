@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Ticket from "../models/Ticket";
 
+// Create Ticket
 export const createTicket = async (req: Request, res: Response) => {
   try {
     const admin = (req as any).admin; // From verifyToken
@@ -50,5 +51,16 @@ export const createTicket = async (req: Request, res: Response) => {
   } catch (err) {
     console.error("Create Ticket Error:", err);
     res.status(500).json({ message: "Server error while creating ticket" });
+  }
+};
+
+// Get All Tickets
+export const getTickets = async (req: Request, res: Response) => {
+  try {
+    const tickets = await Ticket.find().sort({ createdAt: -1 });
+    res.status(200).json(tickets);
+  } catch (err) {
+    console.error("Error fetching tickets:", err);
+    res.status(500).json({ message: "Failed to fetch tickets" });
   }
 };

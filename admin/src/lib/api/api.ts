@@ -54,3 +54,9 @@ export const CreateTicketFc = async (formData: FormData) => {
   });
   return res.data;
 };
+
+// Get All Ticket
+export const GetAllTicketsFc = async () => {
+  const res = await admin.get("/admin/tickets");
+  return res.data;
+};

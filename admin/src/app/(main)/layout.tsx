@@ -8,10 +8,10 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     <>
       <RequireAdmin>
         <SidebarProvider>
-          <main className="w-full flex flex-row ">
+          <main className="w-full flex flex-row min-h-screen">
             <AppSidebar />
             <div className="flex flex-col w-full">
-              <div className="flex flex-row">
+              <div className="flex flex-row ">
                 <div className="bg-slate-900 border-b-2 border-blue-500 p-2 outline-none flex items-center z-20 sticky inset-x-0">
                   <SidebarTrigger
                     size={"default"}
@@ -22,7 +22,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                   <Navbar />
                 </div>
               </div>
-              <div className="flex flex-col ">{children}</div>
+              <div className="flex-1 flex flex-col">{children}</div>
             </div>
           </main>
         </SidebarProvider>

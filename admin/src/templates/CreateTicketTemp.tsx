@@ -11,12 +11,14 @@ import OnSellSection from "@/components/OnSellCreateTicket";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CreateTicket } from "@/lib/api/main/mutations";
+import { useRouter } from "next/navigation";
 const LocationPicker = dynamic(() => import("@/components/LocationPicker"), {
   ssr: false,
 });
 
 function CreateTicketTemp() {
   const formRef = useRef<HTMLFormElement>(null);
+  const router = useRouter();
   const [coordinates, setCoordinates] = useState<[number, number] | null>(null);
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const [previewImage, setPreviewImage] = useState<string | null>(null);
@@ -53,8 +55,7 @@ function CreateTicketTemp() {
 
     createTicket(formData, {
       onSuccess: () => {
-        window.alert("ticket created successful");
-        console.log("ticket created successful");
+        router.push("/ticketTable");
       },
     });
   };

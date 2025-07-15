@@ -10,11 +10,10 @@ import {
 import {
   Tags,
   Home,
-  UserRoundSearch,
-  Pencil,
-  PencilLine,
+  UsersRound,
+  Users,
   UserRoundPlus,
-  UserRoundCog,
+  Tickets,
 } from "lucide-react";
 
 // Menu items.
@@ -25,39 +24,31 @@ const items = [
     icon: Home,
   },
   {
-    title: "Users Table",
-    url: "#",
-    icon: UserRoundSearch,
-  },
-  {
     title: "Ticket Table",
-    url: "#",
+    url: "/ticketTable",
     icon: Tags,
   },
-];
-const tickets = [
   {
-    title: "Create Ticket",
-    url: "/createTicket",
-    icon: Pencil,
-  },
-  {
-    title: "Edit Ticket",
+    title: "Users Table",
     url: "#",
-    icon: PencilLine,
+    icon: Users,
+  },
+  {
+    title: "Admin Table",
+    url: "#",
+    icon: UsersRound,
   },
 ];
-
-const admins = [
+const creates = [
   {
-    title: "Create Admin",
+    title: "Ticket",
+    url: "/createTicket",
+    icon: Tickets,
+  },
+  {
+    title: "Admin",
     url: "/createAdmin",
     icon: UserRoundPlus,
-  },
-  {
-    title: "Edit admin",
-    url: "#",
-    icon: UserRoundCog,
   },
 ];
 
@@ -84,32 +75,15 @@ function AppSidebarContent() {
         </SidebarGroupContent>
       </SidebarGroup>
       <SidebarGroup>
-        <SidebarGroupLabel className="text-white">Ticket</SidebarGroupLabel>
+        <SidebarGroupLabel className="text-white">Create</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
-            {tickets.map((ticket) => (
-              <SidebarMenuItem key={ticket.title}>
+            {creates.map((create) => (
+              <SidebarMenuItem key={create.title}>
                 <SidebarMenuButton asChild>
-                  <a href={ticket.url}>
-                    <ticket.icon />
-                    <span>{ticket.title}</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
-        </SidebarGroupContent>
-      </SidebarGroup>
-      <SidebarGroup>
-        <SidebarGroupLabel className="text-white">Admin</SidebarGroupLabel>
-        <SidebarGroupContent>
-          <SidebarMenu>
-            {admins.map((admin) => (
-              <SidebarMenuItem key={admin.title}>
-                <SidebarMenuButton asChild>
-                  <a href={admin.url}>
-                    <admin.icon />
-                    <span>{admin.title}</span>
+                  <a href={create.url}>
+                    <create.icon />
+                    <span>{create.title}</span>
                   </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>

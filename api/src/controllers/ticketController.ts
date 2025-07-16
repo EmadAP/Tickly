@@ -64,3 +64,9 @@ export const getTickets = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Failed to fetch tickets" });
   }
 };
+
+// Delete Ticket
+export const deleteTicket = async (req: Request, res: Response) => {
+  try {
+  } catch (err) {}
+};

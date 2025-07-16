@@ -2,7 +2,11 @@ import { Router } from "express";
 import { verifyToken } from "../middleware/verifyToken";
 import { validateTicketInput } from "../middleware/validateTicketInput";
 import { handleFileUpload } from "../middleware/handleFileUpload";
-import { createTicket, getTickets } from "../controllers/ticketController";
+import {
+  createTicket,
+  deleteTicket,
+  getTickets,
+} from "../controllers/ticketController";
 import multer from "multer";
 
 const upload = multer({ dest: "uploads/" });
@@ -18,5 +22,7 @@ router.post(
 );
 
 router.get("/tickets", verifyToken, getTickets);
+
+router.delete("/tickets/:id", verifyToken, deleteTicket);
 
 export default router;

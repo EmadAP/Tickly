@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Ticket from "../models/Ticket";
-import fs from "fs"
+import fs from "fs";
 import mongoose from "mongoose";
 
 // Create Ticket
@@ -69,37 +69,53 @@ export const getTickets = async (req: Request, res: Response) => {
 
 // Delete Ticket
 export const deleteTicket = async (req: Request, res: Response) => {
-  const { id } = req.params
-  console.log("Resived ID from deletation", id);
-
-  if (!id || !mongoose.Types.ObjectId.isValid(id)) {
-    res.status(400).json({ message: "Invalid ticket ID" });
-    return
-  }
+  const { id } = req.params;
 
   try {
-    const ticket = await Ticket.findById(id)
+    const ticket = await Ticket.findById(id);
 
     if (!ticket) {
-      res.status(400).json({ message: "Ticket not found" })
-      return
+      res.status(404).json({ message: "Ticket not found" });
+      return;
     }
 
     if (Array.isArray(ticket.imageUrl)) {
       ticket.imageUrl.forEach((path) => {
         try {
-          fs.unlinkSync(path)
+          fs.unlinkSync(path);
         } catch (err) {
-          console.warn("Failed to delete image file:", path, err)
+          console.warn("Failed to delete image file:", path, err);
         }
-      })
+      });
     }
 
-    await ticket.deleteOne()
+    await ticket.deleteOne();
 
-    res.json({ message: "ticket deleted successfully" })
+    res.json({ message: "ticket deleted successfully" });
   } catch (err) {
-    console.error('Error deleting ticket', err)
-    res.status(500).json({ message: "Failed to delete ticket" })
+    console.error("Error deleting ticket", err);
+    res.status(500).json({ message: "Failed to delete ticket" });
   }
+};
+
+//Update ticket
+export const updateTicket = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    console.log("Resived ID from deletation", id);
+
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+      res.status(400).json({ message: "Invalid ticket ID" });
+      return;
+    }
+
+    const ticket = await Ticket.findById(id);
+
+    if (!ticket) {
+      res.status(404).json({ message: "Ticket not found" });
+      return;
+    }
+
+    
+  } catch (err) {}
 };

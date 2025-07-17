@@ -6,6 +6,7 @@ import {
   createTicket,
   deleteTicket,
   getTickets,
+  updateTicket,
 } from "../controllers/ticketController";
 import multer from "multer";
 
@@ -24,5 +25,14 @@ router.post(
 router.get("/tickets", verifyToken, getTickets);
 
 router.delete("/tickets/:id", verifyToken, deleteTicket);
+
+router.put(
+  "/tickets/:id",
+  verifyToken,
+  upload.single("image"),
+  validateTicketInput,
+  handleFileUpload,
+  updateTicket,
+);
 
 export default router;

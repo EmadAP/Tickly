@@ -1,5 +1,5 @@
 import axios from "axios";
-import { loginProps, SignupProps } from "../type";
+import { loginProps, SignupProps, Ticket } from "../type";
 
 const admin = axios.create({
   baseURL: "http://localhost:5000",
@@ -60,3 +60,8 @@ export const GetAllTicketsFc = async () => {
   const res = await admin.get("/admin/tickets");
   return res.data;
 };
+
+//Delete one ticket
+export const DeleteTicketFc = async (id:string) => {
+  const res = await admin.delete(`/admin/tickets/${id}`)
+}

@@ -1,12 +1,14 @@
 "use client";
 
-import { TicketTable } from "@/lib/type";
+import { Ticket, TicketTable } from "@/lib/type";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "./ui/button";
 import { Pencil, Trash2 } from "lucide-react";
+import { useDeleteTicket } from "@/lib/api/main/mutations";
+import { QueryClient, useQueryClient } from "@tanstack/react-query";
 
-export const columns: ColumnDef<TicketTable>[] = [
+export const columns: ColumnDef<Ticket>[] = [
   {
     accessorKey: "title",
     header: "Title",
@@ -77,11 +79,24 @@ export const columns: ColumnDef<TicketTable>[] = [
   {
     id: "delete",
     cell: ({ row }) => {
-      const tickets = row.original;
+      const deleteTicket = useDeleteTicket();
+
+      const handleDelete = (id: string) => {
+        deleteTicket.mutate(id, {
+          onSuccess: () => {
+            window.alert("delete successfull");
+          },
+        });
+      };
+
+      const data = row.original;
 
       return (
         <div>
-          <Button className="bg-red-500 hover:bg-red-600">
+          <Button
+            onClick={() => handleDelete(data._id)}
+            className="bg-red-500 hover:bg-red-600"
+          >
             <Trash2 />
           </Button>
         </div>

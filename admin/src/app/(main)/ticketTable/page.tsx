@@ -2,11 +2,17 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { columns } from "@/components/TableColums";
 import { TableData } from "@/components/TableData";
-import { GetAllTickets } from "@/lib/api/main/queries";
+import { useGetAllTickets } from "@/lib/api/main/queries";
 import React from "react";
 
 function Page() {
-  const { data: tickets, isLoading, isError, error } = GetAllTickets();
+  const {
+    data: tickets,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useGetAllTickets();
 
   if (isLoading || !tickets) return <div>loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;

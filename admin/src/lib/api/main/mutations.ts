@@ -1,5 +1,5 @@
-import { useMutation } from "@tanstack/react-query";
-import { CreateTicketFc } from "../api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { CreateTicketFc, DeleteTicketFc } from "../api";
 import { toast } from "sonner";
 
 export const CreateTicket = () => {
@@ -10,6 +10,24 @@ export const CreateTicket = () => {
     },
     onError: (err: Error) => {
       toast.error("Failed to create Ticket. try again!", {
+        description: err.message,
+      });
+    },
+  });
+};
+
+export const useDeleteTicket = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: DeleteTicketFc,
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["Tickets"] });
+      toast.success("Ticket deleted successfully");
+    },
+    onError: (err: Error) => {
+      toast.error("Failed to delete Ticket. try again!", {
         description: err.message,
       });
     },

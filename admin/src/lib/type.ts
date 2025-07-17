@@ -1,4 +1,5 @@
 export interface Ticket {
+  _id: string; 
   id: string; // UUID or unique ticket ID (can be optional on create)
   title: string;
   description: string;

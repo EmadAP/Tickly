@@ -36,14 +36,16 @@ function LocationPicker({
   onLocationSelect,
   defaultCenter = [51.505, -0.09],
   defaultZoom = 13,
+  defaultPosition,
 }: {
   onLocationSelect: (latlng: [number, number]) => void;
   defaultCenter?: [number, number];
   defaultZoom?: number;
+  defaultPosition?: [number, number];
 }) {
   return (
     <MapContainer
-      center={defaultCenter}
+      center={defaultPosition || defaultCenter}
       zoom={defaultZoom}
       scrollWheelZoom
       style={{ height: "400px", width: "100%" }}
@@ -52,9 +54,36 @@ function LocationPicker({
         attribution="&copy; OpenStreetMap contributors"
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <LocationMarker onSelect={onLocationSelect} />
+      <LocationMarker
+        onSelect={onLocationSelect}
+        defaultPosition={defaultPosition}
+      />
     </MapContainer>
   );
 }
+// function LocationPicker({
+//   onLocationSelect,
+//   defaultCenter = [51.505, -0.09],
+//   defaultZoom = 13,
+// }: {
+//   onLocationSelect: (latlng: [number, number]) => void;
+//   defaultCenter?: [number, number];
+//   defaultZoom?: number;
+// }) {
+//   return (
+//     <MapContainer
+//       center={defaultCenter}
+//       zoom={defaultZoom}
+//       scrollWheelZoom
+//       style={{ height: "400px", width: "100%" }}
+//     >
+//       <TileLayer
+//         attribution="&copy; OpenStreetMap contributors"
+//         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+//       />
+//       <LocationMarker onSelect={onLocationSelect} />
+//     </MapContainer>
+//   );
+// }
 
 export default LocationPicker;

@@ -1,5 +1,5 @@
 export interface Ticket {
-  _id: string; 
+  _id: string;
   id: string; // UUID or unique ticket ID (can be optional on create)
   title: string;
   description: string;
@@ -12,7 +12,7 @@ export interface Ticket {
     | "Seminar"
     | string;
   coordinates: [number, number];
-  image: File | null;
+  image: string | File | null;
   eventDate: string; // ISO string like "2025-08-01T19:00:00Z"
   price: number;
   quantity: number; // total tickets available

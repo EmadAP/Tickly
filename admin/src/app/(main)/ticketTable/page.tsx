@@ -6,13 +6,7 @@ import { useGetAllTickets } from "@/lib/api/main/queries";
 import React from "react";
 
 function Page() {
-  const {
-    data: tickets,
-    isLoading,
-    isError,
-    error,
-    refetch,
-  } = useGetAllTickets();
+  const { data: tickets, isLoading, isError, error } = useGetAllTickets();
 
   if (isLoading || !tickets) return <div>loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;

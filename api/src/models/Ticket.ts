@@ -14,7 +14,7 @@ export interface ITicket extends Document {
     | "Seminar"
     | string;
   coordinates: [number, number];
-  imageUrl: string;
+  image: string;
   eventDate: string; // ISO date string
   price: number;
   quantity: number;
@@ -56,7 +56,7 @@ const TicketSchema = new Schema<ITicket>(
         message: "Coordinates must be an array of [longitude, latitude]",
       },
     },
-    imageUrl: {
+    image: {
       type: String,
       required: true,
       trim: true,

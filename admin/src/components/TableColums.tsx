@@ -1,12 +1,12 @@
 "use client";
 
-import { Ticket, TicketTable } from "@/lib/type";
+import { Ticket } from "@/lib/type";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "./ui/button";
-import { Pencil, Trash2 } from "lucide-react";
-import { useDeleteTicket } from "@/lib/api/main/mutations";
-import { QueryClient, useQueryClient } from "@tanstack/react-query";
+import { Trash2 } from "lucide-react";
+import { DeleteTicket } from "@/lib/api/main/mutations";
+import TableEditBtn from "./TableEditBtn";
 
 export const columns: ColumnDef<Ticket>[] = [
   {
@@ -20,7 +20,7 @@ export const columns: ColumnDef<Ticket>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="hover:bg-blue-500 hover:text-white"
+          className="hover:bg-blue-500 hover:text-white cursor-pointer"
         >
           Category
           <ArrowUpDown />
@@ -35,7 +35,7 @@ export const columns: ColumnDef<Ticket>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="hover:bg-blue-500 hover:text-white"
+          className="hover:bg-blue-500 hover:text-white cursor-pointer"
         >
           Date
           <ArrowUpDown />
@@ -50,7 +50,7 @@ export const columns: ColumnDef<Ticket>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="hover:bg-blue-500 hover:text-white"
+          className="hover:bg-blue-500 hover:text-white cursor-pointer"
         >
           OnSell
           <ArrowUpDown />
@@ -79,14 +79,10 @@ export const columns: ColumnDef<Ticket>[] = [
   {
     id: "delete",
     cell: ({ row }) => {
-      const deleteTicket = useDeleteTicket();
+      const deleteTicket = DeleteTicket();
 
       const handleDelete = (id: string) => {
-        deleteTicket.mutate(id, {
-          onSuccess: () => {
-            window.alert("delete successfull");
-          },
-        });
+        deleteTicket.mutate(id);
       };
 
       const data = row.original;
@@ -95,7 +91,7 @@ export const columns: ColumnDef<Ticket>[] = [
         <div>
           <Button
             onClick={() => handleDelete(data._id)}
-            className="bg-red-500 hover:bg-red-600"
+            className="bg-red-500 hover:bg-red-600 cursor-pointer"
           >
             <Trash2 />
           </Button>
@@ -106,13 +102,11 @@ export const columns: ColumnDef<Ticket>[] = [
   {
     id: "edit",
     cell: ({ row }) => {
-      const tickets = row.original;
+      const ticket = row.original;
 
       return (
         <div>
-          <Button className="bg-green-500 hover:bg-green-600">
-            <Pencil />
-          </Button>
+          <TableEditBtn ticketId={ticket._id} />
         </div>
       );
     },

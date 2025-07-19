@@ -1,10 +1,14 @@
 import { Router } from "express";
 import { verifyToken } from "../middleware/verifyToken";
 import { validateTicketInput } from "../middleware/validateTicketInput";
-import { handleFileUpload } from "../middleware/handleFileUpload";
+import {
+  handleCreateFileUpload,
+  handleUpdateFileUpload,
+} from "../middleware/handleFileUpload";
 import {
   createTicket,
   deleteTicket,
+  getTicketById,
   getTickets,
   updateTicket,
 } from "../controllers/ticketController";
@@ -18,7 +22,7 @@ router.post(
   verifyToken,
   upload.single("image"),
   validateTicketInput,
-  handleFileUpload,
+  handleCreateFileUpload,
   createTicket
 );
 
@@ -31,8 +35,10 @@ router.put(
   verifyToken,
   upload.single("image"),
   validateTicketInput,
-  handleFileUpload,
-  updateTicket,
+  handleUpdateFileUpload,
+  updateTicket
 );
+
+router.get("/tickets/:id", verifyToken, getTicketById);
 
 export default router;

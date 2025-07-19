@@ -1,5 +1,5 @@
 import axios from "axios";
-import { loginProps, SignupProps, Ticket } from "../type";
+import { loginProps, SignupProps } from "../type";
 
 const admin = axios.create({
   baseURL: "http://localhost:5000",
@@ -62,6 +62,28 @@ export const GetAllTicketsFc = async () => {
 };
 
 //Delete one ticket
-export const DeleteTicketFc = async (id:string) => {
-  const res = await admin.delete(`/admin/tickets/${id}`)
-}
+export const DeleteTicketFc = async (id: string) => {
+  await admin.delete(`/admin/tickets/${id}`);
+};
+
+//Update one ticket
+export const UpdateTicketFc = async ({
+  id,
+  formData,
+}: {
+  id: string;
+  formData: FormData;
+}) => {
+  const res = await admin.put(`/admin/tickets/${id}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.data;
+};
+
+//Get one ticket
+export const GetTicketByIdFc = async (id: string) => {
+  const res = await admin.get(`/admin/tickets/${id}`);
+  return res.data;
+};

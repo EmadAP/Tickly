@@ -1,6 +1,6 @@
-import { Ticket } from "@/lib/type";
+import { Admin, Ticket } from "@/lib/type";
 import { useQuery } from "@tanstack/react-query";
-import { GetAllTicketsFc, GetTicketByIdFc } from "../api";
+import { GetAllAdminFc, GetAllTicketsFc, GetTicketByIdFc } from "../api";
 
 export const useGetAllTickets = () => {
   return useQuery<Ticket[], Error>({
@@ -14,5 +14,12 @@ export const GetTicketById = (id?: string) => {
     queryKey: ["TicketById", id],
     queryFn: () => GetTicketByIdFc(id!),
     enabled: !!id,
+  });
+};
+
+export const GetAllAdmins = () => {
+  return useQuery<Admin[], Error>({
+    queryKey: ["Admins"],
+    queryFn: GetAllAdminFc,
   });
 };

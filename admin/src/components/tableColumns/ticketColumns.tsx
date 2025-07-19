@@ -3,12 +3,12 @@
 import { Ticket } from "@/lib/type";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
-import { Button } from "./ui/button";
 import { Trash2 } from "lucide-react";
 import { DeleteTicket } from "@/lib/api/main/mutations";
-import TableEditBtn from "./TableEditBtn";
+import { Button } from "../ui/button";
+import TableEditBtn from "../TableEditBtn";
 
-export const columns: ColumnDef<Ticket>[] = [
+export const ticketColumns: ColumnDef<Ticket>[] = [
   {
     accessorKey: "title",
     header: "Title",

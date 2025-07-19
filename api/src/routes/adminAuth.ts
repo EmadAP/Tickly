@@ -5,6 +5,8 @@ import jwt from "jsonwebtoken";
 import fs from "fs";
 import multer from "multer";
 import { SECRET } from "../util/config";
+import { verifyToken } from "../middleware/verifyToken";
+import { deleteAdmin, getAdmins } from "../controllers/adminController";
 
 const upload = multer({ dest: "uploads/" });
 const router = Router();
@@ -174,5 +176,9 @@ router.post("/logout", (req: Request, res: Response) => {
     })
     .json({ message: "Logged out successfully" });
 });
+
+router.get("/admins", verifyToken, getAdmins);
+
+router.delete("/admin/:id", verifyToken, deleteAdmin);
 
 export default router;

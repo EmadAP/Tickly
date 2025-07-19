@@ -34,11 +34,15 @@ import {
 interface TableDataProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  filterKey?: string;
+  filterPlaceholder?: string;
 }
 
 export function TableData<TData, TValue>({
   columns,
   data,
+  filterKey,
+  filterPlaceholder,
 }: TableDataProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -67,16 +71,18 @@ export function TableData<TData, TValue>({
   return (
     <div>
       <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter categories..."
-          value={
-            (table.getColumn("category")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("category")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
+        {filterKey && (
+          <Input
+            placeholder={filterPlaceholder ?? "Filter..."}
+            value={
+              (table.getColumn(filterKey)?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table.getColumn(filterKey)?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+          />
+        )}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button className="ml-auto bg-blue-500 hover:bg-blue-600">

@@ -87,3 +87,14 @@ export const GetTicketByIdFc = async (id: string) => {
   const res = await admin.get(`/admin/tickets/${id}`);
   return res.data;
 };
+
+//Get all admins
+export const GetAllAdminFc = async () => {
+  const res = await admin.get("/admin/admins");
+  return res.data;
+};
+
+//Delete one admin
+export const DeleteAdminFc = async (id: string) => {
+  await admin.delete(`/admin/admin/${id}`);
+};

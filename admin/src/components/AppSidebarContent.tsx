@@ -30,12 +30,12 @@ const items = [
   },
   {
     title: "Users Table",
-    url: "#",
+    url: "usersTable",
     icon: Users,
   },
   {
     title: "Admin Table",
-    url: "#",
+    url: "adminTable",
     icon: UsersRound,
   },
 ];

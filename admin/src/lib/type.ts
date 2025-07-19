@@ -23,7 +23,7 @@ export interface Ticket {
 }
 
 export interface Admin {
-  id: string;
+  _id: string;
   username: string;
   email: string;
   image: string;
@@ -64,4 +64,10 @@ export type TicketTable = {
   price: number;
   quantity: number;
   onSell: boolean;
+};
+
+export type AdminTable = {
+  username: string;
+  email: string;
+  createdAt?: string;
 };

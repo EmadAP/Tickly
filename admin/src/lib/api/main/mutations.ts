@@ -1,5 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { CreateTicketFc, DeleteTicketFc, UpdateTicketFc } from "../api";
+import {
+  CreateTicketFc,
+  DeleteAdminFc,
+  DeleteTicketFc,
+  UpdateTicketFc,
+} from "../api";
 import { toast } from "sonner";
 
 export const CreateTicket = () => {
@@ -44,6 +49,23 @@ export const UpdateTicket = () => {
     onError: (error: Error) => {
       toast.error("Failed to update the Ticket", {
         description: error.message,
+      });
+    },
+  });
+};
+
+export const DeleteAdmin = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: DeleteAdminFc,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["Admins"] });
+      toast.success("Admin deleted successfully");
+    },
+    onError: (err: Error) => {
+      toast.error("Failed to delete Admin. try again!", {
+        description: err.message,
       });
     },
   });

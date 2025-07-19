@@ -7,9 +7,11 @@ import { SignupAdmin } from "@/lib/api/auth/mutations";
 import { SignupProps } from "@/lib/type";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { ChevronDown } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 function Page() {
+  const router = useRouter();
   const { mutate: signup } = SignupAdmin();
   const [preview, setPreview] = useState<string | null>(null);
   const [signupData, setSignupData] = useState<SignupProps>({
@@ -23,8 +25,7 @@ function Page() {
     e.preventDefault();
     signup(signupData, {
       onSuccess: () => {
-        window.alert("login successful");
-        console.log("login successful");
+        router.push("/adminTable");
       },
     });
   };

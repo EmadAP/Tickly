@@ -31,3 +31,8 @@ export const ProfileUserFc = async () => {
   const res = await api.get("/api/profile");
   return res.data;
 };
+
+export const GetAllTicketsFc = async () => {
+  const res = await api.get("/api/tickets");
+  return res.data;
+};

@@ -7,6 +7,7 @@ import path from "path";
 import userAuthRoutes from "./routes/userAuth";
 import adminAuthRoutes from "./routes/adminAuth";
 import adminTicketRoutes from "./routes/adminTicket";
+import userTicketRoutes from "./routes/userTicket";
 import { MONGO_URI, PORT } from "./util/config";
 
 const app = express();
@@ -24,6 +25,7 @@ app.use("/uploads", express.static(path.resolve("uploads")));
 
 //Routes
 app.use("/api", userAuthRoutes);
+app.use("/api", userTicketRoutes);
 app.use("/admin", adminAuthRoutes);
 app.use("/admin", adminTicketRoutes);
 

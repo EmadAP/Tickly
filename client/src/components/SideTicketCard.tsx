@@ -19,8 +19,8 @@ const SideTicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
         />
         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 z-0" />
       </div>
-      <p className="text-red-600 absolute inset-0 pl-2 text-xl font-bold">
-        {ticket.off ? `${ticket.off}%` : ""}
+      <p className="absolute top-0 left-0 bg-red-500 text-white px-2 py-1 text-sm font-semibold rounded-lg shadow z-10">
+        {ticket.off ? `${ticket.off}% OFF` : ""}
       </p>
 
       <div className="absolute inset-0 flex flex-col items-center justify-center text-white opacity-0 transition-opacity duration-500 group-hover:opacity-100">

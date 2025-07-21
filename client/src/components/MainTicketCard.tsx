@@ -4,12 +4,21 @@ import React from "react";
 
 interface TicketCardProps {
   ticket: Ticket;
+  showOff?: boolean;
 }
 
-const MainTicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
+const MainTicketCard: React.FC<TicketCardProps> = ({
+  ticket,
+  showOff = false,
+}) => {
   return (
     <div className="flex flex-col rounded-2xl h-96 bg-slate-900 justify-between group cursor-pointer">
-      <div className="overflow-hidden rounded-2xl h">
+      {showOff && ticket.onSell && ticket.off && (
+        <div className="absolute top-1 left-5 bg-red-500 text-white px-2 py-1 text-sm font-semibold rounded-lg shadow z-10">
+          {ticket.off}% OFF
+        </div>
+      )}
+      <div className="overflow-hidden rounded-2xl">
         <Image
           src={`http://localhost:5000/${ticket.image}`}
           alt={ticket.title}

@@ -22,7 +22,7 @@ const MainCarouselCards: React.FC<MainCarouselCardsProps> = ({
   link,
   tickets,
 }) => {
-  const preview = tickets.slice(0, 5);
+  const preview = tickets.slice(0, 8);
 
   return (
     <section>
@@ -46,10 +46,10 @@ const MainCarouselCards: React.FC<MainCarouselCardsProps> = ({
             {preview.map((ticket) => (
               <CarouselItem
                 key={ticket._id}
-                className="sm:basis-1/2 2xl:basis-1/3"
+                className="sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
               >
                 <div className="p-1">
-                  <MainTicketCard ticket={ticket} />
+                  <MainTicketCard ticket={ticket} showOff />
                 </div>
               </CarouselItem>
             ))}

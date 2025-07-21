@@ -1,21 +1,11 @@
 "use client";
 
-import MainCarouselCards from "@/components/MainCarouselCards";
 import MainTicketCard from "@/components/MainTicketCard";
 import { GetAllTickets } from "@/lib/api/main/queries";
 import { ArrowBigRightDash, CalendarDays } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useMediaQuery } from "react-responsive";
-
-const CATEGORIES = [
-  "Concert",
-  "Sports",
-  "Theater",
-  "Comedy",
-  "Workshop",
-  "Seminar",
-];
 
 function MainLeft() {
   const { data: tickets, isLoading, isError, error } = GetAllTickets();
@@ -91,23 +81,6 @@ function MainLeft() {
           <span>Explore more</span>
           <ArrowBigRightDash size={30} />
         </Link>
-      </div>
-      {/* Categories carousels */}
-      <div className="mt-20 space-y-10">
-        {CATEGORIES.map((category) => {
-          const categoryTickets = regularTickets.filter(
-            (ticket) => ticket.category === category
-          );
-          if (categoryTickets.length === 0) return null;
-          return (
-            <MainCarouselCards
-              key={category}
-              title={category}
-              link={`/category/${encodeURIComponent(category)}`}
-              tickets={categoryTickets}
-            />
-          );
-        })}
       </div>
     </div>
   );

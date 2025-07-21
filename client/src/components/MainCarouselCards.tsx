@@ -9,7 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Ticket } from "@/lib/types/types";
-import MainTicketCard from "./MainTicketCard";
+import BottomTicketCard from "./BottomTicketCard";
 
 interface MainCarouselCardsProps {
   title: string;
@@ -49,7 +49,7 @@ const MainCarouselCards: React.FC<MainCarouselCardsProps> = ({
                 className="sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
               >
                 <div className="p-1">
-                  <MainTicketCard ticket={ticket} showOff />
+                  <BottomTicketCard ticket={ticket} />
                 </div>
               </CarouselItem>
             ))}

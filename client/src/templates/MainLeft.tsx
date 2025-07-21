@@ -1,6 +1,6 @@
 "use client";
 
-import MainTicketCard from "@/components/MainTicketCard";
+import LeftTicketCard from "@/components/LeftTicketCard";
 import { GetAllTickets } from "@/lib/api/main/queries";
 import { ArrowBigRightDash, CalendarDays } from "lucide-react";
 import Link from "next/link";
@@ -64,7 +64,7 @@ function MainLeft() {
       <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4">
         {filteredTickets.length > 0 ? (
           filteredTickets.map((ticket) => (
-            <MainTicketCard key={ticket._id} ticket={ticket} />
+            <LeftTicketCard key={ticket._id} ticket={ticket} />
           ))
         ) : (
           <p className="text-center col-span-full text-lg">

@@ -35,6 +35,8 @@ export interface Ticket {
     | "Workshop"
     | "Seminar"
     | string;
+  country: string;
+  address: string;
   coordinates: [number, number];
   image: string; //| File | null;
   eventDate: string; // ISO string like "2025-08-01T19:00:00Z"

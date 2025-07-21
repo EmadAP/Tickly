@@ -1,6 +1,6 @@
 "use client";
 
-import SideTicketCard from "@/components/SideTicketCard";
+import RightTicketCard from "@/components/RightTicketCard";
 import { GetAllTickets } from "@/lib/api/main/queries";
 import { ArrowBigRightDash, PartyPopper } from "lucide-react";
 import Link from "next/link";
@@ -31,7 +31,7 @@ function MainRight() {
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-1">
         {onSellTickets.map((ticket) => (
-          <SideTicketCard key={ticket._id} ticket={ticket} />
+          <RightTicketCard key={ticket._id} ticket={ticket} />
         ))}
       </div>
       <div className="flex items-center justify-center pt-5">

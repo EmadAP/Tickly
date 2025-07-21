@@ -2,7 +2,7 @@
 import MainCarouselCards from "@/components/MainCarouselCards";
 import { GetAllTickets } from "@/lib/api/main/queries";
 import { ChevronDown } from "lucide-react";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 const CATEGORIES = [
   "Concert",
@@ -16,6 +16,23 @@ const CATEGORIES = [
 function MainBottom() {
   const { data: tickets, isLoading, isError, error } = GetAllTickets();
   const [activeFilter, setActiveFilter] = useState("Categories");
+
+  const topCountries = useMemo(() => {
+    if (!tickets) return [];
+
+    const countryCountMap: Record<string, number> = {};
+    tickets.forEach((ticket) => {
+      countryCountMap[ticket.country] =
+        (countryCountMap[ticket.country] || 0) + 1;
+    });
+
+    const sortedCountries = Object.entries(countryCountMap)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([country]) => country);
+
+    return sortedCountries;
+  }, [tickets]);
 
   if (isLoading || !tickets) return <div>loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;
@@ -39,20 +56,37 @@ function MainBottom() {
         ))}
       </div>
       <div className="space-y-10">
-        {CATEGORIES.map((category) => {
-          const categoryTickets = tickets.filter(
-            (ticket) => ticket.category === category
-          );
-          if (categoryTickets.length === 0) return null;
-          return (
-            <MainCarouselCards
-              key={category}
-              title={category}
-              link={`/category/${encodeURIComponent(category)}`}
-              tickets={categoryTickets}
-            />
-          );
-        })}
+        {activeFilter === "Categories" &&
+          CATEGORIES.map((category) => {
+            const categoryTickets = tickets.filter(
+              (ticket) => ticket.category === category
+            );
+            if (categoryTickets.length === 0) return null;
+            return (
+              <MainCarouselCards
+                key={category}
+                title={category}
+                link={`/category/${encodeURIComponent(category)}`}
+                tickets={categoryTickets}
+              />
+            );
+          })}
+
+        {activeFilter === "Country" &&
+          topCountries.map((country) => {
+            const countryTickets = tickets.filter(
+              (ticket) => ticket.country === country
+            );
+            if (countryTickets.length === 0) return null;
+            return (
+              <MainCarouselCards
+                key={country}
+                title={country}
+                link={`/country/${encodeURIComponent(country)}`}
+                tickets={countryTickets}
+              />
+            );
+          })}
       </div>
     </div>
   );

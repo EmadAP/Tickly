@@ -18,6 +18,8 @@ export const createTicket = async (req: Request, res: Response) => {
       quantity,
       onSell,
       off,
+      country,
+      address,
       imageUrl,
     } = req.body;
 
@@ -41,6 +43,8 @@ export const createTicket = async (req: Request, res: Response) => {
       title,
       description,
       category,
+      country: country.trim(),
+      address: address.trim(),
       coordinates: parsedCoordinates,
       eventDate: parsedEventDate,
       price: parsedPrice,
@@ -122,6 +126,8 @@ export const updateTicket = async (req: Request, res: Response) => {
     ticket.title = updatedData.title;
     ticket.description = updatedData.description;
     ticket.category = updatedData.category;
+    ticket.country = updatedData.country.trim();
+    ticket.address = updatedData.address.trim();
     ticket.coordinates = updatedData.coordinates;
     ticket.image = updatedData.imageUrl || ticket.image;
     ticket.eventDate = updatedData.eventDate;
@@ -129,6 +135,7 @@ export const updateTicket = async (req: Request, res: Response) => {
     ticket.quantity = updatedData.quantity;
     ticket.onSell = updatedData.onSell;
     ticket.off = updatedData.off ?? ticket.off;
+
     await ticket.save();
 
     res.status(200).json({ message: "Ticket updated", ticket });

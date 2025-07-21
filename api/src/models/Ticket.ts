@@ -13,6 +13,8 @@ export interface ITicket extends Document {
     | "Workshop"
     | "Seminar"
     | string;
+  country: string;
+  address: string; // Format "City, Venue"
   coordinates: [number, number];
   image: string;
   eventDate: string; // ISO date string
@@ -47,6 +49,26 @@ const TicketSchema = new Schema<ITicket>(
       type: String,
       required: true,
       enum: ["Concert", "Sports", "Theater", "Comedy", "Workshop", "Seminar"],
+    },
+    country: {
+      type: String,
+      required: true,
+      minlength: 2,
+      maxlength: 100,
+      trim: true,
+    },
+    address: {
+      type: String,
+      required: true,
+      minlength: 5,
+      maxlength: 200,
+      trim: true,
+      validate: {
+        validator: function (v: string) {
+          return v.includes(",");
+        },
+        message: "Address must contain a comma (format: City, Venue)",
+      },
     },
     coordinates: {
       type: [Number],

@@ -14,6 +14,10 @@ export const ticketColumns: ColumnDef<Ticket>[] = [
     header: "Title",
   },
   {
+    accessorKey: "country",
+    header: "Country",
+  },
+  {
     accessorKey: "category",
     header: ({ column }) => {
       return (

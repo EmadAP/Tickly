@@ -20,8 +20,8 @@ function Page() {
           <TableData
             columns={ticketColumns}
             data={tickets ?? []}
-            filterKey="category"
-            filterPlaceholder="Filter by category..."
+            filterKey="country"
+            filterPlaceholder="Filter by country..."
           />
         </div>
       </MaxWidthWrapper>

@@ -10,6 +10,7 @@ import { Calendar } from "@/components/ui/calendar";
 import OnSellSection from "@/components/OnSellCreateTicket";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import CountrySelect from "@/components/CountrySelectCreateTemp";
 
 const LocationPicker = dynamic(() => import("@/components/LocationPicker"), {
   ssr: false,
@@ -25,6 +26,8 @@ type TicketTempProps = {
     category: string;
     onSell: boolean;
     off: number;
+    country: string;
+    address: string;
     coordinates: [number, number];
     eventDate: string; // ISO format
     image: string | File | null;
@@ -46,6 +49,8 @@ function TicketTemp({ mode, initialData, onSubmit }: TicketTempProps) {
       : null
   );
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [country, setCountry] = useState<string>(initialData?.country || "");
+  // const [address, setAddress] = useState<string>(initialData?.address || "");
   const [category, setCategory] = useState<string>(initialData?.category || "");
   const [onSell, setOnSell] = useState<boolean>(initialData?.onSell || false);
   const [offValue, setOffValue] = useState<string>(
@@ -70,6 +75,14 @@ function TicketTemp({ mode, initialData, onSubmit }: TicketTempProps) {
     if (coordinates) {
       formData.set("coordinates", JSON.stringify(coordinates));
     }
+
+    if (country) {
+      formData.set("country", country);
+    }
+
+    // if (address) {
+    //   formData.set("address", address);
+    // }
     if (date) {
       const localDateStr = `${date.getFullYear()}-${String(
         date.getMonth() + 1
@@ -134,6 +147,34 @@ function TicketTemp({ mode, initialData, onSubmit }: TicketTempProps) {
                 name="description"
                 className="bg-slate-800 border-0"
                 defaultValue={initialData?.description}
+              />
+            </div>
+
+            {/* Country */}
+
+            <div className="w-full flex flex-col gap-2">
+              <label className="text-xl flex flex-row items-center">
+                <span>Country</span>
+                <ChevronDown />
+              </label>
+              <CountrySelect
+                onSelect={setCountry}
+                defaultValue={initialData?.country}
+              />
+              <Input type="hidden" name="country" value={country} />
+            </div>
+
+            {/* Address */}
+            <div className="w-full flex flex-col gap-2">
+              <label className="text-xl flex flex-row items-center">
+                <span>Address</span>
+                <ChevronDown />
+              </label>
+              <Input
+                type="text"
+                name="address"
+                className="bg-slate-800 border-0"
+                defaultValue={initialData?.address}
               />
             </div>
 

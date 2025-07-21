@@ -1,6 +1,5 @@
 export interface Ticket {
   _id: string;
-  id: string; // UUID or unique ticket ID (can be optional on create)
   title: string;
   description: string;
   category:
@@ -18,6 +17,8 @@ export interface Ticket {
   quantity: number; // total tickets available
   onSell: boolean;
   off?: number;
+  country: string;
+  address: string;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -64,6 +65,7 @@ export type TicketTable = {
   price: number;
   quantity: number;
   onSell: boolean;
+  country: string;
 };
 
 export type AdminTable = {

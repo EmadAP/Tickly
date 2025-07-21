@@ -9,19 +9,8 @@ import {
   UsersData,
 } from "@/lib/mock/mock";
 import ChartTemplate from "@/templates/ChartTemplate";
-// import { useRouter } from "next/navigation";
-// import { useEffect } from "react";
-// import { useAdmin } from "@/lib/context/AdminContext";
 
 export default function Home() {
-  // const { admin } = useAdmin();
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   if (!admin) {
-  //     router.push("/login");
-  //   }
-  // }, [admin, router]);
   return (
     <div className="bg-slate-900 text-white py-10">
       <MaxWidthWrapper>

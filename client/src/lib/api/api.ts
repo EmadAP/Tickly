@@ -36,3 +36,8 @@ export const GetAllTicketsFc = async () => {
   const res = await api.get("/api/tickets");
   return res.data;
 };
+
+export const GetTicketByIdFc = async (id: string) => {
+  const res = await api.get(`/api/tickets/${id}`);
+  return res.data;
+};

@@ -3,6 +3,7 @@ import Event from "../models/Event";
 import fs from "fs";
 import mongoose from "mongoose";
 import path from "path";
+import Section from "../models/Section";
 
 // Create Event
 export const createEvent = async (req: Request, res: Response) => {
@@ -151,6 +152,9 @@ export const deleteEvent = async (req: Request, res: Response) => {
         console.warn("Failed to delete image file:", event.image, err);
       }
     }
+
+    // Delete all related sections
+    await Section.deleteMany({ event: event._id });
 
     await event.deleteOne();
 

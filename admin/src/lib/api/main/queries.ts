@@ -1,10 +1,12 @@
-import { Admin, Event, Ticket } from "@/lib/type";
+import { Admin, Event, Section, Ticket } from "@/lib/type";
 import { useQuery } from "@tanstack/react-query";
 import {
   GetAllAdminFc,
   GetAllEventsFc,
   GetAllTicketsFc,
   GetEventByIdFc,
+  GetSectionByIdFc,
+  GetSectionsByEventIdFc,
   GetTicketByIdFc,
 } from "../api";
 
@@ -24,7 +26,7 @@ export const GetTicketById = (id?: string) => {
 };
 
 // Get All Events
-export const GetAllEvents = () => {
+export const useGetAllEvents = () => {
   return useQuery<Event[], Error>({
     queryKey: ["Events"],
     queryFn: GetAllEventsFc,
@@ -32,7 +34,7 @@ export const GetAllEvents = () => {
 };
 
 // Get Event By Id
-export const GetEventById = (id?: string) => {
+export const useGetEventById = (id?: string) => {
   return useQuery<Event, Error>({
     queryKey: ["EventById", id],
     queryFn: () => GetEventByIdFc(id!),
@@ -40,6 +42,25 @@ export const GetEventById = (id?: string) => {
   });
 };
 
+// Get Sections by Event ID
+export const useGetSectionsByEventId = (eventId?: string) => {
+  return useQuery<Section[], Error>({
+    queryKey: ["SectionsByEvent", eventId],
+    queryFn: () => GetSectionsByEventIdFc(eventId!),
+    enabled: !!eventId,
+  });
+};
+
+// Get Sections by ID
+export const useGetSectionById = (id?: string) => {
+  return useQuery<Section, Error>({
+    queryKey: ["SectionById", id],
+    queryFn: () => GetSectionByIdFc(id!),
+    enabled: !!id,
+  });
+};
+
+//Get All Admins
 export const GetAllAdmins = () => {
   return useQuery<Admin[], Error>({
     queryKey: ["Admins"],

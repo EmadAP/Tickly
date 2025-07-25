@@ -47,7 +47,7 @@ export interface Event {
   updatedAt?: string;
 }
 
-export interface SectionAdmin {
+export interface Section {
   _id: string;
   event: string;
   name: string;

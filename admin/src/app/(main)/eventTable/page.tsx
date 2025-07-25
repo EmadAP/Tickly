@@ -2,11 +2,11 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { eventColumns } from "@/components/tableColumns/eventColumns";
 import { TableData } from "@/components/TableData";
-import { GetAllEvents } from "@/lib/api/main/queries";
+import { useGetAllEvents } from "@/lib/api/main/queries";
 import React from "react";
 
 function Page() {
-  const { data: events, isLoading, isError, error } = GetAllEvents();
+  const { data: events, isLoading, isError, error } = useGetAllEvents();
 
   if (isLoading || !events) return <div>loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;

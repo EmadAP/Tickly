@@ -2,7 +2,7 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { useParams, useRouter } from "next/navigation";
 import { UpdateEvent } from "@/lib/api/main/mutations";
-import { GetEventById } from "@/lib/api/main/queries";
+import { useGetEventById } from "@/lib/api/main/queries";
 import { useQueryClient } from "@tanstack/react-query";
 import EventTemp from "@/templates/EventTemp";
 
@@ -13,7 +13,7 @@ function Page() {
 
   const eventId = params.id as string;
 
-  const { data: event, isLoading } = GetEventById(eventId);
+  const { data: event, isLoading } = useGetEventById(eventId);
 
   const { mutate: updateEvent } = UpdateEvent();
 

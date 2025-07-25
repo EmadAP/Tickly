@@ -55,15 +55,36 @@ export const CreateTicketFc = async (formData: FormData) => {
   return res.data;
 };
 
+// Create Event
+export const CreateEventFc = async (formData: FormData) => {
+  const res = await admin.post("/admin/events", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.data;
+};
+
 // Get All Ticket
 export const GetAllTicketsFc = async () => {
   const res = await admin.get("/admin/tickets");
   return res.data;
 };
 
+// Get All Ticket
+export const GetAllEventsFc = async () => {
+  const res = await admin.get("/admin/events");
+  return res.data;
+};
+
 //Delete one ticket
 export const DeleteTicketFc = async (id: string) => {
   await admin.delete(`/admin/tickets/${id}`);
+};
+
+//Delete one ticket
+export const DeleteEventFc = async (id: string) => {
+  await admin.delete(`/admin/events/${id}`);
 };
 
 //Update one ticket
@@ -82,9 +103,31 @@ export const UpdateTicketFc = async ({
   return res.data;
 };
 
+//Update one ticket
+export const UpdateEventFc = async ({
+  id,
+  formData,
+}: {
+  id: string;
+  formData: FormData;
+}) => {
+  const res = await admin.put(`/admin/events/${id}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.data;
+};
+
 //Get one ticket
 export const GetTicketByIdFc = async (id: string) => {
   const res = await admin.get(`/admin/tickets/${id}`);
+  return res.data;
+};
+
+//Get one ticket
+export const GetEventByIdFc = async (id: string) => {
+  const res = await admin.get(`/admin/Events/${id}`);
   return res.data;
 };
 

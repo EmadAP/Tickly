@@ -14,6 +14,7 @@ import {
   Users,
   UserRoundPlus,
   Tickets,
+  Ticket,
 } from "lucide-react";
 
 // Menu items.
@@ -40,6 +41,11 @@ const items = [
   },
 ];
 const creates = [
+  {
+    title: "Event",
+    url: "/createEvent",
+    icon: Ticket,
+  },
   {
     title: "Ticket",
     url: "/createTicket",

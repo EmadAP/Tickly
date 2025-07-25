@@ -23,6 +23,43 @@ export interface Ticket {
   updatedAt?: string;
 }
 
+export interface Event {
+  _id: string;
+  creator: string;
+  title: string;
+  description: string;
+  category:
+    | "Concert"
+    | "Sports"
+    | "Theater"
+    | "Comedy"
+    | "Workshop"
+    | "Seminar"
+    | string;
+  country: string;
+  city: string;
+  address: string;
+  coordinates: [number, number];
+  image: string | File | null;
+  eventDate: string;
+  eventTime: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface SectionAdmin {
+  _id: string;
+  event: string;
+  name: string;
+  price: number;
+  quantity: number;
+  sold: number;
+  onSell: boolean;
+  discountPercent?: number;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 export interface Admin {
   _id: string;
   username: string;

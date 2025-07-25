@@ -1,6 +1,6 @@
 "use client";
 
-import CategoryCreateTicket from "@/components/CategoryCreateTicket";
+import CategoryCreateTicket from "@/components/CategoryCreateEvent";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ChevronDown } from "lucide-react";

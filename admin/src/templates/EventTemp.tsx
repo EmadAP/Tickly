@@ -9,8 +9,8 @@ import { Calendar } from "@/components/ui/calendar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import CountrySelect from "@/components/CountrySelectCreateTemp";
 import CategoryCreateEvent from "@/components/CategoryCreateEvent";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import SectionTemp from "./SectionTemp";
 
 const LocationPicker = dynamic(() => import("@/components/LocationPicker"), {
   ssr: false,
@@ -36,7 +36,6 @@ type EventTempProps = {
 
 function EventTemp({ mode, initialData, onSubmit }: EventTempProps) {
   const formRef = useRef<HTMLFormElement>(null);
-  const router = useRouter();
 
   const [coordinates, setCoordinates] = useState<[number, number] | null>(
     initialData?.coordinates || null
@@ -102,198 +101,185 @@ function EventTemp({ mode, initialData, onSubmit }: EventTempProps) {
   };
 
   return (
-    <form
-      ref={formRef}
-      onSubmit={handleSubmit}
-      className="flex flex-col gap-4 items-center justify-center"
-    >
-      <div className="grid grid-cols-3 w-full gap-4">
-        <div className="gap-4 col-span-3 md:col-span-1 flex flex-col items-center justify-start w-full">
-          {/* Title */}
-          <div className="w-full flex flex-col gap-2">
-            <label className="text-xl flex flex-row items-center">
-              <span>Title </span>
-              <ChevronDown />
-            </label>
-            <Input
-              type="text"
-              name="title"
-              className="bg-slate-800 border-0"
-              defaultValue={initialData?.title}
-            />
-          </div>
-
-          {/* Description */}
-          <div className="w-full flex flex-col gap-2">
-            <label className="text-xl flex flex-row items-center">
-              <span>Description </span>
-              <ChevronDown />
-            </label>
-            <Textarea
-              name="description"
-              className="bg-slate-800 border-0"
-              defaultValue={initialData?.description}
-            />
-          </div>
-
-          {/* Country */}
-          <div className="w-full flex flex-col gap-2">
-            <label className="text-xl flex flex-row items-center">
-              <span>Country</span>
-              <ChevronDown />
-            </label>
-            <CountrySelect
-              onSelect={setCountry}
-              defaultValue={initialData?.country}
-            />
-            <Input type="hidden" name="country" value={country} />
-          </div>
-
-          {/* City */}
-          <div className="w-full flex flex-col gap-2">
-            <label className="text-xl flex flex-row items-center">
-              <span>City</span>
-              <ChevronDown />
-            </label>
-            <Input
-              type="text"
-              name="city"
-              className="bg-slate-800 border-0"
-              defaultValue={initialData?.city}
-            />
-          </div>
-
-          {/* Address */}
-          <div className="w-full flex flex-col gap-2">
-            <label className="text-xl flex flex-row items-center">
-              <span>Address</span>
-              <ChevronDown />
-            </label>
-            <Input
-              type="text"
-              name="address"
-              className="bg-slate-800 border-0"
-              defaultValue={initialData?.address}
-            />
-          </div>
-
-          {/* Time */}
-          <div className="w-full flex flex-col gap-2">
-            <label className="text-xl flex flex-row items-center">
-              <span>Event Time </span>
-              <ChevronDown />
-            </label>
-            <Input
-              type="time"
-              name="eventTime"
-              className="bg-slate-800 border-0"
-              defaultValue={initialData?.eventTime}
-            />
-          </div>
-
-          {/* Category */}
-          <div className="w-full">
-            <CategoryCreateEvent
-              selectedCategory={category}
-              onCategoryChange={setCategory}
-            />
-            <Input type="hidden" name="category" value={category} />
-          </div>
-        </div>
-
-        <div className="col-span-3 md:col-span-2 flex flex-col gap-4 items-center w-full">
-          {/* Location */}
-          <div className="w-full flex flex-col gap-2">
-            <label className="text-xl flex flex-row items-center">
-              <span>Location </span>
-              <ChevronDown />
-            </label>
-            <LocationPicker
-              onLocationSelect={setCoordinates}
-              defaultPosition={initialData?.coordinates}
-            />
-            <Input
-              type="hidden"
-              name="coordinates"
-              value={coordinates ? JSON.stringify(coordinates) : ""}
-            />
-          </div>
-
-          <div className="w-full flex flex-col xl:flex-row items-center gap-4">
-            {/* Image Upload */}
-            <div className="w-full h-full flex flex-col gap-2">
-              <label className="text-xl flex flex-row items-center">
-                <span>Ticket Background </span>
-                <ChevronDown />
-              </label>
-              <Avatar className="w-full h-[470px] rounded-lg overflow-hidden">
-                <AvatarImage
-                  className="rounded-lg object-cover w-full h-full"
-                  src={IMG}
-                />
-                <AvatarFallback>AD</AvatarFallback>
-              </Avatar>
-              <label className="text-center relative mt-2 cursor-pointer bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg shadow transition-colors">
-                Upload image
-                <Input
-                  name="image"
-                  type="file"
-                  accept="image/*"
-                  className="absolute inset-0 opacity-0 cursor-pointer"
-                  onChange={handleFileChange}
-                />
-              </label>
-            </div>
-
-            {/* Date */}
+    <>
+      <form
+        ref={formRef}
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 items-center justify-center"
+      >
+        <div className="grid grid-cols-3 w-full gap-4">
+          <div className="gap-4 col-span-3 md:col-span-1 flex flex-col items-center justify-start w-full">
+            {/* Title */}
             <div className="w-full flex flex-col gap-2">
               <label className="text-xl flex flex-row items-center">
-                <span>Event Date </span>
+                <span>Title </span>
                 <ChevronDown />
               </label>
-              <Calendar
-                mode="single"
-                selected={date}
-                onSelect={setDate}
-                className="rounded-md shadow-sm bg-slate-800 w-full"
-                captionLayout="dropdown"
+              <Input
+                type="text"
+                name="title"
+                className="bg-slate-800 border-0"
+                defaultValue={initialData?.title}
               />
+            </div>
+
+            {/* Description */}
+            <div className="w-full flex flex-col gap-2">
+              <label className="text-xl flex flex-row items-center">
+                <span>Description </span>
+                <ChevronDown />
+              </label>
+              <Textarea
+                name="description"
+                className="bg-slate-800 border-0"
+                defaultValue={initialData?.description}
+              />
+            </div>
+
+            {/* Country */}
+            <div className="w-full flex flex-col gap-2">
+              <label className="text-xl flex flex-row items-center">
+                <span>Country</span>
+                <ChevronDown />
+              </label>
+              <CountrySelect
+                onSelect={setCountry}
+                defaultValue={initialData?.country}
+              />
+              <Input type="hidden" name="country" value={country} />
+            </div>
+
+            {/* City */}
+            <div className="w-full flex flex-col gap-2">
+              <label className="text-xl flex flex-row items-center">
+                <span>City</span>
+                <ChevronDown />
+              </label>
+              <Input
+                type="text"
+                name="city"
+                className="bg-slate-800 border-0"
+                defaultValue={initialData?.city}
+              />
+            </div>
+
+            {/* Address */}
+            <div className="w-full flex flex-col gap-2">
+              <label className="text-xl flex flex-row items-center">
+                <span>Address</span>
+                <ChevronDown />
+              </label>
+              <Input
+                type="text"
+                name="address"
+                className="bg-slate-800 border-0"
+                defaultValue={initialData?.address}
+              />
+            </div>
+
+            {/* Time */}
+            <div className="w-full flex flex-col gap-2">
+              <label className="text-xl flex flex-row items-center">
+                <span>Event Time </span>
+                <ChevronDown />
+              </label>
+              <Input
+                type="time"
+                name="eventTime"
+                className="bg-slate-800 border-0"
+                defaultValue={initialData?.eventTime}
+              />
+            </div>
+
+            {/* Category */}
+            <div className="w-full">
+              <CategoryCreateEvent
+                selectedCategory={category}
+                onCategoryChange={setCategory}
+              />
+              <Input type="hidden" name="category" value={category} />
+            </div>
+          </div>
+
+          <div className="col-span-3 md:col-span-2 flex flex-col gap-4 items-center w-full">
+            {/* Location */}
+            <div className="w-full flex flex-col gap-2">
+              <label className="text-xl flex flex-row items-center">
+                <span>Location </span>
+                <ChevronDown />
+              </label>
+              <LocationPicker
+                onLocationSelect={setCoordinates}
+                defaultPosition={initialData?.coordinates}
+              />
+              <Input
+                type="hidden"
+                name="coordinates"
+                value={coordinates ? JSON.stringify(coordinates) : ""}
+              />
+            </div>
+
+            <div className="w-full flex flex-col xl:flex-row items-center gap-4">
+              {/* Image Upload */}
+              <div className="w-full h-full flex flex-col gap-2">
+                <label className="text-xl flex flex-row items-center">
+                  <span>Ticket Background </span>
+                  <ChevronDown />
+                </label>
+                <Avatar className="w-full h-[300px] rounded-lg overflow-hidden">
+                  <AvatarImage
+                    className="rounded-lg object-cover w-full h-full"
+                    src={IMG}
+                  />
+                  <AvatarFallback>AD</AvatarFallback>
+                </Avatar>
+                <label className="text-center relative mt-2 cursor-pointer bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg shadow transition-colors">
+                  Upload image
+                  <Input
+                    name="image"
+                    type="file"
+                    accept="image/*"
+                    className="absolute inset-0 opacity-0 cursor-pointer"
+                    onChange={handleFileChange}
+                  />
+                </label>
+              </div>
+
+              {/* Date */}
+              <div className="flex flex-col h-full  gap-2">
+                <label className="text-xl flex flex-row items-center">
+                  <span>Event Date </span>
+                  <ChevronDown />
+                </label>
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  className="rounded-md shadow-sm bg-slate-800"
+                  captionLayout="dropdown"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* submit button */}
-      <div className="mt-20 mb-10 flex justify-end w-full">
-        <Button
-          type="submit"
-          className="bg-green-500 hover:bg-green-600 text-xl"
-        >
-          {mode === "edit" ? "Update Ticket" : "Create Ticket"}
-        </Button>
-      </div>
-    </form>
+        {/* submit button */}
+        <div className="mt-20 mb-10 flex justify-end w-full">
+          <Button
+            type="submit"
+            className="bg-green-500 hover:bg-green-600 text-xl"
+          >
+            {mode === "edit" ? "Update Ticket" : "Create Ticket"}
+          </Button>
+        </div>
+      </form>
+      {mode === "edit" && initialData?._id && (
+        <div className="w-full mt-10">
+          <SectionTemp eventId={initialData._id} />
+        </div>
+      )}
+    </>
   );
 }
 
 export default EventTemp;
-
-//   {mode === "edit" ? (
-//     <div className="mt-10 w-full flex justify-end">
-//       <button
-//         type="submit"
-//         className="bg-green-600 px-6 py-2 rounded-lg text-white text-xl hover:bg-green-700"
-//       >
-//         Update Event
-//       </button>
-//     </div>
-//   ) : (
-//     <div className="mt-10 w-full flex justify-end">
-//       <button
-//         type="submit"
-//         className="bg-blue-600 px-6 py-2 rounded-lg text-white text-xl hover:bg-blue-700"
-//       >
-//         Continue to Sections
-//       </button>
-//     </div>
-//   )}

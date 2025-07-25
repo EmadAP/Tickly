@@ -5,14 +5,14 @@ import { Button } from "./ui/button";
 import { Pencil } from "lucide-react";
 
 interface TableEditBtnProps {
-  ticketId: string;
+  eventId: string;
 }
 
-const TableEditBtn = ({ ticketId }: TableEditBtnProps) => {
+const TableEditBtn = ({ eventId }: TableEditBtnProps) => {
   const router = useRouter();
 
   const handleEdit = () => {
-    router.push(`/updateTicket/${ticketId}`);
+    router.push(`/updateEvent/${eventId}`);
   };
 
   return (

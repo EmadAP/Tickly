@@ -13,7 +13,6 @@ import {
   UsersRound,
   Users,
   UserRoundPlus,
-  Tickets,
   Ticket,
 } from "lucide-react";
 
@@ -25,8 +24,8 @@ const items = [
     icon: Home,
   },
   {
-    title: "Ticket Table",
-    url: "/ticketTable",
+    title: "Event Table",
+    url: "/eventTable",
     icon: Tags,
   },
   {
@@ -45,11 +44,6 @@ const creates = [
     title: "Event",
     url: "/createEvent",
     icon: Ticket,
-  },
-  {
-    title: "Ticket",
-    url: "/createTicket",
-    icon: Tickets,
   },
   {
     title: "Admin",

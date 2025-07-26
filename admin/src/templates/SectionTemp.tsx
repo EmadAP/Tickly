@@ -51,12 +51,7 @@ function SectionTemp({ mode, initialData = {}, onSubmit }: SectionTempProps) {
         className="flex flex-col gap-4 items-center justify-center"
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-4">
-          <div className="flex flex-col gap-4">
-            {/* Name */}
-            <div className="w-full">
-              <NameCreateSection selectedName={name} onNameChange={setName} />
-            </div>
-
+          <div className="flex flex-col gap-4 col-span-1">
             {/* Price */}
             <div className="w-full flex flex-col gap-2">
               <label className="text-xl flex flex-row items-center">
@@ -71,8 +66,8 @@ function SectionTemp({ mode, initialData = {}, onSubmit }: SectionTempProps) {
               />
             </div>
 
+            {/* Quantity */}
             <div className="w-full flex flex-col gap-2">
-              {/* Quantity */}
               <label className="text-xl flex flex-row items-center">
                 <span>Quantity</span>
                 <ChevronDown />
@@ -87,13 +82,18 @@ function SectionTemp({ mode, initialData = {}, onSubmit }: SectionTempProps) {
           </div>
 
           {/* OnSell Section */}
-          <div className="w-full">
+          <div className=" col-span-1 w-full">
             <OnSellSection
               value={onSell}
               onChange={setOnSell}
               discountValue={discountPercent}
               onDiscountChange={setDiscountPercent}
             />
+          </div>
+
+          {/* Name */}
+          <div className="w-full col-span-1 lg:col-span-2">
+            <NameCreateSection selectedName={name} onNameChange={setName} />
           </div>
         </div>
         <div className="mt-10 mb-10 flex justify-end w-full">

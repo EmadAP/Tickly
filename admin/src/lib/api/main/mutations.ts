@@ -68,7 +68,6 @@ export const CreateSection = (eventId: string) => {
       name: string;
       price: number;
       quantity: number;
-      sold: number;
       onSell: boolean;
       discountPercent?: number;
     }) => CreateSectionFc({ eventId, data }),
@@ -94,7 +93,6 @@ export const UpdateSection = () => {
         name: string;
         price: number;
         quantity: number;
-        sold: number;
         onSell: boolean;
         discountPercent?: number;
       };

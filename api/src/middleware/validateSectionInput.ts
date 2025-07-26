@@ -31,15 +31,6 @@ export const validateSectionInput = (
     return;
   }
 
-  // Sold
-  const parsedSold = Number(sold);
-  if (isNaN(parsedSold) || parsedSold < 0) {
-    res
-      .status(400)
-      .json({ message: "Sold must be a number greater than or equal to 0." });
-    return;
-  }
-
   // onSell
   const parsedOnSell =
     onSell === true || onSell === "true" || onSell === "1" || onSell === 1;
@@ -58,7 +49,6 @@ export const validateSectionInput = (
   // Attach normalized fields to req.body
   req.body.price = parsedPrice;
   req.body.quantity = parsedQuantity;
-  req.body.sold = parsedSold;
   req.body.onSell = parsedOnSell;
 
   next();

@@ -40,6 +40,7 @@ const SectionSchema = new Schema<ISection>(
       type: Number,
       required: true,
       min: 0,
+      default: 0,
     },
     onSell: {
       type: Boolean,

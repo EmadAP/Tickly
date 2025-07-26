@@ -98,7 +98,6 @@ export const CreateSectionFc = async ({
     name: string;
     price: number;
     quantity: number;
-    sold: number;
     onSell: boolean;
     discountPercent?: number;
   };
@@ -129,7 +128,6 @@ export const UpdateSectionFc = async ({
     name: string;
     price: number;
     quantity: number;
-    sold: number;
     onSell: boolean;
     discountPercent?: number;
   };

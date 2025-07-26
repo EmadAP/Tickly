@@ -10,7 +10,6 @@ type SectionFormData = {
   name: string;
   price: number;
   quantity: number;
-  sold: number;
   onSell: boolean;
   discountPercent?: number;
 };
@@ -25,7 +24,6 @@ function SectionTemp({ mode, initialData = {}, onSubmit }: SectionTempProps) {
   const [name, setName] = useState(initialData.name || "");
   const [price, setPrice] = useState(initialData.price || 0);
   const [quantity, setQuantity] = useState(initialData.quantity || 0);
-  const [sold, setSold] = useState(initialData.sold || 0);
   const [onSell, setOnSell] = useState<boolean>(initialData.onSell || false);
   const [discountPercent, setDiscountPercent] = useState<string>(
     initialData.discountPercent?.toString() || ""
@@ -38,7 +36,6 @@ function SectionTemp({ mode, initialData = {}, onSubmit }: SectionTempProps) {
       name,
       price,
       quantity,
-      sold,
       onSell,
       discountPercent: onSell && discountPercent ? Number(discountPercent) : 0,
     };
@@ -47,12 +44,12 @@ function SectionTemp({ mode, initialData = {}, onSubmit }: SectionTempProps) {
   };
 
   return (
-    <div>
+    <div className="h-full mx-auto w-full max-w-screen-lg px-3 md:px-10">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 items-center justify-center"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-3 w-full gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-4">
           <div className="flex flex-col gap-4">
             {/* Name */}
             <div className="w-full flex flex-col gap-2">
@@ -68,22 +65,6 @@ function SectionTemp({ mode, initialData = {}, onSubmit }: SectionTempProps) {
               />
             </div>
 
-            {/* Sold */}
-            <div className="w-full flex flex-col gap-2">
-              <label className="text-xl flex flex-row items-center">
-                <span>Sold</span>
-                <ChevronDown />
-              </label>
-              <Input
-                type="number"
-                value={sold}
-                onChange={(e) => setSold(Number(e.target.value))}
-                className="bg-slate-800 border-0"
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-4">
             {/* Price */}
             <div className="w-full flex flex-col gap-2">
               <label className="text-xl flex flex-row items-center">
@@ -123,7 +104,7 @@ function SectionTemp({ mode, initialData = {}, onSubmit }: SectionTempProps) {
             />
           </div>
         </div>
-        <div className="mt-20 mb-10 flex justify-end w-full">
+        <div className="mt-10 mb-10 flex justify-end w-full">
           <Button
             type="submit"
             className="bg-green-500 hover:bg-green-600 text-xl"

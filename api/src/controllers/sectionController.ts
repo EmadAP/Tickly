@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 // Create Section
 export const createSection = async (req: Request, res: Response) => {
   try {
-    const { name, price, quantity, onSell, sold, discountPercent } = req.body;
+    const { name, price, quantity, onSell, discountPercent } = req.body;
     const { eventId } = req.params;
 
     if (!eventId || !mongoose.Types.ObjectId.isValid(eventId)) {
@@ -18,7 +18,6 @@ export const createSection = async (req: Request, res: Response) => {
       name: name.trim(),
       price: Number(price),
       quantity: Number(quantity),
-      sold: Number(sold),
       onSell: Boolean(onSell),
       discountPercent: discountPercent ? Number(discountPercent) : undefined,
     });
@@ -86,7 +85,6 @@ export const updateSection = async (req: Request, res: Response) => {
     section.name = updatedData.name?.trim() ?? section.name;
     section.price = updatedData.price ?? section.price;
     section.quantity = updatedData.quantity ?? section.quantity;
-    section.sold = updatedData.sold ?? section.sold;
     section.onSell = updatedData.onSell ?? section.onSell;
     section.discountPercent =
       updatedData.discountPercent !== undefined

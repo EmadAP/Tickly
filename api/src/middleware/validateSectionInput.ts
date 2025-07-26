@@ -32,7 +32,7 @@ export const validateSectionInput = (
   }
 
   // Sold
-  const parsedSold = sold !== undefined ? Number(sold) : 0;
+  const parsedSold = Number(sold);
   if (isNaN(parsedSold) || parsedSold < 0) {
     res
       .status(400)

@@ -5,14 +5,19 @@ import { Button } from "./ui/button";
 import { Pencil } from "lucide-react";
 
 interface TableEditBtnProps {
-  eventId: string;
+  id: string;
+  type: "event" | "section";
 }
 
-const TableEditBtn = ({ eventId }: TableEditBtnProps) => {
+const TableEditBtn = ({ id, type }: TableEditBtnProps) => {
   const router = useRouter();
 
   const handleEdit = () => {
-    router.push(`/updateEvent/${eventId}`);
+    if (type === "event") {
+      router.push(`/updateEvent/${id}`);
+    } else if (type === "section") {
+      router.push(`/updateSection/${id}`);
+    }
   };
 
   return (

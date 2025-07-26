@@ -27,7 +27,7 @@ function Page() {
               mode="create"
               onSubmit={(data) =>
                 createSection(data, {
-                  onSuccess: () => router.push("/ticketTable"),
+                  onSuccess: () => router.push(`/updateEvent/${eventId}`),
                 })
               }
             />

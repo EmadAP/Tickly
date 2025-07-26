@@ -81,7 +81,7 @@ export const eventColumns: ColumnDef<Event>[] = [
 
       return (
         <div>
-          <TableEditBtn eventId={event._id} />
+          <TableEditBtn id={event._id} type="event" />
         </div>
       );
     },

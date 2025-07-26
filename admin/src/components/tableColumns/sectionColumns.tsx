@@ -64,13 +64,12 @@ export const sectionColumns: ColumnDef<Section>[] = [
   {
     id: "delete",
     cell: ({ row }) => {
-      const deleteSection = DeleteSection();
+      const data = row.original;
+      const deleteSection = DeleteSection(data.event);
 
       const handleDelete = (id: string) => {
         deleteSection.mutate(id);
       };
-
-      const data = row.original;
 
       return (
         <div>
@@ -84,16 +83,16 @@ export const sectionColumns: ColumnDef<Section>[] = [
       );
     },
   },
-  // {
-  //   id: "edit",
-  //   cell: ({ row }) => {
-  //     const ticket = row.original;
+  {
+    id: "edit",
+    cell: ({ row }) => {
+      const data = row.original;
 
-  //     return (
-  //       <div>
-  //         <TableEditBtn ticketId={ticket._id} />
-  //       </div>
-  //     );
-  //   },
-  // },
+      return (
+        <div>
+          <TableEditBtn id={data._id} type="section" />
+        </div>
+      );
+    },
+  },
 ];

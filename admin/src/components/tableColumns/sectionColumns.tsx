@@ -4,7 +4,7 @@ import { Section } from "@/lib/type";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { Trash2 } from "lucide-react";
-import { DeleteTicket } from "@/lib/api/main/mutations";
+import { DeleteSection } from "@/lib/api/main/mutations";
 import { Button } from "../ui/button";
 import TableEditBtn from "../TableEditBtn";
 
@@ -14,7 +14,7 @@ export const sectionColumns: ColumnDef<Section>[] = [
     header: "Name",
   },
   {
-    accessorKey: "price",
+    accessorKey: "sold",
     header: ({ column }) => {
       return (
         <Button
@@ -22,22 +22,7 @@ export const sectionColumns: ColumnDef<Section>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           className="hover:bg-blue-500 hover:text-white cursor-pointer"
         >
-          Price
-          <ArrowUpDown />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "quantity",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="hover:bg-blue-500 hover:text-white cursor-pointer"
-        >
-          Quantity
+          Sold
           <ArrowUpDown />
         </Button>
       );
@@ -79,10 +64,10 @@ export const sectionColumns: ColumnDef<Section>[] = [
   {
     id: "delete",
     cell: ({ row }) => {
-      const deleteTicket = DeleteTicket();
+      const deleteSection = DeleteSection();
 
       const handleDelete = (id: string) => {
-        deleteTicket.mutate(id);
+        deleteSection.mutate(id);
       };
 
       const data = row.original;
@@ -99,16 +84,16 @@ export const sectionColumns: ColumnDef<Section>[] = [
       );
     },
   },
-  {
-    id: "edit",
-    cell: ({ row }) => {
-      const ticket = row.original;
+  // {
+  //   id: "edit",
+  //   cell: ({ row }) => {
+  //     const ticket = row.original;
 
-      return (
-        <div>
-          <TableEditBtn ticketId={ticket._id} />
-        </div>
-      );
-    },
-  },
+  //     return (
+  //       <div>
+  //         <TableEditBtn ticketId={ticket._id} />
+  //       </div>
+  //     );
+  //   },
+  // },
 ];

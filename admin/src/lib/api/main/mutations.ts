@@ -1,28 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   CreateEventFc,
-  CreateTicketFc,
+  CreateSectionFc,
   DeleteAdminFc,
   DeleteEventFc,
-  DeleteTicketFc,
+  DeleteSectionFc,
   UpdateEventFc,
-  UpdateTicketFc,
+  UpdateSectionFc,
 } from "../api";
 import { toast } from "sonner";
-
-export const CreateTicket = () => {
-  return useMutation({
-    mutationFn: (formData: FormData) => CreateTicketFc(formData),
-    onSuccess: () => {
-      toast.success("Ticket created successfully.");
-    },
-    onError: (err: Error) => {
-      toast.error("Failed to create Ticket. try again!", {
-        description: err.message,
-      });
-    },
-  });
-};
 
 //Create event
 export const CreateEvent = () => {
@@ -33,24 +19,6 @@ export const CreateEvent = () => {
     },
     onError: (err: Error) => {
       toast.error("Failed to create Event. try again!", {
-        description: err.message,
-      });
-    },
-  });
-};
-
-export const DeleteTicket = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: DeleteTicketFc,
-
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["Tickets"] });
-      toast.success("Ticket deleted successfully");
-    },
-    onError: (err: Error) => {
-      toast.error("Failed to delete Ticket. try again!", {
         description: err.message,
       });
     },
@@ -76,21 +44,6 @@ export const DeleteEvent = () => {
   });
 };
 
-export const UpdateTicket = () => {
-  return useMutation({
-    mutationFn: ({ id, formData }: { id: string; formData: FormData }) =>
-      UpdateTicketFc({ id, formData }),
-    onSuccess: () => {
-      toast.success("Ticket updated successfully");
-    },
-    onError: (error: Error) => {
-      toast.error("Failed to update the Ticket", {
-        description: error.message,
-      });
-    },
-  });
-};
-
 // Update Event
 export const UpdateEvent = () => {
   return useMutation({
@@ -107,6 +60,70 @@ export const UpdateEvent = () => {
   });
 };
 
+// Create Section
+export const CreateSection = (eventId: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: {
+      name: string;
+      price: number;
+      quantity: number;
+      sold: number;
+      onSell: boolean;
+      discountPercent?: number;
+    }) => CreateSectionFc({ eventId, data }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["SectionsByEvent", eventId] });
+      toast.success("Section created successfully.");
+    },
+    onError: (err: Error) => {
+      toast.error("Failed to create section.", { description: err.message });
+    },
+  });
+};
+
+// Update Section
+export const UpdateSection = () => {
+  return useMutation({
+    mutationFn: ({
+      id,
+      data,
+    }: {
+      id: string;
+      data: {
+        name: string;
+        price: number;
+        quantity: number;
+        sold: number;
+        onSell: boolean;
+        discountPercent?: number;
+      };
+    }) => UpdateSectionFc({ id, data }),
+    onSuccess: () => {
+      toast.success("Section updated successfully.");
+    },
+    onError: (err: Error) => {
+      toast.error("Failed to update section.", { description: err.message });
+    },
+  });
+};
+
+// Delete Section
+export const DeleteSection = (eventId: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => DeleteSectionFc(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["SectionsByEvent", eventId] });
+      toast.success("Section deleted successfully.");
+    },
+    onError: (err: Error) => {
+      toast.error("Failed to delete section.", { description: err.message });
+    },
+  });
+};
+
+// Delete Admin
 export const DeleteAdmin = () => {
   const queryClient = useQueryClient();
 

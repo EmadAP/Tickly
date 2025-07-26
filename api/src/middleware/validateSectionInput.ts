@@ -5,14 +5,7 @@ export const validateSectionInput = (
   res: Response,
   next: NextFunction
 ) => {
-  const { event, name, price, quantity, sold, onSell, discountPercent } =
-    req.body;
-
-  // Event ID (must be a valid Mongo ObjectId string)
-  if (!event || typeof event !== "string" || !/^[a-f\d]{24}$/i.test(event)) {
-    res.status(400).json({ message: "Invalid or missing event ID." });
-    return;
-  }
+  const { name, price, quantity, sold, onSell, discountPercent } = req.body;
 
   // Name
   if (!name || typeof name !== "string" || name.trim().length < 2) {

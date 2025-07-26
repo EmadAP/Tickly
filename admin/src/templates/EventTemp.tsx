@@ -7,10 +7,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Calendar } from "@/components/ui/calendar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import CountrySelect from "@/components/CountrySelectCreateTemp";
+import CountrySelect from "@/components/CountrySelectEventTemp";
 import CategoryCreateEvent from "@/components/CategoryCreateEvent";
 import { Button } from "@/components/ui/button";
-import SectionTemp from "./SectionTemp";
+import SectionComp from "@/components/SectionComp";
 
 const LocationPicker = dynamic(() => import("@/components/LocationPicker"), {
   ssr: false,
@@ -264,10 +264,10 @@ function EventTemp({ mode, initialData, onSubmit }: EventTempProps) {
         </div>
 
         {/* submit button */}
-        <div className="mt-20 mb-10 flex justify-end w-full">
+        <div className="my-10 flex justify-center w-full">
           <Button
             type="submit"
-            className="bg-green-500 hover:bg-green-600 text-xl"
+            className="bg-green-500 hover:bg-green-600 text-xl w-1/3"
           >
             {mode === "edit" ? "Update Ticket" : "Create Ticket"}
           </Button>
@@ -275,7 +275,7 @@ function EventTemp({ mode, initialData, onSubmit }: EventTempProps) {
       </form>
       {mode === "edit" && initialData?._id && (
         <div className="w-full mt-10">
-          <SectionTemp eventId={initialData._id} />
+          <SectionComp eventId={initialData._id} />
         </div>
       )}
     </>

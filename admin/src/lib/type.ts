@@ -1,28 +1,3 @@
-export interface Ticket {
-  _id: string;
-  title: string;
-  description: string;
-  category:
-    | "Concert"
-    | "Sports"
-    | "Theater"
-    | "Comedy"
-    | "Workshop"
-    | "Seminar"
-    | string;
-  coordinates: [number, number];
-  image: string | File | null;
-  eventDate: string; // ISO string like "2025-08-01T19:00:00Z"
-  price: number;
-  quantity: number; // total tickets available
-  onSell: boolean;
-  off?: number;
-  country: string;
-  address: string;
-  createdAt?: string;
-  updatedAt?: string;
-}
-
 export interface Event {
   _id: string;
   creator: string;
@@ -85,24 +60,6 @@ export type SignupProps = {
 export type loginProps = {
   username: string;
   password: string;
-};
-
-export type TicketTable = {
-  id: string;
-  title: string;
-  category:
-    | "Concert"
-    | "Sports"
-    | "Theater"
-    | "Comedy"
-    | "Workshop"
-    | "Seminar"
-    | string;
-  eventDate: string;
-  price: number;
-  quantity: number;
-  onSell: boolean;
-  country: string;
 };
 
 export type AdminTable = {

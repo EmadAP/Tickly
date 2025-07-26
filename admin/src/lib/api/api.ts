@@ -45,16 +45,6 @@ export const ProfileAdminFc = async () => {
   return res.data;
 };
 
-// Create Ticket
-export const CreateTicketFc = async (formData: FormData) => {
-  const res = await admin.post("/admin/tickets", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
-  return res.data;
-};
-
 // Create Event
 export const CreateEventFc = async (formData: FormData) => {
   const res = await admin.post("/admin/events", formData, {
@@ -65,42 +55,15 @@ export const CreateEventFc = async (formData: FormData) => {
   return res.data;
 };
 
-// Get All Ticket
-export const GetAllTicketsFc = async () => {
-  const res = await admin.get("/admin/tickets");
-  return res.data;
-};
-
 // Get All Events
 export const GetAllEventsFc = async () => {
   const res = await admin.get("/admin/events");
   return res.data;
 };
 
-//Delete one ticket
-export const DeleteTicketFc = async (id: string) => {
-  await admin.delete(`/admin/tickets/${id}`);
-};
-
 //Delete one Event
 export const DeleteEventFc = async (id: string) => {
   await admin.delete(`/admin/events/${id}`);
-};
-
-//Update one ticket
-export const UpdateTicketFc = async ({
-  id,
-  formData,
-}: {
-  id: string;
-  formData: FormData;
-}) => {
-  const res = await admin.put(`/admin/tickets/${id}`, formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
-  return res.data;
 };
 
 //Update one Event
@@ -119,12 +82,6 @@ export const UpdateEventFc = async ({
   return res.data;
 };
 
-//Get one ticket
-export const GetTicketByIdFc = async (id: string) => {
-  const res = await admin.get(`/admin/tickets/${id}`);
-  return res.data;
-};
-
 //Get one Event
 export const GetEventByIdFc = async (id: string) => {
   const res = await admin.get(`/admin/Events/${id}`);
@@ -134,42 +91,56 @@ export const GetEventByIdFc = async (id: string) => {
 //Create Section
 export const CreateSectionFc = async ({
   eventId,
-  formData,
+  data,
 }: {
   eventId: string;
-  formData: FormData;
+  data: {
+    name: string;
+    price: number;
+    quantity: number;
+    sold: number;
+    onSell: boolean;
+    discountPercent?: number;
+  };
 }) => {
-  const res = await admin.post(`/events/${eventId}/sections`, formData);
+  const res = await admin.post(`/admin/events/${eventId}/sections`, data);
   return res.data;
 };
 
 //Get Sections by Event ID
 export const GetSectionsByEventIdFc = async (eventId: string) => {
-  const res = await admin.post(`/events/${eventId}/sections`);
+  const res = await admin.get(`/admin/events/${eventId}/sections`);
   return res.data;
 };
 
 // Get Section by ID
 export const GetSectionByIdFc = async (id: string) => {
-  const res = await admin.get(`/sections/${id}`);
+  const res = await admin.get(`/admin/sections/${id}`);
   return res.data;
 };
 
 // Update Section
 export const UpdateSectionFc = async ({
   id,
-  formData,
+  data,
 }: {
   id: string;
-  formData: FormData;
+  data: {
+    name: string;
+    price: number;
+    quantity: number;
+    sold: number;
+    onSell: boolean;
+    discountPercent?: number;
+  };
 }) => {
-  const res = await admin.put(`/sections/${id}`, formData);
+  const res = await admin.put(`/admin/sections/${id}`, data);
   return res.data;
 };
 
 // Delete Section
 export const DeleteSectionFc = async (id: string) => {
-  await admin.delete(`/sections/${id}`);
+  await admin.delete(`/admin/sections/${id}`);
 };
 
 //Get all admins

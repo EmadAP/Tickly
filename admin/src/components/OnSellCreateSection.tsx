@@ -6,15 +6,15 @@ import { ChevronDown } from "lucide-react";
 type Props = {
   value: boolean;
   onChange: (value: boolean) => void;
-  offValue: string;
-  onOffChange: (value: string) => void;
+  discountValue: string;
+  onDiscountChange: (value: string) => void;
 };
 
 export default function OnSellSection({
   value,
   onChange,
-  offValue,
-  onOffChange,
+  discountValue,
+  onDiscountChange,
 }: Props) {
   return (
     <div className="flex flex-col gap-4">
@@ -36,8 +36,7 @@ export default function OnSellSection({
           >
             <Input
               type="radio"
-              name="onSell"
-              value="true"
+              checked={value}
               onChange={() => onChange(true)}
               className="hidden"
             />
@@ -55,8 +54,7 @@ export default function OnSellSection({
           >
             <Input
               type="radio"
-              name="onSell"
-              value="false"
+              checked={!value}
               onChange={() => onChange(false)}
               className="hidden"
             />
@@ -68,7 +66,7 @@ export default function OnSellSection({
       {/* Off */}
       <div className="w-full flex flex-col gap-2">
         <label className="text-xl flex flex-row items-center">
-          <span>Off</span>
+          <span>Discount Percent</span>
           <ChevronDown />
         </label>
         <Input
@@ -78,8 +76,8 @@ export default function OnSellSection({
           className={`bg-slate-800 border-0 ${
             value ? "" : "opacity-50 cursor-not-allowed"
           }`}
-          onChange={(e) => onOffChange(e.target.value)}
-          value={offValue}
+          onChange={(e) => onDiscountChange(e.target.value)}
+          value={discountValue}
           disabled={!value}
         />
       </div>

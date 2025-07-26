@@ -2,7 +2,19 @@ import mongoose, { Schema, Document, Types } from "mongoose";
 
 export interface ISection extends Document {
   event: Types.ObjectId;
-  name: string;
+  name:
+    | "VIP"
+    | "Floor"
+    | "Section A"
+    | "Section B"
+    | "Section C"
+    | "Section D"
+    | "Section E"
+    | "Section F"
+    | "Balcony Left"
+    | "Balcony Right"
+    | "General"
+    | string;
   price: number;
   quantity: number;
   sold: number;
@@ -23,8 +35,19 @@ const SectionSchema = new Schema<ISection>(
       type: String,
       required: true,
       trim: true,
-      minlength: 2,
-      maxlength: 100,
+      enum: [
+        "VIP",
+        "Floor",
+        "Section A",
+        "Section B",
+        "Section C",
+        "Section D",
+        "Section E",
+        "Section F",
+        "Balcony Left",
+        "Balcony Right",
+        "General",
+      ],
     },
     price: {
       type: Number,

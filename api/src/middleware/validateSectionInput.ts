@@ -1,17 +1,33 @@
 import { Request, Response, NextFunction } from "express";
 
+const ALLOWED_SECTION_NAMES = [
+  "VIP",
+  "Floor",
+  "Section A",
+  "Section B",
+  "Section C",
+  "Section D",
+  "Section E",
+  "Section F",
+  "Balcony Left",
+  "Balcony Right",
+  "General",
+];
+
 export const validateSectionInput = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const { name, price, quantity, sold, onSell, discountPercent } = req.body;
+  const { name, price, quantity, onSell, discountPercent } = req.body;
 
   // Name
-  if (!name || typeof name !== "string" || name.trim().length < 2) {
-    res
-      .status(400)
-      .json({ message: "Section name must be at least 2 characters." });
+  if (!name || !ALLOWED_SECTION_NAMES.includes(name)) {
+    res.status(400).json({
+      message: `Section name must be one of: ${ALLOWED_SECTION_NAMES.join(
+        ", "
+      )}`,
+    });
     return;
   }
 

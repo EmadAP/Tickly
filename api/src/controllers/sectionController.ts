@@ -2,6 +2,20 @@ import { Request, Response } from "express";
 import Section from "../models/Section";
 import mongoose from "mongoose";
 
+const ALLOWED_SECTION_NAMES = [
+  "VIP",
+  "Floor",
+  "Section A",
+  "Section B",
+  "Section C",
+  "Section D",
+  "Section E",
+  "Section F",
+  "Balcony Left",
+  "Balcony Right",
+  "General",
+];
+
 // Create Section
 export const createSection = async (req: Request, res: Response) => {
   try {
@@ -10,6 +24,18 @@ export const createSection = async (req: Request, res: Response) => {
 
     if (!eventId || !mongoose.Types.ObjectId.isValid(eventId)) {
       res.status(400).json({ message: "Invalid or missing event ID" });
+      return;
+    }
+
+    // Check if section name already exists for the same event
+    const existingSection = await Section.findOne({
+      event: eventId,
+      name: name.trim(),
+    });
+    if (existingSection) {
+      res.status(400).json({
+        message: `Section name "${name}" already exists for this event.`,
+      });
       return;
     }
 
@@ -82,7 +108,16 @@ export const updateSection = async (req: Request, res: Response) => {
       return;
     }
 
-    section.name = updatedData.name?.trim() ?? section.name;
+    // Validate and update name if it's being changed
+    if (updatedData.name !== undefined) {
+      const nameTrimmed = updatedData.name.trim();
+      if (!ALLOWED_SECTION_NAMES.includes(nameTrimmed)) {
+        res.status(400).json({ message: "Invalid section name" });
+        return;
+      }
+      section.name = nameTrimmed;
+    }
+
     section.price = updatedData.price ?? section.price;
     section.quantity = updatedData.quantity ?? section.quantity;
     section.onSell = updatedData.onSell ?? section.onSell;

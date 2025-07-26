@@ -25,7 +25,19 @@ export interface Event {
 export interface Section {
   _id: string;
   event: string;
-  name: string;
+  name:
+    | "VIP"
+    | "Floor"
+    | "Section A"
+    | "Section B"
+    | "Section C"
+    | "Section D"
+    | "Section E"
+    | "Section F"
+    | "Balcony Left"
+    | "Balcony Right"
+    | "General"
+    | string;
   price: number;
   quantity: number;
   sold: number;

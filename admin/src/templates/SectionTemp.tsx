@@ -5,6 +5,7 @@ import { ChevronDown } from "lucide-react";
 import React, { useState } from "react";
 import OnSellSection from "@/components/OnSellCreateSection";
 import { Button } from "@/components/ui/button";
+import NameCreateSection from "@/components/NameCreateSection";
 
 type SectionFormData = {
   name: string;
@@ -52,17 +53,8 @@ function SectionTemp({ mode, initialData = {}, onSubmit }: SectionTempProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-4">
           <div className="flex flex-col gap-4">
             {/* Name */}
-            <div className="w-full flex flex-col gap-2">
-              <label className="text-xl flex flex-row items-center">
-                <span>Section Name </span>
-                <ChevronDown />
-              </label>
-              <Input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="bg-slate-800 border-0"
-              />
+            <div className="w-full">
+              <NameCreateSection selectedName={name} onNameChange={setName} />
             </div>
 
             {/* Price */}

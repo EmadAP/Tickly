@@ -95,7 +95,19 @@ export const CreateSectionFc = async ({
 }: {
   eventId: string;
   data: {
-    name: string;
+    name:
+      | "VIP"
+      | "Floor"
+      | "Section A"
+      | "Section B"
+      | "Section C"
+      | "Section D"
+      | "Section E"
+      | "Section F"
+      | "Balcony Left"
+      | "Balcony Right"
+      | "General"
+      | string;
     price: number;
     quantity: number;
     onSell: boolean;
@@ -125,7 +137,19 @@ export const UpdateSectionFc = async ({
 }: {
   id: string;
   data: {
-    name: string;
+    name:
+      | "VIP"
+      | "Floor"
+      | "Section A"
+      | "Section B"
+      | "Section C"
+      | "Section D"
+      | "Section E"
+      | "Section F"
+      | "Balcony Left"
+      | "Balcony Right"
+      | "General"
+      | string;
     price: number;
     quantity: number;
     onSell: boolean;

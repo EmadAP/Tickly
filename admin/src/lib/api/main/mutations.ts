@@ -65,7 +65,19 @@ export const CreateSection = (eventId: string) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: {
-      name: string;
+      name:
+        | "VIP"
+        | "Floor"
+        | "Section A"
+        | "Section B"
+        | "Section C"
+        | "Section D"
+        | "Section E"
+        | "Section F"
+        | "Balcony Left"
+        | "Balcony Right"
+        | "General"
+        | string;
       price: number;
       quantity: number;
       onSell: boolean;
@@ -90,7 +102,19 @@ export const UpdateSection = () => {
     }: {
       id: string;
       data: {
-        name: string;
+        name:
+          | "VIP"
+          | "Floor"
+          | "Section A"
+          | "Section B"
+          | "Section C"
+          | "Section D"
+          | "Section E"
+          | "Section F"
+          | "Balcony Left"
+          | "Balcony Right"
+          | "General"
+          | string;
         price: number;
         quantity: number;
         onSell: boolean;

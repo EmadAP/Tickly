@@ -1,6 +1,6 @@
 "use client";
 import MainCarouselCards from "@/components/MainCarouselCards";
-import { GetAllTickets } from "@/lib/api/main/queries";
+import { GetAllEvents } from "@/lib/api/main/queries";
 import { ChevronDown } from "lucide-react";
 import React, { useMemo, useState } from "react";
 
@@ -14,14 +14,14 @@ const CATEGORIES = [
 ];
 
 function MainBottom() {
-  const { data: tickets, isLoading, isError, error } = GetAllTickets();
+  const { data: events, isLoading, isError, error } = GetAllEvents();
   const [activeFilter, setActiveFilter] = useState("Categories");
 
   const topCountries = useMemo(() => {
-    if (!tickets) return [];
+    if (!events) return [];
 
     const countryCountMap: Record<string, number> = {};
-    tickets.forEach((ticket) => {
+    events.forEach((ticket) => {
       countryCountMap[ticket.country] =
         (countryCountMap[ticket.country] || 0) + 1;
     });
@@ -32,9 +32,9 @@ function MainBottom() {
       .map(([country]) => country);
 
     return sortedCountries;
-  }, [tickets]);
+  }, [events]);
 
-  if (isLoading || !tickets) return <div>loading...</div>;
+  if (isLoading || !events) return <div>loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;
 
   return (
@@ -58,32 +58,32 @@ function MainBottom() {
       <div className="space-y-10">
         {activeFilter === "Categories" &&
           CATEGORIES.map((category) => {
-            const categoryTickets = tickets.filter(
-              (ticket) => ticket.category === category
+            const categoryEvents = events.filter(
+              (event) => event.category === category
             );
-            if (categoryTickets.length === 0) return null;
+            if (categoryEvents.length === 0) return null;
             return (
               <MainCarouselCards
                 key={category}
                 title={category}
                 link={`/category/${encodeURIComponent(category)}`}
-                tickets={categoryTickets}
+                events={categoryEvents}
               />
             );
           })}
 
         {activeFilter === "Country" &&
           topCountries.map((country) => {
-            const countryTickets = tickets.filter(
-              (ticket) => ticket.country === country
+            const countryEvents = events.filter(
+              (event) => event.country === country
             );
-            if (countryTickets.length === 0) return null;
+            if (countryEvents.length === 0) return null;
             return (
               <MainCarouselCards
                 key={country}
                 title={country}
                 link={`/country/${encodeURIComponent(country)}`}
-                tickets={countryTickets}
+                events={countryEvents}
               />
             );
           })}

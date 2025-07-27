@@ -32,12 +32,25 @@ export const ProfileUserFc = async () => {
   return res.data;
 };
 
-export const GetAllTicketsFc = async () => {
-  const res = await api.get("/api/tickets");
+export const GetAllEventsFc = async () => {
+  const res = await api.get("/api/events");
   return res.data;
 };
 
-export const GetTicketByIdFc = async (id: string) => {
-  const res = await api.get(`/api/tickets/${id}`);
+export const GetEventByIdFc = async (id: string) => {
+  const res = await api.get(`/api/events/${id}`);
+  return res.data;
+};
+
+export const GetSectionsByEventIdFc = async (eventId: string) => {
+  const res = await api.get(`/api/events/${eventId}/sections`);
+  return res.data;
+};
+export const GetSectionByIdFc = async (id: string) => {
+  const res = await api.get(`/api/sections/${id}`);
+  return res.data;
+};
+export const GetAllSectionsFc = async () => {
+  const res = await api.get("/api/sections");
   return res.data;
 };

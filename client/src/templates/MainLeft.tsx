@@ -1,23 +1,38 @@
 "use client";
 
-import LeftTicketCard from "@/components/LeftTicketCard";
-import { GetAllTickets } from "@/lib/api/main/queries";
+import LeftEventCard from "@/components/LeftEventCard";
+import { GetAllEvents, useGetAllSections, useGetSectionsByEventId } from "@/lib/api/main/queries";
 import { ArrowBigRightDash, CalendarDays } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useMediaQuery } from "react-responsive";
+import { Event, Section } from "@/lib/types/types"; 
 
 function MainLeft() {
-  const { data: tickets, isLoading, isError, error } = GetAllTickets();
+  const { data: events, isLoading, isError, error } = GetAllEvents();
+  const { data: sections } = useGetAllSections();
+
   const [activeFilter, setActiveFilter] = useState("Explore all");
 
   const is2xl = useMediaQuery({ minWidth: 1536 });
   const visibleCount = is2xl ? 9 : 8;
 
-  if (isLoading || !tickets) return <div>loading...</div>;
+  if (isLoading || !events || !sections) return <div>loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;
 
-  const regularTickets = tickets.filter((ticket) => !ticket.onSell);
+  const sectionMap = new Map<string, boolean>();
+  for (const section of sections) {
+    if (sectionMap.has(section.event)) {
+      if (section.onSell) sectionMap.set(section.event, true);
+    } else {
+      sectionMap.set(section.event, section.onSell);
+    }
+  }
+
+  const notOnSellEvents = events.filter((event) => {
+    const hasOnSell = sectionMap.get(event._id);
+    return !hasOnSell; 
+  });
 
   const now = new Date();
   const today = now.toISOString().slice(0, 10);
@@ -29,14 +44,14 @@ function MainLeft() {
   weekEnd.setDate(now.getDate() + (7 - now.getDay()));
   const weekEndStr = weekEnd.toISOString().slice(0, 10);
 
-  const filteredTickets = regularTickets
-    .filter((ticket) => {
-      const ticketDate = ticket.eventDate.slice(0, 10);
-      if (activeFilter === "Today") return ticketDate === today;
-      if (activeFilter === "Tomorrow") return ticketDate === tomorrowStr;
+  const filteredEvents = notOnSellEvents
+    .filter((event: Event) => {
+      const eventDate = event.eventDate.slice(0, 10);
+      if (activeFilter === "Today") return eventDate === today;
+      if (activeFilter === "Tomorrow") return eventDate === tomorrowStr;
       if (activeFilter === "This week")
-        return ticketDate >= today && ticketDate <= weekEndStr;
-      return true;
+        return eventDate >= today && eventDate <= weekEndStr;
+      return true; // "Explore all"
     })
     .slice(0, visibleCount);
 
@@ -59,19 +74,22 @@ function MainLeft() {
           </button>
         ))}
       </div>
+
       <div className="border-b-2 border-orange-500 mb-10" />
-      {/* Tickets grid */}
+
+      {/* Events grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4">
-        {filteredTickets.length > 0 ? (
-          filteredTickets.map((ticket) => (
-            <LeftTicketCard key={ticket._id} ticket={ticket} />
+        {filteredEvents.length > 0 ? (
+          filteredEvents.map((event) => (
+            <LeftEventCard key={event._id} event={event} />
           ))
         ) : (
           <p className="text-center col-span-full text-lg">
-            No tickets for {activeFilter.toLowerCase()}.
+            No event for {activeFilter.toLowerCase()}.
           </p>
         )}
       </div>
+
       {/* Explore more link */}
       <div className="flex items-center justify-center pt-5">
         <Link

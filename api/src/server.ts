@@ -4,7 +4,9 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
 
+import userEventRoutes from './routes/userEvent'
 import userAuthRoutes from "./routes/userAuth";
+import userSectionRoutes from "./routes/userSection";
 import adminAuthRoutes from "./routes/adminAuth";
 import adminEventRoutes from "./routes/adminEvent";
 import adminSectionRoute from "./routes/adminSection";
@@ -25,6 +27,8 @@ app.use("/uploads", express.static(path.resolve("uploads")));
 
 //Routes
 app.use("/api", userAuthRoutes);
+app.use("/api", userEventRoutes);
+app.use("/api", userSectionRoutes);
 app.use("/admin", adminAuthRoutes);
 app.use("/admin", adminEventRoutes);
 app.use("/admin", adminSectionRoute);

@@ -8,21 +8,21 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Ticket } from "@/lib/types/types";
-import BottomTicketCard from "./BottomTicketCard";
+import { Event } from "@/lib/types/types";
+import BottomEventCard from "./BottomEventCard";
 
 interface MainCarouselCardsProps {
   title: string;
   link: string;
-  tickets: Ticket[];
+  events: Event[];
 }
 
 const MainCarouselCards: React.FC<MainCarouselCardsProps> = ({
   title,
   link,
-  tickets,
+  events,
 }) => {
-  const preview = tickets.slice(0, 8);
+  const preview = events.slice(0, 8);
 
   return (
     <section>
@@ -43,13 +43,13 @@ const MainCarouselCards: React.FC<MainCarouselCardsProps> = ({
           </div>
 
           <CarouselContent>
-            {preview.map((ticket) => (
+            {preview.map((event) => (
               <CarouselItem
-                key={ticket._id}
+                key={event._id}
                 className="sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
               >
                 <div className="p-1">
-                  <BottomTicketCard ticket={ticket} />
+                  <BottomEventCard event={event} />
                 </div>
               </CarouselItem>
             ))}

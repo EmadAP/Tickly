@@ -22,8 +22,9 @@ export type loginProps = {
   password: string;
 };
 
-export interface Ticket {
+export interface Event {
   _id: string;
+  creator: string;
   title: string;
   description: string;
   category:
@@ -35,14 +36,37 @@ export interface Ticket {
     | "Seminar"
     | string;
   country: string;
+  city: string;
   address: string;
   coordinates: [number, number];
-  image: string; //| File | null;
-  eventDate: string; // ISO string like "2025-08-01T19:00:00Z"
+  image: string | File | null;
+  eventDate: string;
+  eventTime: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface Section {
+  _id: string;
+  event: string;
+  name:
+    | "VIP"
+    | "Floor"
+    | "Section A"
+    | "Section B"
+    | "Section C"
+    | "Section D"
+    | "Section E"
+    | "Section F"
+    | "Balcony Left"
+    | "Balcony Right"
+    | "General"
+    | string;
   price: number;
-  quantity: number; // total tickets available
+  quantity: number;
+  sold: number;
   onSell: boolean;
-  off?: number;
+  discountPercent?: number;
   createdAt?: string;
   updatedAt?: string;
 }

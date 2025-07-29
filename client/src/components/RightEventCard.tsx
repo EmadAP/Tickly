@@ -1,4 +1,3 @@
-import { useGetSectionsByEventId } from "@/lib/api/main/queries";
 import { Event } from "@/lib/types/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,15 +5,23 @@ import React from "react";
 
 interface EventCardProps {
   event: Event;
+  discount?: number;
+  sectionName?: string;
 }
 
-const RightEventCard: React.FC<EventCardProps> = ({ event }) => {
-  const { data: sections } = useGetSectionsByEventId();
-
-  const sectionOff = sections?.map((section) => section.discountPercent);
-
+const RightEventCard: React.FC<EventCardProps> = ({
+  event,
+  discount,
+  sectionName,
+}) => {
   return (
-    <Link href={`/event/${event._id}`} className="group">
+    <Link
+      href={{
+        pathname: `/event/${event._id}`,
+        query: { sectionName },
+      }}
+      className="group"
+    >
       <div className="relative w-full h-40 bg-slate-900 rounded-2xl overflow-hidden cursor-pointer">
         <div className="absolute inset-0">
           <Image
@@ -26,9 +33,12 @@ const RightEventCard: React.FC<EventCardProps> = ({ event }) => {
           />
           <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 z-0" />
         </div>
-        <p className="absolute top-0 left-0 bg-red-500 text-white px-2 py-1 text-sm font-semibold rounded-lg shadow z-10">
-          {sectionOff ? `${sectionOff}% OFF` : ""}
-        </p>
+
+        {discount && (
+          <p className="absolute top-0 left-0 bg-red-500 text-white px-2 py-1 text-sm font-semibold rounded-lg shadow z-10">
+            {discount}% OFF
+          </p>
+        )}
 
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white opacity-0 transition-opacity duration-500 group-hover:opacity-100">
           <p className="text-center text-xl">{event.title}</p>

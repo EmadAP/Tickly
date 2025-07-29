@@ -1,56 +1,93 @@
 "use client";
 
 import RightEventCard from "@/components/RightEventCard";
-import { GetAllEvents, useGetAllSections, useGetSectionsByEventId } from "@/lib/api/main/queries";
+import { GetAllEvents, useGetAllSections } from "@/lib/api/main/queries";
 import { ArrowBigRightDash, PartyPopper } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { useMediaQuery } from "react-responsive";
+import { Section, Event } from "@/lib/types/types";
 
 function MainRight() {
-  const { data: events, isLoading, isError, error } = GetAllEvents();
-  const { data: sections } = useGetAllSections();
+  const { data: events, isLoading: eventsLoading } = GetAllEvents();
+  const { data: sections, isLoading: sectionsLoading } = useGetAllSections();
 
   const is2xl = useMediaQuery({ minWidth: 1536 });
   const isLgOrLarger = useMediaQuery({ minWidth: 1024 });
   const visibleCount = is2xl ? 7 : isLgOrLarger ? 10 : 6;
 
-  if (isLoading || !events || !sections) return <div>loading...</div>;
-  if (isError) return <div>Error: {error.message}</div>;
+  if (eventsLoading || sectionsLoading || !events || !sections)
+    return <div>loading...</div>;
 
-  const onSellEventIds = sections
-    .filter((section) => section.onSell)
-    .map((section) => section.event);
+  const discountedSections = sections.filter((section: Section) => {
+    const discount = Number(section.discountPercent) || 0;
+    const remaining = section.quantity - section.sold;
 
-  const uniqueOnSellEventIds = Array.from(new Set(onSellEventIds));
+    return section.onSell && discount > 0 && remaining > 0;
+  });
 
-  const onSellEvents = events
-    .filter((event) => uniqueOnSellEventIds.includes(event._id))
+  const eventDiscountMap = discountedSections.reduce<Record<string, number>>(
+    (acc, section) => {
+      const eventId =
+        typeof section.event === "object" ? section.event._id : section.event;
+
+      const discount = Number(section.discountPercent) || 0;
+      if (!acc[eventId] || discount > acc[eventId]) {
+        acc[eventId] = discount;
+      }
+      return acc;
+    },
+    {}
+  );
+
+  const eventDiscountData = discountedSections.reduce<
+    Record<string, { discount: number; sectionName: string }>
+  >((acc, section) => {
+    const eventId =
+      typeof section.event === "object" ? section.event._id : section.event;
+
+    const discount = Number(section.discountPercent) || 0;
+    if (!acc[eventId] || discount > acc[eventId].discount) {
+      acc[eventId] = {
+        discount,
+        sectionName: section.name,
+      };
+    }
+    return acc;
+  }, {});
+
+  const discountedEvents: Event[] = events
+    .filter((event: Event) => eventDiscountMap[event._id])
     .slice(0, visibleCount);
 
   return (
     <div className="flex-1/3 2xl:flex-1/4 mb-20 mt-10 lg:mt-20">
       <div className="flex flex-row mb-10 justify-center items-center gap-8">
-        <PartyPopper size={40} className="text-orange-500 -rotate-y-180 " />
+        <PartyPopper size={40} className="text-orange-500 -rotate-y-180" />
         <p className="text-4xl font-semibold">On Sell</p>
         <PartyPopper size={40} className="text-orange-500" />
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-1">
-        {onSellEvents.length > 0 ? (
-          onSellEvents.map((event) => (
-            <RightEventCard key={event._id} event={event} />
+        {discountedEvents.length > 0 ? (
+          discountedEvents.map((event) => (
+            <RightEventCard
+              key={event._id}
+              event={event}
+              discount={eventDiscountMap[event._id]}
+              sectionName={eventDiscountData[event._id].sectionName}
+            />
           ))
         ) : (
           <p className="text-center col-span-full text-lg">
-            No on-sell events found.
+            No discounted events found.
           </p>
         )}
       </div>
 
       <div className="flex items-center justify-center pt-5">
         <Link
-          href="#"
+          href="/discounts"
           className="text-2xl hover:text-orange-500 flex flex-row items-center gap-2"
         >
           <span>Explore more</span>

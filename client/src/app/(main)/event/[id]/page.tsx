@@ -6,18 +6,23 @@ import DetailBanner from "@/templates/DetailBanner";
 import DetailBottom from "@/templates/DetailBottom";
 import DetailLeft from "@/templates/DetailLeft";
 import DetailRight from "@/templates/DetailRight";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 
 function Page() {
   const params = useParams();
   const id = params.id as string;
 
+  const searchParams = useSearchParams();
+  const preselectedSection = searchParams.get("sectionName");
+
   const { data: event, isLoading, isError, error } = GetEventById(id);
   const { data: sections } = useGetSectionsByEventId(id);
 
   const [hoveredName, setHoveredName] = useState<string | null>(null);
-  const [selectedName, setSelectedName] = useState<string | null>(null);
+  const [selectedName, setSelectedName] = useState<string | null>(
+    preselectedSection
+  );
 
   const handleHover = (name: string | null) => setHoveredName(name);
   const handleSelect = (name: string) => setSelectedName(name);

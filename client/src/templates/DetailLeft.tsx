@@ -65,6 +65,10 @@ const DetailLeft: React.FC<DetailLeftProps> = ({
         }
         // Seating section rendering
         const sectionData = sections.find((s) => s.name === sectionLayout.name);
+        const remaining = sectionData
+          ? sectionData.quantity - (sectionData.sold || 0)
+          : 0;
+        const isSoldOut = remaining <= 0;
         const isSelected = selectedName === sectionLayout.name;
         const isHovered = hoveredName === sectionLayout.name;
 
@@ -79,7 +83,7 @@ const DetailLeft: React.FC<DetailLeftProps> = ({
                   ? "bg-orange-400"
                   : "bg-gray-600"
               }
-              ${!sectionData?.quantity ? "opacity-50 cursor-not-allowed" : ""}
+              ${isSoldOut ? "opacity-50 cursor-not-allowed" : ""}
             `}
             style={{
               top: sectionLayout.top,

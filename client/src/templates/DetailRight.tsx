@@ -46,38 +46,43 @@ const DetailRight: React.FC<DetailRightProps> = ({
   // all sections
   return (
     <div className="flex flex-col gap-4 text-white">
-      {sections.map((section) => (
-        <div
-          key={section._id}
-          className={`p-2 border rounded-md mb-2 cursor-pointer
-            ${
+      {sections.map((section) => {
+        const remaining = section.quantity - section.sold;
+        const isSoldOut = remaining <= 0;
+
+        return (
+          <div
+            key={section._id}
+            className={`p-2 border rounded-md mb-2 ${
+              isSoldOut ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+            } ${
               hoveredName === section.name
                 ? "border-orange-500"
                 : "border-gray-600"
-            }
-          `}
-          onMouseEnter={() => onHover(section.name)}
-          onMouseLeave={() => onHover(null)}
-          onClick={() => onSelect(section.name)}
-        >
-          {section.quantity === 0 ? (
-            <div className="text-gray-400">Sold Out</div>
-          ) : (
-            <div className="flex flex-row items-center justify-between">
-              <div className="flex flex-row gap-2">
-                <p>{section.name}</p>
-                <span>-</span>
-                <p>€{section.price}</p>
+            }`}
+            onMouseEnter={() => !isSoldOut && onHover(section.name)}
+            onMouseLeave={() => !isSoldOut && onHover(null)}
+            onClick={() => !isSoldOut && onSelect(section.name)}
+          >
+            {isSoldOut ? (
+              <div className="text-gray-400">Sold Out</div>
+            ) : (
+              <div className="flex flex-row items-center justify-between">
+                <div className="flex flex-row gap-2">
+                  <p>{section.name}</p>
+                  <span>-</span>
+                  <p>€{section.price}</p>
+                </div>
+                {section.discountPercent && (
+                  <p className="bg-red-500 text-white px-2 py-1 text-sm font-semibold rounded-lg shadow">
+                    {section.discountPercent}% OFF
+                  </p>
+                )}
               </div>
-              {section.discountPercent && (
-                <p className="bg-red-500 text-white px-2 py-1 text-sm font-semibold rounded-lg shadow">
-                  {section.discountPercent}% OFF
-                </p>
-              )}
-            </div>
-          )}
-        </div>
-      ))}
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 };

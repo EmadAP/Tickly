@@ -48,7 +48,7 @@ export interface Event {
 
 export interface Section {
   _id: string;
-  event: string;
+  event: string | { _id: string };
   name:
     | "VIP"
     | "Floor"

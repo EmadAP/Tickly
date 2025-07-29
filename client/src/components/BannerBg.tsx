@@ -19,7 +19,7 @@ function BannerBg() {
 
   return (
     <div className="absolute inset-0">
-      <div className="absolute inset-0 bg-black/30 z-0" />
+      <div className="absolute inset-0 bg-black/30 z-10" />
       <Image
         src={bgImage}
         alt="Background"

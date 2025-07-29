@@ -21,9 +21,9 @@ function MainBottom() {
     if (!events) return [];
 
     const countryCountMap: Record<string, number> = {};
-    events.forEach((ticket) => {
-      countryCountMap[ticket.country] =
-        (countryCountMap[ticket.country] || 0) + 1;
+    events.forEach((event) => {
+      countryCountMap[event.country] =
+        (countryCountMap[event.country] || 0) + 1;
     });
 
     const sortedCountries = Object.entries(countryCountMap)

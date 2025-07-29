@@ -3,6 +3,7 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { GetEventById, useGetSectionsByEventId } from "@/lib/api/main/queries";
 import DetailBanner from "@/templates/DetailBanner";
+import DetailBottom from "@/templates/DetailBottom";
 import DetailLeft from "@/templates/DetailLeft";
 import DetailRight from "@/templates/DetailRight";
 import { useParams } from "next/navigation";
@@ -29,29 +30,35 @@ function Page() {
     <div className="bg-slate-900">
       <div className="flex flex-col items-center">
         <DetailBanner event={event} />
-        <MaxWidthWrapper className="flex flex-col xl:flex-row my-15 gap-5 relative">
-          {/* left side */}
-          <div className="w-full xl:w-2/3 xl:sticky xl:top-20 self-start">
-            <DetailLeft
-              event={event}
-              sections={sections}
-              hoveredName={hoveredName}
-              selectedName={selectedName}
-              onHover={handleHover}
-              onClick={handleSelect}
-            />
+        <MaxWidthWrapper className="flex flex-col gap-10 my-15">
+          <div className="flex flex-col xl:flex-row gap-5 relative">
+            {/* left side */}
+            <div className="w-full xl:w-2/3 xl:sticky xl:top-30 self-start">
+              <DetailLeft
+                event={event}
+                sections={sections}
+                hoveredName={hoveredName}
+                selectedName={selectedName}
+                onHover={handleHover}
+                onClick={handleSelect}
+              />
+            </div>
+            {/* right side */}
+            <div className="w-full xl:w-1/3 ">
+              <DetailRight
+                event={event}
+                sections={sections}
+                hoveredName={hoveredName}
+                selectedName={selectedName}
+                onReset={handleReset}
+                onSelect={handleSelect}
+                onHover={handleHover}
+              />
+            </div>
           </div>
-          {/* right side */}
-          <div className="w-full xl:w-1/3">
-            <DetailRight
-              event={event}
-              sections={sections}
-              hoveredName={hoveredName}
-              selectedName={selectedName}
-              onReset={handleReset}
-              onSelect={handleSelect}
-              onHover={handleHover}
-            />
+          {/* bottom side */}
+          <div className="w-full">
+            <DetailBottom event={event} />
           </div>
         </MaxWidthWrapper>
       </div>

@@ -26,7 +26,7 @@ const LocationViewer: React.FC<LocationViewerProps> = ({
 }) => {
   const center: LatLngExpression = [coordinates[0], coordinates[1]];
   return (
-    <div className="h-96 w-full rounded-md overflow-hidden">
+    <div className="h-96 w-full rounded-md overflow-hidden z-0">
       <MapContainer
         center={center}
         zoom={13}

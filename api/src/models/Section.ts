@@ -52,12 +52,12 @@ const SectionSchema = new Schema<ISection>(
     price: {
       type: Number,
       required: true,
-      min: 0,
+      min: 1,
     },
     quantity: {
       type: Number,
       required: true,
-      min: 1,
+      min: 0,
     },
     sold: {
       type: Number,

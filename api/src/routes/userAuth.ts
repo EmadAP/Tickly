@@ -98,56 +98,29 @@ router.get("/profile", async (req: Request, res: Response) => {
     res.status(401).json({ message: "Unauthorized: No token" });
     return;
   }
-  // jwt.verify(token, SECRET, {}, async (err, decoded) => {
-  //   if (err || !decoded) {
-  //     res.status(401).json({ message: "Unauthorized: Invalid token" });
-  //     return;
-  //   }
 
-  //   const { id } = decoded as JwtPayload;
-
-  //   try {
-  //     const user = await User.findById(id).select("username email _id");
-  //     if (!user) {
-  //       res.status(404).json({ message: "User not found" });
-  //       return;
-  //     }
-  //     res.status(200).json({
-  //       id: user._id,
-  //       username: user.username,
-  //       email: user.email,
-  //     });
-  //   } catch (err) {
-  //     console.error("Error fetching user profile:", err);
-  //     res.status(500).json({ message: "Server error" });
-  //   }
-  // });
   jwt.verify(token, SECRET, {}, async (err, decoded) => {
     if (err || !decoded) {
       console.log("JWT verification failed:", err);
       res.status(401).json({ message: "Unauthorized: Invalid token" });
       return;
     }
-  
     const { id } = decoded as JwtPayload;
-    console.log("Decoded user ID:", id);
-    console.log("Decoded JWT payload:", decoded);
-  
+
     try {
       const user = await User.findById(id).select("username email _id");
       console.log("Found user?", !!user);
-  
+
       if (!user) {
         res.status(404).json({ message: "User not found" });
         return;
       }
-  
+
       res.status(200).json({
         id: user._id,
         username: user.username,
         email: user.email,
       });
-      
     } catch (err) {
       console.error("Error fetching user profile:", err);
       res.status(500).json({ message: "Server error" });

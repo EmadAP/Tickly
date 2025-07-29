@@ -33,14 +33,14 @@ export const validateSectionInput = (
 
   // Price
   const parsedPrice = Number(price);
-  if (isNaN(parsedPrice) || parsedPrice < 0) {
+  if (isNaN(parsedPrice) || parsedPrice < 1) {
     res.status(400).json({ message: "Price must be a non-negative number." });
     return;
   }
 
   // Quantity
   const parsedQuantity = Number(quantity);
-  if (isNaN(parsedQuantity) || parsedQuantity < 1) {
+  if (isNaN(parsedQuantity) || parsedQuantity < 0) {
     res
       .status(400)
       .json({ message: "Quantity must be a number greater than 0." });

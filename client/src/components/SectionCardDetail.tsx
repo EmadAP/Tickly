@@ -13,6 +13,7 @@ import {
   endOfMonth,
 } from "date-fns";
 import { Event, Section } from "@/lib/types/types";
+import { Button } from "./ui/button";
 
 const LocationViewer = dynamic(() => import("@/components/LocationViewer"), {
   ssr: false,
@@ -20,41 +21,104 @@ const LocationViewer = dynamic(() => import("@/components/LocationViewer"), {
 
 interface SectionCardDetailProps {
   event: Event;
-  section: Section[]
+  section: Section[];
 }
 
-const SectionCardDetail: React.FC<SectionCardDetailProps> = ({ event, section }) => {
+const SectionCardDetail: React.FC<SectionCardDetailProps> = ({
+  event,
+  section,
+}) => {
   const eventDate = parseISO(event.eventDate);
   const today = new Date();
 
   const daysLeft = differenceInCalendarDays(eventDate, today);
   const isEventToday = isSameDay(today, eventDate);
 
-
   return (
-    <div className="text-white w-full flex flex-col my-20">
+    <div className="text-white w-full flex flex-col py-5">
       <div className="flex flex-col items-center justify-between w-full gap-5">
         <div className="flex flex-col gap-5 justify-between w-full">
           <div className="space-y-5">
-            <div>{section.map((sec) => (
-              <div key={sec._id}>{sec.name}</div>
-            ))}</div>
-            <p className="text-orange-500 font-bold text-xl">{event.title}</p>
+            <p className="text-orange-500 font-bold text-2xl">{event.title}</p>
             <p>{event.description}</p>
             <p className="text-sm">
               Country:{" "}
               <span className="text-lg font-semibold">{event.country}</span>
             </p>
-            <p className="text-sm">
-              City: <span className="text-lg font-semibold">{event.city}</span>
-            </p>
-            <p className="text-sm">
-              Address:{" "}
-              <span className="text-lg font-semibold">{event.address}</span>
-            </p>
           </div>
+          <div>
+            {section.map((sec) => (
+              <div key={sec._id} className="space-y-5">
+                <p className="text-sm">
+                  Section:{" "}
+                  <span className="text-lg font-semibold">{sec.name}</span>
+                </p>
+                <div>
+                  {sec.onSell && sec.discountPercent ? (
+                    // Price with discount
+                    <div className="flex flex-row items-center justify-between w-full gap-3">
+                      <span className="text-sm flex flex-row items-center gap-2">
+                        Price:
+                        <p className="text-sm line-through text-gray-400">
+                          ${sec.price.toFixed(2)}
+                        </p>
+                        <span className="text-lg font-semibold text-green-400">
+                          $
+                          {(
+                            sec.price -
+                            (sec.price * sec.discountPercent) / 100
+                          ).toFixed(2)}
+                        </span>
+                      </span>
 
-          <div className="flex flex-col md:flex-row gap-5 justify-between">
+                      <span className="text-green-400 text-sm font-semibold">
+                        {sec.discountPercent}% OFF
+                      </span>
+                    </div>
+                  ) : (
+                    // Price without discount
+                    <p className="text-sm">
+                      Price:{" "}
+                      <span className="text-lg font-semibold text-green-400">
+                        ${sec.price.toFixed(2)}
+                      </span>
+                    </p>
+                  )}
+                </div>
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center gap-3">
+                    <button
+                      className="px-3 py-1 bg-gray-600 hover:bg-gray-500 rounded text-lg"
+                      onClick={() => {
+                        // decrease quantity logic
+                      }}
+                    >
+                      –
+                    </button>
+                    <span className="text-lg font-semibold">1</span>{" "}
+                    {/* selected quantity */}
+                    <button
+                      className="px-3 py-1 bg-gray-600 hover:bg-gray-500 rounded text-lg"
+                      onClick={() => {
+                        // increase quantity logic
+                      }}
+                    >
+                      +
+                    </button>
+                  </div>
+                  {sec.quantity - sec.sold < 10 && (
+                    <p className="text-red-400 text-sm font-semibold">
+                      Less than {sec.quantity - sec.sold} tickets remaining!
+                    </p>
+                  )}
+                </div>
+                <Button className="bg-orange-500 text-lg hover:bg-orange-400 cursor-pointer">
+                  Add to Cart
+                </Button>
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-col gap-5 justify-between">
             <div className="space-y-5">
               <p className="text-sm ">
                 Time:{" "}
@@ -70,7 +134,7 @@ const SectionCardDetail: React.FC<SectionCardDetailProps> = ({ event, section })
               </p>
             </div>
             {/* Calendar */}
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col">
               <Calendar
                 mode="single"
                 selected={eventDate}
@@ -89,7 +153,7 @@ const SectionCardDetail: React.FC<SectionCardDetailProps> = ({ event, section })
                     "bg-orange-500 rounded-lg text-white hover:bg-orange-600",
                   today: "bg-orange-400 rounded-lg text-white",
                 }}
-                className="rounded-lg border border-orange-500 bg-slate-900 [&_.rdp-day]:pointer-events-none"
+                className=" rounded-lg border border-orange-500 bg-slate-900 [&_.rdp-day]:pointer-events-none"
               />
 
               {/* Days left */}
@@ -103,10 +167,19 @@ const SectionCardDetail: React.FC<SectionCardDetailProps> = ({ event, section })
             </div>
           </div>
         </div>
-        {/* <LocationViewer
-          coordinates={event.coordinates}
-          locationName={event.address}
-        /> */}
+        <div className="flex flex-col gap-5 justify-between w-full">
+          <p className="text-sm">
+            City: <span className="text-lg font-semibold">{event.city}</span>
+          </p>
+          <p className="text-sm">
+            Address:{" "}
+            <span className="text-lg font-semibold">{event.address}</span>
+          </p>
+          <LocationViewer
+            coordinates={event.coordinates}
+            locationName={event.address}
+          />
+        </div>
       </div>
     </div>
   );

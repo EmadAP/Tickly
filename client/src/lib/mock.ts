@@ -168,3 +168,216 @@ export const TESTIMONIALS = [
     time: "8 months ago",
   },
 ];
+
+// maps.ts
+export interface SectionLayout {
+  name: string;
+  top: string;
+  left: string;
+  width: string;
+  height: string;
+  type?: "stage" | "section";
+}
+
+export const concertMap: SectionLayout[] = [
+  {
+    name: "Stage",
+    top: "3%",
+    left: "22%",
+    width: "56%",
+    height: "8%",
+    type: "stage",
+  },
+  { name: "VIP", top: "12%", left: "22%", width: "56%", height: "10%" },
+  { name: "Floor", top: "23%", left: "22%", width: "56%", height: "30%" },
+  { name: "Section A", top: "54%", left: "10%", width: "25%", height: "15%" },
+  { name: "Section B", top: "54%", left: "36%", width: "28%", height: "15%" },
+  { name: "Section C", top: "54%", left: "65%", width: "25%", height: "15%" },
+  { name: "Section D", top: "70%", left: "10%", width: "25%", height: "15%" },
+  { name: "Section E", top: "70%", left: "36%", width: "28%", height: "15%" },
+  { name: "Section F", top: "70%", left: "65%", width: "25%", height: "15%" },
+  {
+    name: "Balcony Left",
+    top: "12%",
+    left: "10%",
+    width: "11%",
+    height: "41%",
+  },
+  {
+    name: "Balcony Right",
+    top: "12%",
+    left: "79%",
+    width: "11%",
+    height: "41%",
+  },
+  { name: "General", top: "86%", left: "10%", width: "80%", height: "10%" },
+];
+
+// Sports stadium layout
+export const sportsMap: SectionLayout[] = [
+  {
+    name: "Field",
+    top: "35%",
+    left: "25%",
+    width: "50%",
+    height: "25%",
+    type: "stage",
+  },
+  { name: "VIP", top: "24%", left: "40%", width: "20%", height: "10%" },
+  { name: "Floor", top: "61%", left: "25%", width: "50%", height: "5%" },
+  { name: "Section A", top: "14%", left: "9%", width: "30%", height: "20%" },
+  { name: "Section B", top: "14%", left: "61%", width: "30%", height: "20%" },
+  { name: "Section C", top: "67%", left: "25%", width: "24%", height: "20%" },
+  { name: "Section D", top: "67%", left: "51%", width: "24%", height: "20%" },
+  { name: "Section E", top: "61%", left: "9%", width: "15%", height: "26%" },
+  { name: "Section F", top: "61%", left: "76%", width: "15%", height: "26%" },
+  {
+    name: "Balcony Left",
+    top: "35%",
+    left: "9%",
+    width: "15%",
+    height: "25%",
+  },
+  {
+    name: "Balcony Right",
+    top: "35%",
+    left: "76%",
+    width: "15%",
+    height: "25%",
+  },
+  { name: "General", top: "14%", left: "40%", width: "20%", height: "9%" },
+];
+
+// Theater layout
+export const theaterMap: SectionLayout[] = [
+  {
+    name: "Stage",
+    top: "5%",
+    left: "20%",
+    width: "60%",
+    height: "10%",
+    type: "stage",
+  },
+  { name: "VIP", top: "33%", left: "40%", width: "20%", height: "20%" },
+  { name: "Floor", top: "64%", left: "10%", width: "80%", height: "10%" },
+  { name: "Section A", top: "16%", left: "20%", width: "19%", height: "16%" },
+  { name: "Section B", top: "16%", left: "40%", width: "20%", height: "16%" },
+  { name: "Section C", top: "16%", left: "61%", width: "19%", height: "16%" },
+  { name: "Section D", top: "33%", left: "20%", width: "19%", height: "20%" },
+  { name: "Section E", top: "33%", left: "61%", width: "19%", height: "20%" },
+  { name: "Section F", top: "54%", left: "20%", width: "60%", height: "9%" },
+  {
+    name: "Balcony Left",
+    top: "33%",
+    left: "4%",
+    width: "15%",
+    height: "30%",
+  },
+  {
+    name: "Balcony Right",
+    top: "33%",
+    left: "81%",
+    width: "15%",
+    height: "30%",
+  },
+  { name: "General", top: "75%", left: "14%", width: "73%", height: "15%" },
+];
+
+// Comedy layout
+export const comedyMap: SectionLayout[] = [
+  {
+    name: "Stage",
+    top: "10%",
+    left: "40%",
+    width: "20%",
+    height: "10%",
+    type: "stage",
+  },
+  { name: "VIP", top: "21%", left: "40%", width: "20%", height: "14%" },
+  { name: "Floor", top: "49%", left: "30%", width: "41%", height: "17%" },
+  { name: "Section A", top: "10%", left: "24%", width: "15%", height: "12%" },
+  { name: "Section B", top: "10%", left: "61%", width: "15%", height: "12%" },
+  { name: "Section C", top: "23%", left: "24%", width: "15%", height: "12%" },
+  { name: "Section D", top: "23%", left: "61%", width: "15%", height: "12%" },
+  { name: "Section E", top: "36%", left: "30%", width: "20%", height: "12%" },
+  { name: "Section F", top: "36%", left: "51%", width: "20%", height: "12%" },
+  {
+    name: "Balcony Left",
+    top: "36%",
+    left: "14%",
+    width: "15%",
+    height: "30%",
+  },
+  {
+    name: "Balcony Right",
+    top: "36%",
+    left: "72%",
+    width: "15%",
+    height: "30%",
+  },
+  { name: "General", top: "67%", left: "14%", width: "73%", height: "25%" },
+];
+
+// Workshop layout (smaller, more open)
+export const workshopMap: SectionLayout[] = [
+  {
+    name: "Stage",
+    top: "16%",
+    left: "45%",
+    width: "10%",
+    height: "47%",
+    type: "stage",
+  },
+  { name: "VIP", top: "5%", left: "40%", width: "20%", height: "10%" },
+  { name: "Floor", top: "64%", left: "20%", width: "60%", height: "20%" },
+  { name: "Section A", top: "16%", left: "29%", width: "15%", height: "15%" },
+  { name: "Section B", top: "16%", left: "56%", width: "15%", height: "15%" },
+  { name: "Section C", top: "32%", left: "29%", width: "15%", height: "15%" },
+  { name: "Section D", top: "32%", left: "56%", width: "15%", height: "15%" },
+  { name: "Section E", top: "48%", left: "29%", width: "15%", height: "15%" },
+  { name: "Section F", top: "48%", left: "56%", width: "15%", height: "15%" },
+  {
+    name: "Balcony Left",
+    top: "16%",
+    left: "13%",
+    width: "15%",
+    height: "47%",
+  },
+  {
+    name: "Balcony Right",
+    top: "16%",
+    left: "72%",
+    width: "15%",
+    height: "47%",
+  },
+  { name: "General", top: "85%", left: "20%", width: "60%", height: "10%" },
+];
+
+// Seminar layout (conference hall style)
+export const seminarMap: SectionLayout[] = [
+  {
+    name: "Stage",
+    top: "5%",
+    left: "22%",
+    width: "56%",
+    height: "8%",
+    type: "stage",
+  },
+  { name: "VIP", top: "17%", left: "30%", width: "40%", height: "8%" },
+  { name: "Floor", top: "26%", left: "35%", width: "30%", height: "32%" },
+  { name: "Section A", top: "26%", left: "4%", width: "30%", height: "10%" },
+  { name: "Section B", top: "26%", left: "66%", width: "30%", height: "10%" },
+  { name: "Section C", top: "37%", left: "4%", width: "30%", height: "10%" },
+  { name: "Section D", top: "37%", left: "66%", width: "30%", height: "10%" },
+  { name: "Section E", top: "48%", left: "4%", width: "30%", height: "10%" },
+  { name: "Section F", top: "48%", left: "66%", width: "30%", height: "10%" },
+  { name: "Balcony Left", top: "17%", left: "9%", width: "20%", height: "8%" },
+  {
+    name: "Balcony Right",
+    top: "17%",
+    left: "71%",
+    width: "20%",
+    height: "8%",
+  },
+  { name: "General", top: "60%", left: "4%", width: "92%", height: "35%" },
+];

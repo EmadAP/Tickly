@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -34,6 +34,30 @@ const SectionCardDetail: React.FC<SectionCardDetailProps> = ({
   const daysLeft = differenceInCalendarDays(eventDate, today);
   const isEventToday = isSameDay(today, eventDate);
 
+  const [selectedQuantities, setSelectedQuantities] = useState<
+    Record<string, number>
+  >({});
+
+  const handleIncrease = (secId: string, available: number) => {
+    setSelectedQuantities((prev) => {
+      const current = prev[secId] || 1;
+      if (current < available) {
+        return { ...prev, [secId]: current + 1 };
+      }
+      return prev;
+    });
+  };
+
+  const handleDecrease = (secId: string) => {
+    setSelectedQuantities((prev) => {
+      const current = prev[secId] || 1;
+      if (current > 1) {
+        return { ...prev, [secId]: current - 1 };
+      }
+      return prev;
+    });
+  };
+
   return (
     <div className="text-white w-full flex flex-col py-5">
       <div className="flex flex-col items-center justify-between w-full gap-5">
@@ -47,76 +71,81 @@ const SectionCardDetail: React.FC<SectionCardDetailProps> = ({
             </p>
           </div>
           <div>
-            {section.map((sec) => (
-              <div key={sec._id} className="space-y-5">
-                <p className="text-sm">
-                  Section:{" "}
-                  <span className="text-lg font-semibold">{sec.name}</span>
-                </p>
-                <div>
-                  {sec.onSell && sec.discountPercent ? (
-                    // Price with discount
-                    <div className="flex flex-row items-center justify-between w-full gap-3">
-                      <span className="text-sm flex flex-row items-center gap-2">
-                        Price:
-                        <p className="text-sm line-through text-gray-400">
-                          ${sec.price.toFixed(2)}
-                        </p>
-                        <span className="text-lg font-semibold text-green-400">
-                          $
-                          {(
-                            sec.price -
-                            (sec.price * sec.discountPercent) / 100
-                          ).toFixed(2)}
-                        </span>
-                      </span>
+            {section.map((sec) => {
+              const available = sec.quantity - sec.sold;
+              const selectedQty = selectedQuantities[sec._id] || 1;
 
-                      <span className="text-green-400 text-sm font-semibold">
-                        {sec.discountPercent}% OFF
-                      </span>
-                    </div>
-                  ) : (
-                    // Price without discount
-                    <p className="text-sm">
-                      Price:{" "}
-                      <span className="text-lg font-semibold text-green-400">
-                        ${sec.price.toFixed(2)}
-                      </span>
-                    </p>
-                  )}
-                </div>
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-3">
-                    <button
-                      className="px-3 py-1 bg-gray-600 hover:bg-gray-500 rounded text-lg"
-                      onClick={() => {
-                        // decrease quantity logic
-                      }}
-                    >
-                      –
-                    </button>
-                    <span className="text-lg font-semibold">1</span>{" "}
-                    {/* selected quantity */}
-                    <button
-                      className="px-3 py-1 bg-gray-600 hover:bg-gray-500 rounded text-lg"
-                      onClick={() => {
-                        // increase quantity logic
-                      }}
-                    >
-                      +
-                    </button>
+              return (
+                <div key={sec._id} className="space-y-5">
+                  <p className="text-sm">
+                    Section:{" "}
+                    <span className="text-lg font-semibold">{sec.name}</span>
+                  </p>
+                  <div>
+                    {sec.onSell && sec.discountPercent ? (
+                      // Price with discount
+                      <div className="flex flex-row items-center justify-between w-full gap-3">
+                        <span className="text-sm flex flex-row items-center gap-2">
+                          Price:
+                          <p className="text-sm line-through text-gray-400">
+                            ${sec.price.toFixed(2)}
+                          </p>
+                          <span className="text-lg font-semibold text-green-400">
+                            $
+                            {(
+                              sec.price -
+                              (sec.price * sec.discountPercent) / 100
+                            ).toFixed(2)}
+                          </span>
+                        </span>
+
+                        <span className="text-green-400 text-sm font-semibold">
+                          {sec.discountPercent}% OFF
+                        </span>
+                      </div>
+                    ) : (
+                      // Price without discount
+                      <p className="text-sm">
+                        Price:{" "}
+                        <span className="text-lg font-semibold text-green-400">
+                          ${sec.price.toFixed(2)}
+                        </span>
+                      </p>
+                    )}
                   </div>
-                  {sec.quantity - sec.sold < 10 && (
-                    <p className="text-red-400 text-sm font-semibold">
-                      Less than {sec.quantity - sec.sold} tickets remaining!
-                    </p>
-                  )}
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-3">
+                      <button
+                        className="px-3 py-1 bg-gray-600 hover:bg-gray-500 rounded text-lg"
+                        onClick={() => handleDecrease(sec._id)}
+                        disabled={selectedQty <= 1}
+                      >
+                        –
+                      </button>
+                      <span className="text-lg font-semibold">
+                        {selectedQty}
+                      </span>{" "}
+                      {/* selected quantity */}
+                      <button
+                        className="px-3 py-1 bg-gray-600 hover:bg-gray-500 rounded text-lg"
+                        onClick={() => handleIncrease(sec._id, available)}
+                        disabled={selectedQty >= available}
+                      >
+                        +
+                      </button>
+                    </div>
+                    {available < 10 && (
+                      <p className="text-red-400 text-sm font-semibold">
+                        Less than {available} tickets remaining!
+                      </p>
+                    )}
+                  </div>
+                  <Button className="bg-orange-500 text-lg hover:bg-orange-400 cursor-pointer">
+                    Add to Cart
+                  </Button>
                 </div>
-                <Button className="bg-orange-500 text-lg hover:bg-orange-400 cursor-pointer">
-                  Add to Cart
-                </Button>
-              </div>
-            ))}
+              );
+            })}
           </div>
           <div className="flex flex-col gap-5 justify-between">
             <div className="space-y-5">

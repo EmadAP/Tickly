@@ -1,12 +1,12 @@
 "use client";
 
 import LeftEventCard from "@/components/LeftEventCard";
-import { GetAllEvents, useGetAllSections, useGetSectionsByEventId } from "@/lib/api/main/queries";
+import { GetAllEvents, useGetAllSections } from "@/lib/api/main/queries";
 import { ArrowBigRightDash, CalendarDays } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { Event, Section } from "@/lib/types/types"; 
+import { Event } from "@/lib/types/types";
 
 function MainLeft() {
   const { data: events, isLoading, isError, error } = GetAllEvents();
@@ -31,7 +31,7 @@ function MainLeft() {
 
   const notOnSellEvents = events.filter((event) => {
     const hasOnSell = sectionMap.get(event._id);
-    return !hasOnSell; 
+    return !hasOnSell;
   });
 
   const now = new Date();

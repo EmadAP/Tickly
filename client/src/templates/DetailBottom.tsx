@@ -37,7 +37,7 @@ const DetailBottom: React.FC<DetailBottomProps> = ({ event }) => {
         <MainCarouselCards
           key={`country-${event.country}`}
           title={`Events in ${event.country}`}
-          link={`/country/${encodeURIComponent(event.country)}`}
+          link={`/explore?country=${encodeURIComponent(event.country)}`}
           events={sameCountryEvents}
         />
       )}
@@ -46,7 +46,7 @@ const DetailBottom: React.FC<DetailBottomProps> = ({ event }) => {
         <MainCarouselCards
           key={`category-${event.category}`}
           title={`${event.category} events`}
-          link={`/category/${encodeURIComponent(event.category)}`}
+          link={`/explore?category=${encodeURIComponent(event.category)}`}
           events={sameCategoryEvents}
         />
       )}

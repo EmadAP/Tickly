@@ -79,7 +79,7 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
           Date
         </AccordionTrigger>
         <AccordionContent className="flex flex-col gap-4 text-balance">
-          {["Today", "This week", "this month", "This year"].map((date) => (
+          {["Today", "This week", "This month", "This year"].map((date) => (
             <button
               key={date}
               onClick={() =>

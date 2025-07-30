@@ -21,30 +21,39 @@ function MainLeft() {
 
   const now = new Date();
   const today = now.toISOString().slice(0, 10);
-  const tomorrow = new Date(now);
-  tomorrow.setDate(now.getDate() + 1);
-  const tomorrowStr = tomorrow.toISOString().slice(0, 10);
 
   const weekEnd = new Date(now);
-  weekEnd.setDate(now.getDate() + (7 - now.getDay()));
+  weekEnd.setDate(now.getDate() + 7);
   const weekEndStr = weekEnd.toISOString().slice(0, 10);
+
+  const monthEnd = new Date(now);
+  monthEnd.setDate(now.getDate() + 30);
+  const monthEndStr = monthEnd.toISOString().slice(0, 10);
 
   const filteredEvents = events
     .filter((event: Event) => {
       const eventDate = event.eventDate.slice(0, 10);
-      if (activeFilter === "Today") return eventDate === today;
-      if (activeFilter === "Tomorrow") return eventDate === tomorrowStr;
-      if (activeFilter === "This week")
+
+      if (activeFilter === "Today") {
+        return eventDate === today;
+      }
+
+      if (activeFilter === "This week") {
         return eventDate >= today && eventDate <= weekEndStr;
+      }
+
+      if (activeFilter === "This month") {
+        return eventDate >= today && eventDate <= monthEndStr;
+      }
+
       return true; // "Explore all"
     })
     .slice(0, visibleCount);
-
   return (
-    <div className="flex-2/3 2xl:flex-3/4 py-20 border-b-2 border-orange-500 lg:border-b-0 ">
+    <div className="flex-2/3 2xl:flex-3/4 py-10 border-b-2 border-orange-500 lg:border-b-0 ">
       {/* Date filter buttons */}
       <div className="mb-10 gap-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
-        {["Today", "Tomorrow", "This week", "Explore all"].map((label) => (
+        {["Today", "This week", "This month", "Explore all"].map((label) => (
           <button
             key={label}
             onClick={() => setActiveFilter(label)}
@@ -78,7 +87,10 @@ function MainLeft() {
       {/* Explore more link */}
       <div className="flex items-center justify-center pt-5">
         <Link
-          href="#"
+          href={{
+            pathname: "/explore",
+            query: { date: activeFilter !== "Explore all" ? activeFilter : "" },
+          }}
           className="text-2xl hover:text-orange-500 flex flex-row items-center gap-2"
         >
           <span>Explore more</span>

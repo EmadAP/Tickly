@@ -66,7 +66,7 @@ function MainBottom() {
               <MainCarouselCards
                 key={category}
                 title={category}
-                link={`/category/${encodeURIComponent(category)}`}
+                link={`/explore?category=${encodeURIComponent(category)}`}
                 events={categoryEvents}
               />
             );
@@ -82,7 +82,7 @@ function MainBottom() {
               <MainCarouselCards
                 key={country}
                 title={country}
-                link={`/country/${encodeURIComponent(country)}`}
+                link={`/explore?country=${encodeURIComponent(country)}`}
                 events={countryEvents}
               />
             );

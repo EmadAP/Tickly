@@ -35,26 +35,21 @@ function ExploreTemp({ filters }: ExploreTempProps) {
     }
 
     if (filters.date === "This week") {
-      const weekStart = new Date(today);
-      weekStart.setDate(today.getDate() - today.getDay()); // start of week
-      const weekEnd = new Date(weekStart);
-      weekEnd.setDate(weekStart.getDate() + 6); // end of week
-      if (eventDate < weekStart || eventDate > weekEnd) return false;
+      const weekEnd = new Date(today);
+      weekEnd.setDate(today.getDate() + 7);
+      if (eventDate < today || eventDate > weekEnd) return false;
     }
 
     if (filters.date === "This month") {
-      if (
-        eventDate.getMonth() !== today.getMonth() ||
-        eventDate.getFullYear() !== today.getFullYear()
-      )
-        return false;
+      const monthEnd = new Date(today);
+      monthEnd.setDate(today.getDate() + 30);
+      if (eventDate < today || eventDate > monthEnd) return false;
     }
 
     if (filters.date === "This year") {
       if (eventDate.getFullYear() !== today.getFullYear()) return false;
     }
 
-    // Price range, on sale, availability → derive from sections
     const eventSections = sections.filter((sec) =>
       typeof sec.event === "string"
         ? sec.event === event._id

@@ -2,8 +2,7 @@
 
 import RightEventCard from "@/components/RightEventCard";
 import { GetAllEvents, useGetAllSections } from "@/lib/api/main/queries";
-import { ArrowBigRightDash, PartyPopper } from "lucide-react";
-import Link from "next/link";
+import { PartyPopper } from "lucide-react";
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 import { Section, Event } from "@/lib/types/types";
@@ -83,16 +82,6 @@ function MainRight() {
             No discounted events found.
           </p>
         )}
-      </div>
-
-      <div className="flex items-center justify-center pt-5">
-        <Link
-          href="/discounts"
-          className="text-2xl hover:text-orange-500 flex flex-row items-center gap-2"
-        >
-          <span>Explore more</span>
-          <ArrowBigRightDash size={30} />
-        </Link>
       </div>
     </div>
   );

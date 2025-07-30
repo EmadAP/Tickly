@@ -1,24 +1,93 @@
 "use client";
 
 import LeftEventCard from "@/components/LeftEventCard";
-import { GetAllEvents } from "@/lib/api/main/queries";
+import { GetAllEvents, useGetAllSections } from "@/lib/api/main/queries";
+import { ExploreFilters } from "@/lib/types/types";
 import React from "react";
 
-function ExploreTemp() {
-  const { data: events, isLoading, isError, error } = GetAllEvents();
+interface ExploreTempProps {
+  filters: ExploreFilters;
+}
 
-  if (isLoading || !events) return <div>loading...</div>;
+function ExploreTemp({ filters }: ExploreTempProps) {
+  const { data: events, isLoading, isError, error } = GetAllEvents();
+  const { data: sections } = useGetAllSections();
+
+  if (isLoading || !events || !sections) return <div>loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;
 
+  const filteredEvents = events.filter((event) => {
+    // Category
+    if (filters.category && event.category !== filters.category) return false;
+
+    // Country
+    if (
+      filters.country &&
+      event.country.toLowerCase() !== filters.country.toLowerCase()
+    )
+      return false;
+    // Date filters
+    const eventDate = new Date(event.eventDate);
+    const today = new Date();
+
+    if (filters.date === "Today") {
+      if (eventDate.toDateString() !== today.toDateString()) return false;
+    }
+
+    if (filters.date === "This week") {
+      const weekStart = new Date(today);
+      weekStart.setDate(today.getDate() - today.getDay()); // start of week
+      const weekEnd = new Date(weekStart);
+      weekEnd.setDate(weekStart.getDate() + 6); // end of week
+      if (eventDate < weekStart || eventDate > weekEnd) return false;
+    }
+
+    if (filters.date === "This month") {
+      if (
+        eventDate.getMonth() !== today.getMonth() ||
+        eventDate.getFullYear() !== today.getFullYear()
+      )
+        return false;
+    }
+
+    if (filters.date === "This year") {
+      if (eventDate.getFullYear() !== today.getFullYear()) return false;
+    }
+
+    // Price range, on sale, availability → derive from sections
+    const eventSections = sections.filter((sec) =>
+      typeof sec.event === "string"
+        ? sec.event === event._id
+        : sec.event._id === event._id
+    );
+
+    const minPrice = Math.min(...eventSections.map((s) => s.price));
+    const maxPrice = Math.max(...eventSections.map((s) => s.price));
+
+    if (filters.priceRange) {
+      if (minPrice > filters.priceRange[1] || maxPrice < filters.priceRange[0])
+        return false;
+    }
+
+    if (filters.onSale && !eventSections.some((s) => s.onSell)) return false;
+
+    if (
+      filters.available &&
+      !eventSections.some((s) => s.quantity - s.sold > 0)
+    )
+      return false;
+
+    return true;
+  });
+
   return (
-    <div className="bg-slate-800 py-10 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4">
-      {events.length > 0 ? (
-        events.map((event) => <LeftEventCard key={event._id} event={event} />)
+    <div className="bg-slate-800 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 2xl:grid-cols-3 gap-4">
+      {filteredEvents.length > 0 ? (
+        filteredEvents.map((event) => (
+          <LeftEventCard key={event._id} event={event} />
+        ))
       ) : (
-        <p className="text-center col-span-full text-lg">
-          No event for
-          {/* {activeFilter.toLowerCase()}. */}
-        </p>
+        <p className="text-center col-span-full text-lg">No event for</p>
       )}
     </div>
   );

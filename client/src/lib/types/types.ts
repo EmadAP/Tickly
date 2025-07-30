@@ -70,3 +70,12 @@ export interface Section {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface ExploreFilters {
+  category: string | null;
+  date: string | null;
+  country: string | null;
+  priceRange: [number, number];
+  onSale: boolean;
+  available: boolean;
+}

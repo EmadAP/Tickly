@@ -1,7 +1,7 @@
 "use client";
 
 import LeftEventCard from "@/components/LeftEventCard";
-import { GetAllEvents, useGetAllSections } from "@/lib/api/main/queries";
+import { GetAllEvents } from "@/lib/api/main/queries";
 import { ArrowBigRightDash, CalendarDays } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -10,29 +10,14 @@ import { Event } from "@/lib/types/types";
 
 function MainLeft() {
   const { data: events, isLoading, isError, error } = GetAllEvents();
-  const { data: sections } = useGetAllSections();
 
   const [activeFilter, setActiveFilter] = useState("Explore all");
 
   const is2xl = useMediaQuery({ minWidth: 1536 });
   const visibleCount = is2xl ? 9 : 8;
 
-  if (isLoading || !events || !sections) return <div>loading...</div>;
+  if (isLoading || !events) return <div>loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;
-
-  const sectionMap = new Map<string, boolean>();
-  for (const section of sections) {
-    if (sectionMap.has(section.event)) {
-      if (section.onSell) sectionMap.set(section.event, true);
-    } else {
-      sectionMap.set(section.event, section.onSell);
-    }
-  }
-
-  const notOnSellEvents = events.filter((event) => {
-    const hasOnSell = sectionMap.get(event._id);
-    return !hasOnSell;
-  });
 
   const now = new Date();
   const today = now.toISOString().slice(0, 10);
@@ -44,7 +29,7 @@ function MainLeft() {
   weekEnd.setDate(now.getDate() + (7 - now.getDay()));
   const weekEndStr = weekEnd.toISOString().slice(0, 10);
 
-  const filteredEvents = notOnSellEvents
+  const filteredEvents = events
     .filter((event: Event) => {
       const eventDate = event.eventDate.slice(0, 10);
       if (activeFilter === "Today") return eventDate === today;

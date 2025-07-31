@@ -14,6 +14,7 @@ import {
 } from "date-fns";
 import { Event, Section } from "@/lib/types/types";
 import { Button } from "./ui/button";
+import { useCart } from "@/lib/context/CartContext";
 
 const LocationViewer = dynamic(() => import("@/components/LocationViewer"), {
   ssr: false,
@@ -28,6 +29,8 @@ const SectionCardDetail: React.FC<SectionCardDetailProps> = ({
   event,
   section,
 }) => {
+  const { addToCart } = useCart();
+
   const eventDate = parseISO(event.eventDate);
   const today = new Date();
 
@@ -140,7 +143,20 @@ const SectionCardDetail: React.FC<SectionCardDetailProps> = ({
                       </p>
                     )}
                   </div>
-                  <Button className="bg-orange-500 text-lg hover:bg-orange-400 cursor-pointer">
+                  <Button
+                    onClick={() =>
+                      addToCart(
+                        {
+                          eventId: event._id,
+                          sectionId: sec._id,
+                          event,
+                          section: sec,
+                        },
+                        selectedQty
+                      )
+                    }
+                    className="bg-orange-500 text-lg hover:bg-orange-400 cursor-pointer"
+                  >
                     Add to Cart
                   </Button>
                 </div>

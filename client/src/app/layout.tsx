@@ -5,6 +5,7 @@ import "./globals.css";
 import QueryProvider from "@/lib/context/QueryProvider";
 import { Toaster } from "@/components/ui/sonner";
 import { UserProvider } from "@/lib/context/UserContext";
+import { CartProvider } from "@/lib/context/CartContext";
 
 const robotoSans = Roboto({
   variable: "--font-roboto-sans",
@@ -32,7 +33,9 @@ export default function RootLayout({
         className={`${robotoSans.variable} ${robotoMono.variable} antialiased`}
       >
         <QueryProvider>
-          <UserProvider>{children}</UserProvider>
+          <CartProvider>
+            <UserProvider>{children}</UserProvider>
+          </CartProvider>
         </QueryProvider>
         <Toaster />
       </body>

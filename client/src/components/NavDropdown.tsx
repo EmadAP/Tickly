@@ -14,7 +14,7 @@ function NavDropdown() {
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger
-        className={`cursor-pointer outline-none text-2xl flex flex-row items-center justify-around gap-2 group shadow-xs px-2 py-1 rounded-lg transition-all duration-200 ${
+        className={`w-full cursor-pointer outline-none text-2xl flex flex-row items-center justify-between gap-2 group shadow-xs px-2 py-1 rounded-lg transition-all duration-200 ${
           open ? "bg-slate-700" : "bg-slate-800 hover:bg-slate-700"
         }`}
       >

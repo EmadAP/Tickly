@@ -14,8 +14,6 @@ export default function DetailPageSkeleton() {
             <div className="w-full xl:w-2/3 h-[690px] bg-slate-800 rounded-lg">
               <Skeleton className="w-full h-full rounded-lg" />
             </div>
-
-            {/* Right sections */}
             <div className="w-full xl:w-1/3 space-y-8">
               {Array.from({ length: 10 }).map((_, i) => (
                 <div
@@ -27,8 +25,6 @@ export default function DetailPageSkeleton() {
               ))}
             </div>
           </div>
-
-          {/* Bottom recommended events */}
           <div className="w-full py-10 border-t-2 border-orange-500 space-y-12">
             {Array.from({ length: 2 }).map((_, i) => (
               <MainCarouselSkeleton key={i} />

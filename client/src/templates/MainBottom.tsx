@@ -1,6 +1,6 @@
 "use client";
 import MainCarouselCards from "@/components/MainCarouselCards";
-import EventCardSkeleton from "@/components/skeletons/EventCardSkeleton";
+import MainCarouselSkeleton from "@/components/skeletons/MainCarouselSkeleton";
 import { GetAllEvents } from "@/lib/api/main/queries";
 import { ChevronDown } from "lucide-react";
 import React, { useMemo, useState } from "react";
@@ -35,14 +35,12 @@ function MainBottom() {
     return sortedCountries;
   }, [events]);
 
-  if (isLoading || events) {
+  if (isLoading || !events) {
     return (
       <div className="py-20 border-t-2 border-orange-500 lg:border-b-0 space-y-10">
-        <div className="gird grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <EventCardSkeleton key={i} />
-          ))}
-        </div>
+        {Array.from({ length: 3 }).map((_, i) => (
+          <MainCarouselSkeleton key={i} />
+        ))}
       </div>
     );
   }

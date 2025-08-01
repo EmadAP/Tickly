@@ -1,4 +1,5 @@
 import MainCarouselCards from "@/components/MainCarouselCards";
+import MainCarouselSkeleton from "@/components/skeletons/MainCarouselSkeleton";
 import { GetAllEvents } from "@/lib/api/main/queries";
 import { Event } from "@/lib/types/types";
 import React, { useMemo } from "react";
@@ -25,7 +26,15 @@ const DetailBottom: React.FC<DetailBottomProps> = ({ event }) => {
     };
   }, [events, event]);
 
-  if (isLoading || !events) return <div>Loading...</div>;
+  if (isLoading || !events) {
+    return (
+      <div className="py-20 border-t-2 border-orange-500 lg:border-b-0 space-y-10">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <MainCarouselSkeleton key={i} />
+        ))}
+      </div>
+    );
+  }
   if (isError) return <div>Error: {error.message}</div>;
 
   console.log("Filtered country events:", sameCountryEvents);

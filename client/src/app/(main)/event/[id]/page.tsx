@@ -1,6 +1,7 @@
 "use client";
 
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import DetailPageSkeleton from "@/components/skeletons/DetailPageSkeleton";
 import { GetEventById, useGetSectionsByEventId } from "@/lib/api/main/queries";
 import DetailBanner from "@/templates/DetailBanner";
 import DetailBottom from "@/templates/DetailBottom";
@@ -28,7 +29,7 @@ function Page() {
   const handleSelect = (name: string) => setSelectedName(name);
   const handleReset = () => setSelectedName(null);
 
-  if (isLoading || !event || !sections) return <div>loading...</div>;
+  if (isLoading || !event || !sections) return <DetailPageSkeleton />;
   if (isError) return <div>Error: {error.message}</div>;
 
   return (

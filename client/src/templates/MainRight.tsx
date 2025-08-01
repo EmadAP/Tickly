@@ -6,6 +6,7 @@ import { PartyPopper } from "lucide-react";
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 import { Section, Event } from "@/lib/types/types";
+import SideEventCardSkeleton from "@/components/skeletons/SideEventCardSkeleton";
 
 function MainRight() {
   const { data: events, isLoading: eventsLoading } = GetAllEvents();
@@ -15,8 +16,17 @@ function MainRight() {
   const isLgOrLarger = useMediaQuery({ minWidth: 1024 });
   const visibleCount = is2xl ? 7 : isLgOrLarger ? 10 : 6;
 
-  if (eventsLoading || sectionsLoading || !events || !sections)
-    return <div>loading...</div>;
+  if (eventsLoading || sectionsLoading || !events || !sections) {
+    return (
+      <div className="flex-1/3 2xl:flex-1/4 mb-20 py-10">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-1">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <SideEventCardSkeleton key={i} />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   const discountedSections = sections.filter((section: Section) => {
     const discount = Number(section.discountPercent) || 0;

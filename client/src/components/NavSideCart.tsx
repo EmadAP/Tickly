@@ -16,29 +16,35 @@ function NavSideCart({ isOpen }: NavSideCartProps) {
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
-      <div className="p-4 space-y-4">
-        {cart.length === 0 ? (
-          <div className="flex flex-col items-center">
-            <Image
-              src="/idk/emptyCard.png"
-              height={500}
-              width={300}
-              alt="empty card"
-            />
-            <p className="text-center text-gray-400">Cart is empty</p>
-          </div>
-        ) : (
-          cart.map((item) => (
-            <NavCartCard
-              key={item.sectionId}
-              item={item}
-              onRemove={() => removeFromCart(item.sectionId)}
-            />
-          ))
-        )}
+      <div className="flex flex-col h-full px-2 py-4">
+        {/* Cart items area */}
+        <div className="flex-1 overflow-y-auto space-y-4">
+          {cart.length === 0 ? (
+            <div className="flex flex-col items-center justify-center h-full p-4">
+              <div className="relative h-52 w-40 mb-4 mr-5">
+                <Image
+                  src="/idk/emptyCart.png"
+                  fill
+                  alt="empty card"
+                  className="object-cover"
+                />
+              </div>
+              <p className="text-center text-gray-400">Cart is empty</p>
+            </div>
+          ) : (
+            cart.map((item) => (
+              <NavCartCard
+                key={item.sectionId}
+                item={item}
+                onRemove={() => removeFromCart(item.sectionId)}
+              />
+            ))
+          )}
+        </div>
 
+        {/* Checkout footer */}
         {cart.length > 0 && (
-          <div className="border-t border-orange-500 pt-4">
+          <div className="border-t border-orange-500 pt-4 mt-4">
             <p className="text-lg font-semibold">
               Total: ${totalPrice.toFixed(2)}
             </p>

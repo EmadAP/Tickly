@@ -7,6 +7,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Event } from "@/lib/types/types";
+import EventCardSkeleton from "@/components/skeletons/EventCardSkeleton";
 
 function MainLeft() {
   const { data: events, isLoading, isError, error } = GetAllEvents();
@@ -16,7 +17,17 @@ function MainLeft() {
   const is2xl = useMediaQuery({ minWidth: 1536 });
   const visibleCount = is2xl ? 9 : 8;
 
-  if (isLoading || !events) return <div>loading...</div>;
+  if (isLoading || !events) {
+    return (
+      <div className="flex-2/3 2xl:flex-3/4 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <EventCardSkeleton key={i} />
+          ))}
+        </div>
+      </div>
+    );
+  }
   if (isError) return <div>Error: {error.message}</div>;
 
   const now = new Date();

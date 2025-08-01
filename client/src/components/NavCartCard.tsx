@@ -1,4 +1,5 @@
 import { CartItem } from "@/lib/context/CartContext";
+import { X } from "lucide-react";
 import React from "react";
 
 interface NavCartCardProps {
@@ -13,19 +14,31 @@ function NavCartCard({ item, onRemove }: NavCartCardProps) {
     : item.section.price;
 
   return (
-    <div className="flex flex-col w-full border-2 rounded-lg px-2 py-3 border-orange-500">
-      <div className="font-bold text-orange-400">{item.event.title}</div>
-      <div>Country: {item.event.country}</div>
-      <div>City: {item.event.city}</div>
-      <div>Section: {item.section.name}</div>
-      <div>Price: ${price.toFixed(2)}</div>
-      <div>Tickets: {item.total}</div>
-      <button
-        onClick={onRemove}
-        className="mt-2 text-sm bg-red-500 hover:bg-red-400 px-2 py-1 rounded"
-      >
-        Remove
-      </button>
+    <div className="flex flex-col w-full border-2 rounded-lg px-2 py-3 border-orange-500 bg-slate-900">
+      <div className="flex flex-row items-center justify-between">
+        <p className=" text-lg font-bold text-orange-400">{item.event.title}</p>
+        <button
+          onClick={onRemove}
+          className="text-red-500 hover:bg-slate-800 px-1 py-1 rounded-full"
+        >
+          <X />
+        </button>
+      </div>
+      <p className="text-lg">
+        <span className="text-sm">Location: </span>
+        {item.event.country}, {item.event.city}
+      </p>
+
+      <p className="text-lg">
+        <span className="text-sm">Section:</span> {item.section.name}
+      </p>
+      <div className="flex flex-row items-center justify-between">
+        <p className="text-sm">
+          Price per ticket:{" "}
+          <span className="text-lg text-green-500">${price.toFixed(2)}</span>
+        </p>
+        <p>Tickets: {item.total}</p>
+      </div>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
+import Footer from "@/templates/Footer";
 import Navbar from "@/templates/Navbar";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
@@ -9,6 +10,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
           {/* <SidebarTrigger /> */}
           <Navbar />
           <div className="flex-1 flex flex-col h-full">{children}</div>
+          <Footer />
         </main>
       </SidebarProvider>
     </div>

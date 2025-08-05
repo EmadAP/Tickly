@@ -14,7 +14,7 @@ function NavCartCard({ item, onRemove }: NavCartCardProps) {
     : item.section.price;
 
   return (
-    <div className="flex flex-col w-full border-2 rounded-lg px-2 py-3 border-orange-500 bg-slate-900">
+    <div className="flex flex-col w-full rounded-lg px-2 py-3  bg-slate-900">
       <div className="flex flex-row items-center justify-between">
         <p className=" text-lg font-bold text-orange-400">{item.event.title}</p>
         <button

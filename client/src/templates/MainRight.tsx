@@ -70,7 +70,7 @@ function MainRight() {
     .slice(0, visibleCount);
 
   return (
-    <div className="flex-1/3 2xl:flex-1/4 mb-20 mt-10 lg:mt-20">
+    <div className="flex-1/3 2xl:flex-1/4 bg-slate-800 rounded-2xl px-5 py-10">
       <div className="flex flex-row mb-10 justify-center items-center gap-8">
         <PartyPopper size={40} className="text-orange-500 -rotate-y-180" />
         <p className="text-4xl font-semibold">On Sell</p>

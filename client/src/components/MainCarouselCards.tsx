@@ -35,7 +35,7 @@ const MainCarouselCards: React.FC<MainCarouselCardsProps> = ({
         </Link>
       </div>
 
-      <div className="relative border-2 border-orange-500 p-3 rounded-xl bg-slate-800">
+      <div className="relative  p-3 rounded-xl bg-slate-800">
         <Carousel opts={{ align: "start" }} className="w-full">
           <div className="absolute -top-13 right-1 mt-2 z-10 flex gap-4">
             <CarouselPrevious className="static w-auto h-auto p-2 border-0 bg-white text-slate-900 hover:bg-white hover:text-orange-500 cursor-pointer" />

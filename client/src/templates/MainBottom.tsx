@@ -47,8 +47,8 @@ function MainBottom() {
   if (isError) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="py-20 border-t-2 border-orange-500 lg:border-b-0 ">
-      <div className="mb-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="px-5 py-10 bg-slate-800 rounded-2xl ">
+      <div className="mb-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {["Categories", "Country"].map((label, index) => (
           <button
             key={label}

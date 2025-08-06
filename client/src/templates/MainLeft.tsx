@@ -61,7 +61,7 @@ function MainLeft() {
     })
     .slice(0, visibleCount);
   return (
-    <div className="flex-2/3 2xl:flex-3/4 py-10 border-b-2 border-orange-500 lg:border-b-0 ">
+    <div className="flex-2/3 2xl:flex-3/4 px-5 py-10 bg-slate-800 rounded-2xl ">
       {/* Date filter buttons */}
       <div className="mb-10 gap-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
         {["Today", "This week", "This month", "Explore all"].map((label) => (

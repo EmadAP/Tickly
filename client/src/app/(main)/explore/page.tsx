@@ -32,14 +32,16 @@ function Page() {
   }, [initialDate, initialCategory, initialCountry]);
 
   return (
-    <div className="bg-slate-800 text-white flex flex-col lg:flex-row relative min-h-screen">
-      <div className="px-10 lg:px-2 w-full lg:w-1/5 bg-slate-900 border-b border-orange-500 lg:border-r lg:border-r-orange-500">
-        <div className="lg:sticky lg:top-20 lg:h-[calc(100vh-5rem)] overflow-y-auto">
-          <ExploreSide filters={filters} setFilters={setFilters} />
+    <div className="bg-slate-900 text-white relative min-h-screen">
+      <MaxWidthWrapper className="flex flex-col lg:flex-row gap-10 max-w-screen-4xl">
+        <div className="w-full lg:w-1/5 lg:sticky lg:top-20 lg:h-[calc(100vh-5rem)] overflow-y-auto">
+          <div className="bg-slate-800 mt-10  lg:my-10 px-5 rounded-2xl ">
+            <ExploreSide filters={filters} setFilters={setFilters} />
+          </div>
         </div>
-      </div>
-      <MaxWidthWrapper className="w-full lg:w-4/5">
-        <ExploreTemp filters={filters} />
+        <div className="w-full lg:w-4/5 bg-slate-900">
+          <ExploreTemp filters={filters} />
+        </div>
       </MaxWidthWrapper>
     </div>
   );

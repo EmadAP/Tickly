@@ -38,7 +38,7 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
     <Accordion
       type="single"
       collapsible
-      className="w-full py-5 "
+      className="w-full"
       defaultValue="item-1"
     >
       {/* Category filter */}

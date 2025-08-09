@@ -71,6 +71,21 @@ export interface Section {
   updatedAt?: string;
 }
 
+export interface Ticket {
+  _id: string;
+  ticketNumber: string;       // Unique ticket code or serial
+  seatNumber: string | number; // Assigned seat in the section
+  event: string | Event;       // Event reference
+  section: string | Section;   // Section reference
+  user: string;                // User ID or email
+  pricePaid: number;           // Final price after discounts
+  purchaseDate: string;        // ISO date string
+  status: "active" | "cancelled" | "used"; // Ticket status
+  qrCode?: string;             // Optional: for check-in systems
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 export interface ExploreFilters {
   category: string | null;
   date: string | null;

@@ -2,7 +2,7 @@
 
 import { TESTIMONIALS } from "@/lib/mock";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   HoverCard,
   HoverCardContent,
@@ -11,6 +11,12 @@ import {
 
 function TestimonialReviews() {
   const [columns, setColumns] = useState(3);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [isUserHovering, setIsUserHovering] = useState(false);
+  const [lastHoveredIndex, setLastHoveredIndex] = useState<number | null>(null);
+
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     function updateColumns() {
@@ -31,16 +37,59 @@ function TestimonialReviews() {
 
   const maxRows = 3;
   const maxItems = columns * maxRows;
-
   const visibleTestimonials = TESTIMONIALS.slice(0, maxItems);
 
+  useEffect(() => {
+    if (!isUserHovering && visibleTestimonials.length > 0) {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+
+      intervalRef.current = setInterval(() => {
+        let next;
+        do {
+          next = Math.floor(Math.random() * visibleTestimonials.length);
+        } while (next === activeIndex);
+        setActiveIndex(next);
+      }, 6000); 
+    }
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [isUserHovering, visibleTestimonials.length, activeIndex]);
+
+  
+  const handleMouseLeave = () => {
+    setIsUserHovering(false);
+
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setActiveIndex((prev) => lastHoveredIndex ?? prev);
+    }, 6000); 
+  };
+
   return (
-    <div className="grid gap-y-20 overflow-hidden w-full grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8">
-      {visibleTestimonials.map((testimonial, i) => (
-        <div key={i} className="flex items-center justify-center">
-          <HoverCard>
-            <HoverCardTrigger>
-              <div className="relative shrink-0 h-16 w-16 rounded-full overflow-hidden">
+    <div className="pl-20 grid gap-y-15 overflow-hidden w-full grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8">
+      {visibleTestimonials.map((testimonial, i) => {
+        const isOpen = i === activeIndex;
+
+        return (
+          <HoverCard
+            key={i}
+            open={isOpen}
+            onOpenChange={(open) => {
+              if (open) {
+                setIsUserHovering(true);
+                setActiveIndex(i);
+                setLastHoveredIndex(i);
+
+                if (timeoutRef.current) clearTimeout(timeoutRef.current);
+              } else {
+                handleMouseLeave();
+              }
+            }}
+          >
+            <HoverCardTrigger asChild>
+              <div className="relative shrink-0 h-16 w-16 rounded-full overflow-hidden cursor-pointer">
                 <Image
                   src={testimonial.image}
                   alt="image"
@@ -49,12 +98,11 @@ function TestimonialReviews() {
                 />
               </div>
             </HoverCardTrigger>
-            <HoverCardContent className="bg-slate-700 border-slate-700 text-white lg:w-lg md:w-md">
+
+            <HoverCardContent className="bg-slate-700 border-slate-700 text-white lg:w-lg md:w-md z-10">
               <div className="flex flex-col gap-2">
                 <div className="flex flex-row justify-between">
-                  <h3 className="text-lg text-orange-500">
-                    {testimonial.name}
-                  </h3>
+                  <h3 className="text-lg text-orange-500">{testimonial.name}</h3>
                   <p className="text-sm font-light">{testimonial.time}</p>
                 </div>
                 <div className="border-b-1 border-orange-500" />
@@ -62,8 +110,8 @@ function TestimonialReviews() {
               </div>
             </HoverCardContent>
           </HoverCard>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

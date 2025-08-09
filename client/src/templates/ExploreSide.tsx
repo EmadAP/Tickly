@@ -144,10 +144,17 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
           Price
         </AccordionTrigger>
         <AccordionContent className="flex flex-col gap-4 text-balance">
-          <div className="p-4 ">
+          <div className="p-4 space-y-2">
+            {/* Display current range */}
+            <div className="flex justify-between text-sm text-gray-300 font-medium">
+              <span>Min: ${filters.priceRange[0]}</span>
+              <span>Max: ${filters.priceRange[1]}</span>
+            </div>
+
+            {/* Slider */}
             <Slider
               defaultValue={filters.priceRange}
-              max={500}
+              max={2500}
               step={5}
               onValueChange={(val) =>
                 setFilters((f) => ({
@@ -193,9 +200,9 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
         <AccordionTrigger
           onClick={() => setFilters(defaultFilters)}
           hideIcon
-          className=" text-lg flex items-center text-slate-900 px-2 bg-orange-500 py-2 my-2"
+          className=" text-lg flex  items-center text-slate-900 px-2 bg-orange-500 py-2 my-2 "
         >
-          Clear filters <Delete size={15} />
+          Clear filters <Delete size={15}  className=""/>
         </AccordionTrigger>
         <AccordionContent className="flex flex-col gap-4 text-balance"></AccordionContent>
       </AccordionItem>

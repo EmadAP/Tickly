@@ -18,7 +18,9 @@ function MainTestimonial() {
           say
         </h2>
       </MaxWidthWrapper>
-      <TestimonialReviews />
+      <MaxWidthWrapper>
+        <TestimonialReviews />
+      </MaxWidthWrapper>
       <MaxWidthWrapper>
         <div>
           <ul className="space-y-4 text-left font-medium flex flex-col items-center  pt-6">

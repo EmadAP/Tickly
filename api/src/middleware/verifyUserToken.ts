@@ -8,7 +8,7 @@ export interface JwtPayload {
   email: string;
 }
 
-export const verifyToken = (
+export const verifyUserToken = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -19,13 +19,13 @@ export const verifyToken = (
     return;
   }
 
-  jwt.verify(token, SECRET, {}, (err, admin) => {
+  jwt.verify(token, SECRET, {}, (err, decoded) => {
     if (err) {
       res.status(403).json({ message: "Token is invalid" });
       return;
     }
 
-    (req as any).admin = admin;
+    (req as any).user = decoded as JwtPayload;
     next();
   });
 };

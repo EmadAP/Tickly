@@ -41,7 +41,7 @@ const DetailBottom: React.FC<DetailBottomProps> = ({ event }) => {
   console.log("Filtered category events:", sameCategoryEvents);
 
   return (
-    <div className="py-10 border-t-2 border-orange-500 space-y-12 text-white">
+    <div className="py-10 bg-slate-800 px-5 rounded-2xl space-y-12 text-white">
       {sameCountryEvents.length > 0 && (
         <MainCarouselCards
           key={`country-${event.country}`}

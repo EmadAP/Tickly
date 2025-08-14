@@ -4,12 +4,14 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
 
-import userEventRoutes from './routes/userEvent'
+import userEventRoutes from "./routes/userEvent";
 import userAuthRoutes from "./routes/userAuth";
 import userSectionRoutes from "./routes/userSection";
 import adminAuthRoutes from "./routes/adminAuth";
 import adminEventRoutes from "./routes/adminEvent";
 import adminSectionRoute from "./routes/adminSection";
+import adminTicketRoute from "./routes/adminTicket";
+import userTicketRoutes from "./routes/userTicket";
 import { MONGO_URI, PORT } from "./util/config";
 
 const app = express();
@@ -29,9 +31,11 @@ app.use("/uploads", express.static(path.resolve("uploads")));
 app.use("/api", userAuthRoutes);
 app.use("/api", userEventRoutes);
 app.use("/api", userSectionRoutes);
+app.use("/api", userTicketRoutes);
 app.use("/admin", adminAuthRoutes);
 app.use("/admin", adminEventRoutes);
 app.use("/admin", adminSectionRoute);
+app.use("/admin", adminTicketRoute);
 
 // Connect DB and Start Server
 mongoose

@@ -54,3 +54,18 @@ export const GetAllSectionsFc = async () => {
   const res = await api.get("/api/sections");
   return res.data;
 };
+
+export const CreatePendingTicketsFc = async (
+  items: {
+    eventId: string;
+    sectionId: string;
+    quantity: number;
+  }[]
+) => {
+  const res = await api.post(
+    "/api/tickets/checkout",
+    { items },
+    { withCredentials: true }
+  );
+  return res.data;
+};

@@ -90,7 +90,7 @@ export const login = async (
 
 // Get Profile
 export const getProfile = async (req: Request, res: Response) => {
-  const { id } = (req as any).admin as JwtPayload;
+  const { id } = (req as any).user as JwtPayload;
 
   try {
     const user = await User.findById(id).select("username email _id");

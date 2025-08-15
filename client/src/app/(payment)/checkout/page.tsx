@@ -12,13 +12,15 @@ function Page() {
         <div className="w-full">
           <CheckoutTop />
         </div>
-        <div className="flex flex-row  gap-5 w-full">
+        <div className="flex flex-row gap-5 w-full">
           {/* left side */}
           <div className="flex-2/3">
             <CheckoutLeft />
           </div>
           {/* right side */}
-          <div className="flex-1/3"><CheckoutRight /></div>
+          <div className="flex-1/3">
+            <CheckoutRight />
+          </div>
         </div>
       </MaxWidthWrapper>
     </div>

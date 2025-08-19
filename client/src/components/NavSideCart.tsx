@@ -1,4 +1,4 @@
-"use clint";
+"use client";
 
 import React, { useState } from "react";
 import NavCartCard from "./NavCartCard";
@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@/lib/context/UserContext";
 import Popup from "./Popup";
 import NavAuth from "./NavAuth";
+import { useQueryClient } from "@tanstack/react-query";
+import { CreatePendingTickets } from "@/lib/api/main/mutations";
 
 interface NavSideCartProps {
   isOpen: boolean;
@@ -17,14 +19,37 @@ function NavSideCart({ isOpen }: NavSideCartProps) {
   const router = useRouter();
   const { cart, totalPrice, removeFromCart } = useCart();
   const { user } = useUser();
+  const queryClient = useQueryClient();
   const [showAuthPopup, setShowAuthPopup] = useState(false);
+
+  const {
+    mutate: createTickets,
+    isError,
+    error,
+    isSuccess,
+    isPending,
+  } = CreatePendingTickets();
 
   const handleCheckoutClick = () => {
     if (!user) {
       setShowAuthPopup(true);
       return;
     }
-    router.push("/checkout");
+
+    if (cart.length === 0) return;
+
+    const items = cart.map((item) => ({
+      eventId: item.eventId,
+      sectionId: item.sectionId,
+      quantity: item.total,
+    }));
+
+    createTickets(items, {
+      onSuccess: () => {
+        queryClient.setQueryData(["hasCreatedTickets"], true);
+        router.push("/checkout");
+      },
+    });
   };
 
   return (
@@ -69,9 +94,17 @@ function NavSideCart({ isOpen }: NavSideCartProps) {
               <button
                 onClick={handleCheckoutClick}
                 className="mt-3 w-full bg-orange-500 py-2 rounded hover:bg-orange-400"
+                disabled={isPending}
               >
-                Checkout
+                {isPending ? "Reserving..." : "Checkout"}
               </button>
+
+              {isError && (
+                <p className="text-red-500 mt-2 text-sm">
+                  {(error as any)?.response?.data?.message ||
+                    "Reservation failed"}
+                </p>
+              )}
             </div>
           )}
         </div>

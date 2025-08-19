@@ -20,7 +20,7 @@ export const getAllTicketsAdmin = async (req: Request, res: Response) => {
 
     const tickets = await Ticket.find(filter)
       .populate("user", "username email")
-      .populate("event", "title")
+      .populate("event", "title category country title")
       .populate("section", "name")
       .sort({ createdAt: -1 });
 

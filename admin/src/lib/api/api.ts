@@ -175,3 +175,9 @@ export const GetAllAdminFc = async () => {
 export const DeleteAdminFc = async (id: string) => {
   await admin.delete(`/admin/admin/${id}`);
 };
+
+//Get all tickets
+export const GetAllticketsFc = async () => {
+  const res = await admin.get("/admin/tickets");
+  return res.data;
+};

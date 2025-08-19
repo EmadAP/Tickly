@@ -68,7 +68,7 @@ function MainLeft() {
           <button
             key={label}
             onClick={() => setActiveFilter(label)}
-            className={`p-3 rounded-2xl flex flex-wrap items-center justify-between cursor-pointer ${
+            className={`font-comic p-3 rounded-2xl flex flex-wrap items-center justify-between cursor-pointer ${
               activeFilter === label
                 ? "bg-slate-700 text-orange-500"
                 : "bg-slate-900 hover:bg-slate-700"

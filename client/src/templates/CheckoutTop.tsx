@@ -1,18 +1,24 @@
+"use client";
+
 import { CheckoutTopHistory } from "@/components/CheckoutTopHistory";
+import { useUser } from "@/lib/context/UserContext";
 import React from "react";
 
 function CheckoutTop() {
+  const { user } = useUser();
+
   return (
     <div className=" bg-slate-800 rounded-2xl p-10 pt-15">
       <div className=" flex flex-col md:flex-row  gap-5">
         <div className="w-full md:w-1/3 flex flex-col justify-between items-start ">
           <div className="w-full px-2 ">
-            <div className="text-3xl font-semibold text-orange-500">username</div>
-          </div>
-          <div className="w-full bg-slate-900 px-2 py-4 rounded-2xl">
-            <div className="">
-              <div>email</div>
+            <div className="text-3xl font-semibold border-b-2 border-b-slate-900 pb-4 text-orange-500">
+              {user?.username}
             </div>
+          </div>
+          <div className="w-full pb-4 pl-2 flex flex-row">
+            <div className="">Email : </div>
+            <div>{user?.email}</div>
           </div>
         </div>
         <div className="w-full md:w-2/3 bg-slate-900 px-2 py-4 rounded-2xl">

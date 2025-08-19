@@ -29,6 +29,11 @@ const items = [
     icon: Tags,
   },
   {
+    title: "Ticket Table",
+    url: "/ticketTable",
+    icon: Ticket,
+  },
+  {
     title: "Users Table",
     url: "usersTable",
     icon: Users,

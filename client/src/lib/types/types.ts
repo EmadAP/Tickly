@@ -80,7 +80,7 @@ export interface Ticket {
   user: string;                // User ID or email
   pricePaid: number;           // Final price after discounts
   purchaseDate: string;        // ISO date string
-  status: "active" | "cancelled" | "used"; // Ticket status
+  status: "active"| 'pending' | "cancelled" | "used"; // Ticket status
   qrCode?: string;             // Optional: for check-in systems
   createdAt?: string;
   updatedAt?: string;

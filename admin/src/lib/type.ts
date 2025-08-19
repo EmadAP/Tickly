@@ -55,6 +55,22 @@ export interface Admin {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface Ticket {
+  _id: string;
+  ticketNumber: string; // Unique ticket code or serial
+  seatNumber: string | number; // Assigned seat in the section
+  event: string | Event; // Event reference
+  section: string | Section; // Section reference
+  user: string | { username: string; email: string };
+  pricePaid: number; // Final price after discounts
+  purchaseDate: string; // ISO date string
+  status: "active" | "pending" | "cancelled" | "used"; // Ticket status
+  qrCode?: string; // Optional: for check-in systems
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 export interface AdminContextType {
   admin: Admin | null;
   isLoading: boolean;

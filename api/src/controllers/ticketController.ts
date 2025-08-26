@@ -79,3 +79,25 @@ export const createPendingTickets = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Server error creating tickets" });
   }
 };
+
+export const confirmPayment = async (req: Request, res: Response) => {
+  try {
+    const { ticketIds } = req.body; 
+    if (!ticketIds || !Array.isArray(ticketIds)) {
+      res.status(400).json({ message: "No ticket IDs provided" });
+      return;
+    }
+
+    const result = await Ticket.updateMany(
+      { _id: { $in: ticketIds }, status: "pending" },
+      { $set: { status: "active", purchaseDate: new Date() } }
+    );
+
+    res.status(200).json({
+      message: `Activated ${result.modifiedCount} tickets`,
+    });
+  } catch (err) {
+    console.error("Error confirming payment:", err);
+    res.status(500).json({ message: "Server error confirming payment" });
+  }
+};

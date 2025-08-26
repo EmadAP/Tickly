@@ -13,6 +13,7 @@ import adminSectionRoute from "./routes/adminSection";
 import adminTicketRoute from "./routes/adminTicket";
 import userTicketRoutes from "./routes/userTicket";
 import { MONGO_URI, PORT } from "./util/config";
+import './util/cron/ticketCleaner'  
 
 const app = express();
 

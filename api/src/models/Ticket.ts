@@ -9,7 +9,6 @@ export interface ITicket extends Document {
   pricePaid: number; // Price at purchase time
   status: "pending" | "active" | "canceled" | "refunded" | "used";
   purchaseDate: Date | null; // Null until payment is complete
-  expiresAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -55,13 +54,6 @@ const TicketSchema = new Schema<ITicket>(
     purchaseDate: {
       type: Date,
       default: null,
-    },
-    expiresAt: {
-      type: Date,
-      index: { expireAfterSeconds: 0 },
-      default: function () {
-        return new Date(Date.now() + 15 * 60 * 1000);
-      },
     },
   },
   { timestamps: true }

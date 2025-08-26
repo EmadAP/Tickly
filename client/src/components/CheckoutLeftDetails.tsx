@@ -9,7 +9,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
-import { GetEventById, useGetSectionById } from "@/lib/api/main/queries";
 import { useCart } from "@/lib/context/CartContext";
 
 export function CheckoutLeftDetails() {
@@ -24,14 +23,14 @@ export function CheckoutLeftDetails() {
       className="w-full relative pl-10"
     >
       <div className="absolute left-3 mt-2 z-10 flex flex-col justify-around h-full gap-4">
-        <CarouselPrevious className="static w-auto h-auto p-2 border-0 bg-white text-slate-900  hover:bg-orange-500 cursor-pointer" />
-        <CarouselNext className="static w-auto h-auto p-2 border-0 bg-white text-slate-900  hover:bg-orange-500 cursor-pointer" />
+        <CarouselPrevious className="static w-auto h-auto p-2 border-0 bg-white text-slate-900  hover:bg-orange-300 cursor-pointer" />
+        <CarouselNext className="static w-auto h-auto p-2 border-0 bg-white text-slate-900  hover:bg-orange-300 cursor-pointer" />
       </div>
       <CarouselContent className="-mt-1 h-[450px] ">
         {cart.map((item) => (
           <CarouselItem key={item.sectionId} className="pt-1  basis-1/5">
             <div className="p-1">
-              <Card className="p-0 bg-orange-500 border-dashed border-slate-800">
+              <Card className="p-0 bg-orange-300 border-dashed border-slate-800">
                 <CardContent className="relative flex items-center justify-center ">
                   <div className="absolute inset-0 w-full h-[150px] overflow-hidden">
                     <Image
@@ -63,7 +62,7 @@ export function CheckoutLeftDetails() {
                           </div>
                         </div>
                       </div>
-                      <div className="absolute -left-6 top-0 font-semibold bg-red-600 rounded-xl py-1 px-2">
+                      <div className="absolute -left-6 top-0 font-semibold bg-red-500 rounded-xl py-1 px-2">
                         {item.section.discountPercent} %
                       </div>
                     </div>
@@ -75,7 +74,9 @@ export function CheckoutLeftDetails() {
                         )}
                       </div>
                       <div>{item.event.eventTime}</div>
-                      <div className="border-t border-white pt-1 text-sm">price : {item.section.price} $</div>
+                      <div className="border-t border-white pt-1 text-sm">
+                        price : {item.section.price} $
+                      </div>
                     </div>
                   </div>
                 </CardContent>

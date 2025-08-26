@@ -1,4 +1,3 @@
-// routes/userTicketRoutes.ts
 import { Router } from "express";
 import { verifyUserToken } from "../middleware/verifyUserToken";
 import { createPendingTickets } from "../controllers/ticketController";

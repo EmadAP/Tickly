@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import * as React from "react";
 
 import {
@@ -20,15 +20,15 @@ export function CheckoutLeftDetails() {
         align: "start",
       }}
       orientation="vertical"
-      className="w-full relative pl-10"
+      className="w-full relative md:pl-8 "
     >
-      <div className="absolute left-3 mt-2 z-10 flex flex-col justify-around h-full gap-4">
+      <div className="hidden absolute left-3 mt-2 md:flex flex-col justify-around z-10  h-full gap-4">
         <CarouselPrevious className="static w-auto h-auto p-2 border-0 bg-white text-slate-900  hover:bg-orange-300 cursor-pointer" />
         <CarouselNext className="static w-auto h-auto p-2 border-0 bg-white text-slate-900  hover:bg-orange-300 cursor-pointer" />
       </div>
       <CarouselContent className="h-[450px]">
         {cart.map((item) => (
-          <CarouselItem key={item.sectionId} className=" basis-1/5">
+          <CarouselItem key={item.sectionId} className="px-1 pt-5 basis-1/5">
             <Ticket
               eventTitle={item.event.title}
               section={item.section.name}
@@ -40,12 +40,14 @@ export function CheckoutLeftDetails() {
               })}
               time={item.event.eventTime}
               price={item.section.price}
-              // seat={item.seatNumber}
-              // user={item.user?.username}
+              discount={item.section.discountPercent}
+              total={item.total}
             />
           </CarouselItem>
         ))}
       </CarouselContent>
+      <CarouselPrevious className="md:hidden p-2 border-0 bg-white text-slate-900  hover:bg-orange-300 cursor-pointer" />
+      <CarouselNext className="md:hidden p-2 border-0 bg-white text-slate-900  hover:bg-orange-300 cursor-pointer" />
     </Carousel>
   );
 }

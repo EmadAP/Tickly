@@ -7,13 +7,13 @@ import React from "react";
 
 function Page() {
   return (
-    <div className="text-white bg-slate-900 h-screen">
+    <div className="text-white bg-slate-900 ">
       <MaxWidthWrapper className="flex flex-col items-center gap-5 py-10">
         {/* top side */}
         <div className="w-full">
           <CheckoutTop />
         </div>
-        <div className="flex flex-row gap-5 w-full">
+        <div className="flex flex-col lg:flex-row gap-5 w-full">
           {/* left side */}
           <div className="flex-2/3">
             <CheckoutLeft />

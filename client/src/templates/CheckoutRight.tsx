@@ -1,15 +1,38 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { useCart } from "@/lib/context/CartContext";
 import React from "react";
 
 function CheckoutRight() {
+  const { totalTickets, totalRawPrice, totalDiscount, totalPrice } = useCart();
+
   return (
-    <div className="bg-slate-800 rounded-2xl mt-4 p-5">
-      <div className="w-full flex flex-col space-y-5">
-        <div>total ticket</div>
-        <div>total price without discount</div>
-        <div>total discount</div>
-        <div>total price with discount</div>
-        <div></div>
+    <div className="flex flex-col gap-5">
+      <div className="bg-slate-800 rounded-2xl mt-4 p-5 text-white space-y-4">
+        <div className="flex justify-between">
+          <span>Total tickets:</span>
+          <span>{totalTickets}</span>
+        </div>
+
+        <div className="flex justify-between">
+          <span>Total price (no discount):</span>
+          <span>{totalRawPrice.toFixed(2)} $</span>
+        </div>
+
+        <div className="flex justify-between text-green-400">
+          <span>Total discount:</span>
+          <span>-{totalDiscount.toFixed(2)} $</span>
+        </div>
+
+        <div className="flex justify-between text-lg font-bold text-orange-400 border-t border-slate-600 pt-3">
+          <span>Total price (with discount):</span>
+          <span>{totalPrice.toFixed(2)} $</span>
+        </div>
       </div>
+      <Button className="bg-green-500 text-white hover:bg-green-400 w-fit text-lg font-semibold cursor-pointer ">
+        Checkout
+      </Button>
     </div>
   );
 }

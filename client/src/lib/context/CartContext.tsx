@@ -1,5 +1,5 @@
-// context/CartContext.tsx
 "use client";
+
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Event, Section } from "@/lib/types/types";
 
@@ -18,6 +18,9 @@ export interface CartContextType {
   updateTotal: (sectionId: string, total: number) => void;
   clearCart: () => void;
   totalPrice: number;
+  totalTickets: number;
+  totalRawPrice: number;
+  totalDiscount: number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -61,13 +64,31 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const clearCart = () => setCart([]);
 
-  const totalPrice = cart.reduce((sum, item) => {
-    const price = item.section.onSell
-      ? item.section.price -
-        (item.section.price * (item.section.discountPercent || 0)) / 100
-      : item.section.price;
-    return sum + price * item.total;
+  // const totalPrice = cart.reduce((sum, item) => {
+  //   const price = item.section.onSell
+  //     ? item.section.price -
+  //       (item.section.price * (item.section.discountPercent || 0)) / 100
+  //     : item.section.price;
+  //   return sum + price * item.total;
+  // }, 0);
+
+  const totalTickets = cart.reduce((sum, item) => sum + item.total, 0);
+
+  const totalRawPrice = cart.reduce(
+    (sum, item) => sum + item.section.price * item.total,
+    0
+  );
+
+  const totalDiscount = cart.reduce((sum, item) => {
+    if (item.section.onSell && item.section.discountPercent) {
+      const discountPerTicket =
+        (item.section.price * item.section.discountPercent) / 100;
+      return sum + discountPerTicket * item.total;
+    }
+    return sum;
   }, 0);
+
+  const totalPrice = totalRawPrice - totalDiscount;
 
   return (
     <CartContext.Provider
@@ -78,6 +99,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
         updateTotal,
         clearCart,
         totalPrice,
+        totalTickets,
+        totalRawPrice,
+        totalDiscount,
       }}
     >
       {children}

@@ -51,9 +51,13 @@ function Navbar() {
           <div className="flex items-center lg:gap-5 gap-2">
             {/* large screens */}
             <div className="hidden lg:flex">
-              <Button className="bg-slate-800 text-2xl hover:bg-slate-700 outline-none cursor-pointer">
+              <Link
+                href="/explore"
+                className="h-9 px-3 py-2 items-center rounded-md flex flex-row justify-between w-full bg-slate-800 text-2xl hover:bg-slate-700 outline-none cursor-pointer"
+              >
                 <p className="text-orange-500 font-semibold">Events</p>
-              </Button>
+                
+              </Link>
             </div>
 
             <div className="hidden lg:flex">

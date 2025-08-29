@@ -25,14 +25,16 @@ function CheckoutRight() {
           <span>-{totalDiscount.toFixed(2)} $</span>
         </div>
 
-        <div className="flex justify-between text-lg font-bold text-orange-400 border-t border-slate-600 pt-3">
+        <div className="flex justify-between text-lg font-bold border-t border-slate-600 pt-3">
           <span>Total price (with discount):</span>
           <span>{totalPrice.toFixed(2)} $</span>
         </div>
       </div>
-      <Button className="bg-green-500 text-white hover:bg-green-400 w-fit text-lg font-semibold cursor-pointer ">
-        Checkout
-      </Button>
+      <div className="flex justify-end">
+        <Button className="bg-green-500 text-white hover:bg-green-400 w-fit text-lg font-semibold cursor-pointer ">
+          Checkout
+        </Button>
+      </div>
     </div>
   );
 }

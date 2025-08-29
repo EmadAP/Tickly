@@ -27,7 +27,7 @@ export const Ticket: React.FC<TicketProps> = ({
   return (
     <div className="relative bg-white rounded-3xl shadow-2xl overflow-visible md:p-2 px-2 py-6 m-4 text-slate-900">
       {/* Background watermark */}
-      <div className="absolute inset-0 flex items-center justify-center rotate-[-25deg] md:rotate-[-15deg] opacity-10 pointer-events-none">
+      <div className="absolute inset-0 flex items-center justify-center rotate-[-25deg] md:rotate-[-15deg] opacity-10 pointer-events-none select-none">
         <span className="text-8xl md:text-9xl font-extrabold text-slate-700 mr-4">
           Tickly
         </span>

@@ -1,14 +1,34 @@
-import { CheckoutBottomDetails } from "@/components/CheckoutBottomDetails";
+"use client";
+
+import { GetAllEvents } from "@/lib/api/main/queries";
 import React from "react";
+import MainCarouselSkeleton from "@/components/skeletons/MainCarouselSkeleton";
+import MainCarouselCards from "@/components/MainCarouselCards";
 
 const CheckoutBottom = () => {
-  return (
-    <div className=" px-5 mt-10 pb-5 pt-20 bg-slate-800 rounded-2xl">
-      <div className="flex flex-col gap-5 w-full">
-        <div className="w-full">
-          <CheckoutBottomDetails />
-        </div>
+  const { data: events, isLoading, isError, error } = GetAllEvents();
+
+  if (isLoading || !events) {
+    return (
+      <div className="py-20 border-t-2 border-orange-500 lg:border-b-0 space-y-10">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <MainCarouselSkeleton key={i} />
+        ))}
       </div>
+    );
+  }
+
+  if (isError) {
+    return <div>Error: {error?.message}</div>;
+  }
+
+  return (
+    <div className="px-5 mt-10 pt-10 bg-slate-800 rounded-2xl">
+      <MainCarouselCards
+        title="All Events"
+        link="/explore"
+        events={events} // ✅ just pass all events here
+      />
     </div>
   );
 };

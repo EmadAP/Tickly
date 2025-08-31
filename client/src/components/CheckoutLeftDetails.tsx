@@ -8,8 +8,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useCart } from "@/lib/context/CartContext";
 import { Ticket } from "./CheckoutLeftCard";
+import { useCart } from "@/lib/hooks/useCart";
 
 export function CheckoutLeftDetails() {
   const { cart } = useCart();
@@ -28,7 +28,7 @@ export function CheckoutLeftDetails() {
       </div>
       <CarouselContent className="h-[450px]">
         {cart.map((item) => (
-          <CarouselItem key={item.sectionId} className="px-1 pt-5 basis-1/5">
+          <CarouselItem key={item.section._id} className="px-1 pt-5 basis-1/5">
             <Ticket
               eventTitle={item.event.title}
               section={item.section.name}

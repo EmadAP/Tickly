@@ -73,15 +73,15 @@ export interface Section {
 
 export interface Ticket {
   _id: string;
-  ticketNumber: string;       // Unique ticket code or serial
+  ticketNumber: string; // Unique ticket code or serial
   seatNumber: string | number; // Assigned seat in the section
-  event: string | Event;       // Event reference
-  section: string | Section;   // Section reference
-  user: string;                // User ID or email
-  pricePaid: number;           // Final price after discounts
-  purchaseDate: string;        // ISO date string
-  status: "active"| 'pending' | "cancelled" | "used"; // Ticket status
-  qrCode?: string;             // Optional: for check-in systems
+  event: string | Event; // Event reference
+  section: string | Section; // Section reference
+  user: string; // User ID or email
+  pricePaid: number; // Final price after discounts
+  purchaseDate: string; // ISO date string
+  status: "active" | "pending" | "cancelled" | "used"; // Ticket status
+  qrCode?: string; // Optional: for check-in systems
   createdAt?: string;
   updatedAt?: string;
 }
@@ -93,4 +93,28 @@ export interface ExploreFilters {
   priceRange: [number, number];
   onSale: boolean;
   available: boolean;
+}
+
+export interface CartItem {
+  eventId: string;
+  sectionId: string;
+  total: number;
+  event: Event;
+  section: Section;
+}
+
+export interface CartContextType {
+  cart: CartItem[];
+  addToCart: (
+    eventId: string,
+    sectionId: string,
+    total?: number
+  ) => Promise<void>;
+  removeFromCart: (sectionId: string) => Promise<void>;
+  updateTotal: (sectionId: string, total: number) => Promise<void>;
+  clearCart: () => Promise<void>;
+  totalPrice: number;
+  totalTickets: number;
+  totalRawPrice: number;
+  totalDiscount: number;
 }

@@ -31,7 +31,7 @@ const DetailRight: React.FC<DetailRightProps> = ({
         <SectionCardDetail event={event} section={selectedSection} />
         <div className="flex gap-3 mt-4">
           <button
-            className="bg-gray-500 px-4 py-2 rounded-lg"
+            className="bg-gray-500 px-4 py-2 rounded-lg cursor-pointer"
             onClick={onReset}
           >
             Show All Sections

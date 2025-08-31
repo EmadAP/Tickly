@@ -25,7 +25,7 @@ const CheckoutBottom = () => {
   return (
     <div className="px-5 mt-10 pt-10 bg-slate-800 rounded-2xl">
       <MainCarouselCards
-        title="All Events"
+        title="Recommended"
         link="/explore"
         events={events} // ✅ just pass all events here
       />

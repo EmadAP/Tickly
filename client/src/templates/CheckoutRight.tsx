@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useCart } from "@/lib/context/CartContext";
+import { useCart } from "@/lib/hooks/useCart";
 import React from "react";
 
 function CheckoutRight() {

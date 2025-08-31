@@ -28,7 +28,6 @@ const DetailLeft: React.FC<DetailLeftProps> = ({
   onHover,
   onClick,
 }) => {
-  // Map selector
   const categoryMap: Record<string, SectionLayout[]> = {
     Concert: concertMap,
     Sports: sportsMap,
@@ -75,12 +74,12 @@ const DetailLeft: React.FC<DetailLeftProps> = ({
         return (
           <div
             key={sectionLayout.name}
-            className={`absolute p-2 rounded-md cursor-pointer text-white text-xs flex items-center justify-center
+            className={`absolute p-2 rounded-md text-white text-xs flex items-center justify-center
               ${
                 isSelected
                   ? "bg-orange-500"
                   : isHovered
-                  ? "bg-orange-400"
+                  ? "bg-orange-400 cursor-pointer"
                   : "bg-gray-600"
               }
               ${isSoldOut ? "opacity-50 cursor-not-allowed" : ""}

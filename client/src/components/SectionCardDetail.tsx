@@ -14,7 +14,7 @@ import {
 } from "date-fns";
 import { Event, Section } from "@/lib/types/types";
 import { Button } from "./ui/button";
-import { useCart } from "@/lib/context/CartContext";
+import { useCart } from "@/lib/hooks/useCart";
 
 const LocationViewer = dynamic(() => import("@/components/LocationViewer"), {
   ssr: false,
@@ -119,7 +119,7 @@ const SectionCardDetail: React.FC<SectionCardDetailProps> = ({
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center gap-3">
                       <button
-                        className="px-3 py-1 bg-gray-600 hover:bg-gray-500 rounded text-lg"
+                        className="px-3 py-1 bg-gray-600 hover:bg-gray-500 rounded text-lg cursor-pointer"
                         onClick={() => handleDecrease(sec._id)}
                         disabled={selectedQty <= 1}
                       >
@@ -130,7 +130,7 @@ const SectionCardDetail: React.FC<SectionCardDetailProps> = ({
                       </span>{" "}
                       {/* selected quantity */}
                       <button
-                        className="px-3 py-1 bg-gray-600 hover:bg-gray-500 rounded text-lg"
+                        className="px-3 py-1 bg-gray-600 hover:bg-gray-500 rounded text-lg cursor-pointer"
                         onClick={() => handleIncrease(sec._id, available)}
                         disabled={selectedQty >= available}
                       >
@@ -144,17 +144,7 @@ const SectionCardDetail: React.FC<SectionCardDetailProps> = ({
                     )}
                   </div>
                   <Button
-                    onClick={() =>
-                      addToCart(
-                        {
-                          eventId: event._id,
-                          sectionId: sec._id,
-                          event,
-                          section: sec,
-                        },
-                        selectedQty
-                      )
-                    }
+                    onClick={() => addToCart(event._id, sec._id, selectedQty)}
                     className="bg-orange-500 text-lg hover:bg-orange-400 cursor-pointer"
                   >
                     Add to Cart

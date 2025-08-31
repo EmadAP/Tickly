@@ -1,4 +1,4 @@
-import { CartItem } from "@/lib/context/CartContext";
+import { CartItem } from "@/lib/types/types";
 import { X } from "lucide-react";
 import React from "react";
 
@@ -19,7 +19,7 @@ function NavCartCard({ item, onRemove }: NavCartCardProps) {
         <p className=" text-lg font-bold text-orange-400">{item.event.title}</p>
         <button
           onClick={onRemove}
-          className="text-red-500 hover:bg-slate-800 px-1 py-1 rounded-full"
+          className="text-red-500 hover:bg-slate-800 px-1 py-1 rounded-full cursor-pointer"
         >
           <X />
         </button>

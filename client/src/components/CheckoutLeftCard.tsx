@@ -35,7 +35,7 @@ export const Ticket: React.FC<TicketProps> = ({
       </div>
 
       {/* Total Tickets */}
-      <div className="absolute -top-1 -left-5 rotate-[-25deg]  bg-orange-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md z-20 pointer-events-none">
+      <div className="absolute -top-1 -left-5 rotate-[-25deg]  bg-orange-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md z-20 pointer-events-none select-none">
         x{total} Tickets
       </div>
 

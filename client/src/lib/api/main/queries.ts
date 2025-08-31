@@ -1,8 +1,9 @@
-import { Event, Section } from "@/lib/types/types";
+import { CartItem, Event, Section } from "@/lib/types/types";
 import { useQuery } from "@tanstack/react-query";
 import {
   GetAllEventsFc,
   GetAllSectionsFc,
+  GetCartFc,
   GetEventByIdFc,
   GetSectionByIdFc,
   GetSectionsByEventIdFc,
@@ -42,5 +43,12 @@ export const useGetSectionById = (id?: string) => {
     queryKey: ["SectionById", id],
     queryFn: () => GetSectionByIdFc(id!),
     enabled: !!id,
+  });
+};
+
+export const useGetCart = () => {
+  return useQuery<{ user: string; items: CartItem[] }, Error>({
+    queryKey: ["Cart"],
+    queryFn: GetCartFc,
   });
 };

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import NavCartCard from "./NavCartCard";
-import { useCart } from "@/lib/context/CartContext";
+import { useCart } from "@/lib/hooks/useCart";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/lib/context/UserContext";
@@ -17,7 +17,7 @@ interface NavSideCartProps {
 
 function NavSideCart({ isOpen }: NavSideCartProps) {
   const router = useRouter();
-  const { cart, totalPrice, removeFromCart } = useCart();
+  const { cart, totalPrice, removeFromCart, isLoading } = useCart();
   const { user } = useUser();
   const queryClient = useQueryClient();
   const [showAuthPopup, setShowAuthPopup] = useState(false);
@@ -26,7 +26,6 @@ function NavSideCart({ isOpen }: NavSideCartProps) {
     mutate: createTickets,
     isError,
     error,
-    isSuccess,
     isPending,
   } = CreatePendingTickets();
 
@@ -39,8 +38,8 @@ function NavSideCart({ isOpen }: NavSideCartProps) {
     if (cart.length === 0) return;
 
     const items = cart.map((item) => ({
-      eventId: item.eventId,
-      sectionId: item.sectionId,
+      eventId: item.event._id,
+      sectionId: item.section._id,
       quantity: item.total,
     }));
 
@@ -62,13 +61,15 @@ function NavSideCart({ isOpen }: NavSideCartProps) {
         <div className="flex flex-col h-full px-2 py-4">
           {/* Cart items area */}
           <div className="flex-1 overflow-y-auto space-y-4">
-            {cart.length === 0 ? (
+            {isLoading ? (
+              <p className="text-center text-gray-400">Loading cart...</p>
+            ) : cart.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full p-4">
                 <div className="relative h-52 w-40 mb-4 mr-5">
                   <Image
                     src="/idk/emptyCart.png"
                     fill
-                    alt="empty card"
+                    alt="empty cart"
                     className="object-cover"
                   />
                 </div>
@@ -77,23 +78,23 @@ function NavSideCart({ isOpen }: NavSideCartProps) {
             ) : (
               cart.map((item) => (
                 <NavCartCard
-                  key={item.sectionId}
+                  key={item.section._id}
                   item={item}
-                  onRemove={() => removeFromCart(item.sectionId)}
+                  onRemove={() => removeFromCart(item.section._id)}
                 />
               ))
             )}
           </div>
 
           {/* Checkout footer */}
-          {cart.length > 0 && (
+          {!isLoading && cart.length > 0 && (
             <div className="border-t border-orange-500 pt-4 mt-4">
               <p className="text-lg font-semibold">
                 Total: ${totalPrice.toFixed(2)}
               </p>
               <button
                 onClick={handleCheckoutClick}
-                className="mt-3 w-full bg-orange-500 py-2 rounded hover:bg-orange-400"
+                className="mt-3 w-full bg-orange-500 py-2 rounded hover:bg-orange-400 cursor-pointer"
                 disabled={isPending}
               >
                 {isPending ? "Reserving..." : "Checkout"}
@@ -109,6 +110,7 @@ function NavSideCart({ isOpen }: NavSideCartProps) {
           )}
         </div>
       </div>
+
       {/* Auth Popup */}
       <Popup isOpen={showAuthPopup} onClose={() => setShowAuthPopup(false)}>
         <NavAuth onClose={() => setShowAuthPopup(false)} />

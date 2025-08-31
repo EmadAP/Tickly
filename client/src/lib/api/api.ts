@@ -69,3 +69,48 @@ export const CreatePendingTicketsFc = async (
   );
   return res.data;
 };
+
+// Fetch cart
+export const GetCartFc = async () => {
+  const res = await api.get("/api/cart", { withCredentials: true });
+  return res.data;
+};
+
+// Add item
+export const AddToCartFc = async (payload: {
+  eventId: string;
+  sectionId: string;
+  total: number;
+}) => {
+  const res = await api.post("/api/cart/add", payload, {
+    withCredentials: true,
+  });
+  return res.data;
+};
+
+// Update item
+export const UpdateCartItemFc = async (payload: {
+  sectionId: string;
+  total: number;
+}) => {
+  const res = await api.put(
+    `/api/cart/update/${payload.sectionId}`,
+    { total: payload.total },
+    { withCredentials: true }
+  );
+  return res.data;
+};
+
+// Remove item
+export const RemoveFromCartFc = async (sectionId: string) => {
+  const res = await api.delete(`/api/cart/remove/${sectionId}`, {
+    withCredentials: true,
+  });
+  return res.data;
+};
+
+// Clear cart
+export const ClearCartFc = async () => {
+  const res = await api.delete("/api/cart/clear", { withCredentials: true });
+  return res.data;
+};

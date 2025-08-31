@@ -12,8 +12,9 @@ import adminEventRoutes from "./routes/adminEvent";
 import adminSectionRoute from "./routes/adminSection";
 import adminTicketRoute from "./routes/adminTicket";
 import userTicketRoutes from "./routes/userTicket";
+import userCartRoutes from "./routes/userCart";
 import { MONGO_URI, PORT } from "./util/config";
-import './util/cron/ticketCleaner'  
+import "./util/cron/ticketCleaner";
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use("/api", userAuthRoutes);
 app.use("/api", userEventRoutes);
 app.use("/api", userSectionRoutes);
 app.use("/api", userTicketRoutes);
+app.use("/api", userCartRoutes);
 app.use("/admin", adminAuthRoutes);
 app.use("/admin", adminEventRoutes);
 app.use("/admin", adminSectionRoute);

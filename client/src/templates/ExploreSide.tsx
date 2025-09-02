@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Command,
@@ -38,7 +39,7 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
     <Accordion
       type="single"
       collapsible
-      className="w-full"
+      className="w-full "
       defaultValue="item-1"
     >
       {/* Category filter */}
@@ -197,6 +198,27 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-6">
+        <div className="py-4">
+          <Button
+            onClick={() => setFilters(defaultFilters)}
+            className="font-medium outline-none w-full text-lg flex items-center text-slate-900 px-2 bg-orange-500 hover:bg-orange-400 cursor-pointer py-4    "
+          >
+            Clear filters
+          </Button>
+        </div>
+        
+
+        {/* <AccordionTrigger className=" text-lg flex  items-center text-slate-900 px-2 bg-orange-500 py-2 my-2 ">
+          <Button
+            onClick={() => setFilters(defaultFilters)}
+            className=" w-full text-lg flex items-center text-slate-900 px-2 bg-orange-500 py-2 mt-4 mb-4  "
+          >
+            Clear filters
+          </Button>
+        </AccordionTrigger>
+        <AccordionContent className="flex flex-col gap-4 text-balance"></AccordionContent> */}
+
+        {/*         
         <AccordionTrigger
           onClick={() => setFilters(defaultFilters)}
           hideIcon
@@ -204,7 +226,10 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
         >
           Clear filters <Delete size={15}  className=""/>
         </AccordionTrigger>
-        <AccordionContent className="flex flex-col gap-4 text-balance"></AccordionContent>
+        <AccordionContent className="flex flex-col gap-4 text-balance"><Button
+          onClick={() => setFilters(defaultFilters)}
+          className=" w-full text-lg flex items-center text-slate-900 px-2 bg-orange-500 py-2 mt-4 mb-4  "
+        >Clear filters</Button></AccordionContent> */}
       </AccordionItem>
     </Accordion>
   );

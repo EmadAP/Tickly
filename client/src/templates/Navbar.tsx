@@ -3,7 +3,7 @@ import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import NavDropdown from "@/components/NavDropdown";
 import { Button } from "@/components/ui/button";
 import { LogIn, LogOut, ShoppingCart, Ticket, Tickets } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavHamBtn from "@/components/NavHamBtn";
 import Link from "next/link";
 import NavAuth from "@/components/NavAuth";
@@ -21,10 +21,17 @@ function Navbar() {
   const queryClient = useQueryClient();
   const { mutate: logout } = LogoutUser();
 
+  useEffect(() => {
+    if (!user) {
+      queryClient.removeQueries({ queryKey: ["cart"] });
+    }
+  }, [user, queryClient]);
+
   const handleLogout = () => {
     logout(undefined, {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["profile"] });
+        queryClient.removeQueries({ queryKey: ["Cart"] });
       },
     });
   };
@@ -56,7 +63,6 @@ function Navbar() {
                 className="h-9 px-3 py-2 items-center rounded-md flex flex-row justify-between w-full bg-slate-800 text-2xl hover:bg-slate-700 outline-none cursor-pointer"
               >
                 <p className="text-orange-500 font-semibold">Events</p>
-                
               </Link>
             </div>
 
@@ -99,6 +105,7 @@ function Navbar() {
         </div>
 
         <NavSideCart isOpen={isShopCartOpen} />
+
         {/* Mobile Sidebar Overlay */}
         <div
           className={`fixed border-l-2 border-l-orange-500 inset-y-0 z-20 right-0 top-20 w-96 bg-slate-800 text-white transform transition-transform duration-300 ease-in-out lg:hidden shadow-lg ${

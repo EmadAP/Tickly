@@ -33,9 +33,9 @@ function Page() {
 
   return (
     <div className="bg-slate-900 text-white relative min-h-screen">
-      <MaxWidthWrapper className="flex flex-col lg:flex-row gap-10 max-w-screen-4xl">
-        <div className="w-full lg:w-1/5 lg:sticky lg:top-20 lg:h-[calc(100vh-5rem)] overflow-y-auto">
-          <div className="bg-slate-800 mt-10  lg:my-10 px-5 rounded-2xl ">
+      <MaxWidthWrapper className="flex flex-col lg:flex-row gap-10 max-w-screen-4xl ">
+        <div className="w-full lg:w-1/5 lg:sticky lg:top-20 lg:h-[calc(100vh-5rem)] overflow-y-auto ">
+          <div className="bg-slate-800 mt-10 lg:my-10 px-5 rounded-2xl ">
             <ExploreSide filters={filters} setFilters={setFilters} />
           </div>
         </div>

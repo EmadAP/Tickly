@@ -61,7 +61,7 @@ function MainLeft() {
     })
     .slice(0, visibleCount);
   return (
-    <div className="flex-2/3 2xl:flex-3/4 px-5 py-10 bg-slate-800 rounded-2xl ">
+    <div className="flex-2/3 2xl:flex-3/4 px-5 py-10 dark:bg-slate-800 bg-zinc-200 rounded-2xl ">
       {/* Date filter buttons */}
       <div className="mb-10 gap-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
         {["Today", "This week", "This month", "Explore all"].map((label) => (
@@ -70,8 +70,8 @@ function MainLeft() {
             onClick={() => setActiveFilter(label)}
             className={`font-comic p-3 rounded-2xl flex flex-wrap items-center justify-between cursor-pointer ${
               activeFilter === label
-                ? "bg-slate-700 text-orange-500"
-                : "bg-slate-900 hover:bg-slate-700"
+                ? "dark:bg-slate-700 bg-zinc-100 text-orange-500"
+                : "dark:bg-slate-900 bg-white dark:hover:bg-slate-700 hover:bg-zinc-100"
             }`}
           >
             <span className="text-xl font-semibold">{label}</span>

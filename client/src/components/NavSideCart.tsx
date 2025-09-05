@@ -54,7 +54,7 @@ function NavSideCart({ isOpen }: NavSideCartProps) {
   return (
     <>
       <div
-        className={`fixed border-l-2 border-l-orange-500 inset-y-0 z-20 right-0 top-20 w-96 bg-slate-800 text-white transform transition-transform duration-300 ease-in-out shadow-lg ${
+        className={`fixed border-l-2 border-l-orange-500 inset-y-0 z-20 right-0 top-20 w-96 dark:bg-slate-800 bg-white dark:text-white text-black transform transition-transform duration-300 ease-in-out shadow-lg ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

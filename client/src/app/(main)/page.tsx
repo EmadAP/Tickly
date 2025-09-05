@@ -7,7 +7,7 @@ import MainTestimonial from "@/templates/MainTestimonial";
 
 export default function Home() {
   return (
-    <div className="bg-slate-900 text-white">
+    <div className="dark:bg-slate-900 bg-white dark:text-white text-black">
       <MainBanner />
       <MaxWidthWrapper className="h-auto lg:px-3 xl:px-6 2xl:px-9 max-w-screen-4xl py-10">
         <div className="flex flex-col">

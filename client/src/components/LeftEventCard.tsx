@@ -10,8 +10,8 @@ interface EventCardProps {
 const LeftEventCard: React.FC<EventCardProps> = ({ event }) => {
   return (
     <Link href={`/event/${event._id}`} className="group">
-      <div className="flex flex-col rounded-2xl h-96 bg-slate-900 justify-between cursor-pointer">
-        <div className="overflow-hidden rounded-2xl">
+      <div className="flex flex-col rounded-2xl h-96 dark:bg-slate-900 bg-white justify-between cursor-pointer">
+        <div className="overflow-hidden rounded-t-2xl">
           <Image
             src={`http://localhost:5000/${event.image}`}
             alt={event.title}

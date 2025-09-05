@@ -5,6 +5,7 @@ import "./globals.css";
 import QueryProvider from "@/lib/context/QueryProvider";
 import { Toaster } from "@/components/ui/sonner";
 import { UserProvider } from "@/lib/context/UserContext";
+import { ThemeProvider } from "@/lib/context/ThemeProvider";
 
 const robotoSans = Roboto({
   variable: "--font-roboto-sans",
@@ -27,14 +28,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${robotoSans.variable} ${robotoMono.variable} antialiased`}
       >
-        <QueryProvider>
-          <UserProvider>{children}</UserProvider>
-        </QueryProvider>
-        <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <QueryProvider>
+            <UserProvider>{children}</UserProvider>
+          </QueryProvider>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

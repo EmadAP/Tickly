@@ -14,8 +14,10 @@ function NavDropdown() {
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger
-        className={`w-full cursor-pointer outline-none text-2xl flex flex-row items-center justify-between gap-2 group shadow-xs px-2 py-1 rounded-lg transition-all duration-200 ${
-          open ? "bg-slate-700" : "bg-slate-800 hover:bg-slate-700"
+        className={`w-full rounded-lg cursor-pointer outline-none text-2xl flex flex-row items-center justify-between gap-2 group px-3 py-2 h-9 transition-all duration-200 ${
+          open
+            ? "dark:bg-slate-700 bg-zinc-200"
+            : "dark:bg-slate-800 bg-white hover:bg-zinc-200 dark:hover:bg-slate-700"
         }`}
       >
         <p className="text-orange-500 font-semibold">Categories</p>
@@ -23,20 +25,20 @@ function NavDropdown() {
           className={`text-orange-500 transition-transform duration-300 ${
             open ? "rotate-90" : "group-hover:rotate-90"
           }`}
-          size={30}
+          size={20}
         />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-slate-700 border-slate-700 w-60">
-        <DropdownMenuItem className="text-xl text-white focus:text-white focus:bg-slate-600 cursor-pointer">
+      <DropdownMenuContent className="dark:bg-slate-700 bg-zinc-200 border-0 w-60">
+        <DropdownMenuItem className="text-xl dark:text-white text-black dark:focus:text-white focus:text-black dark:focus:bg-slate-600 focus:bg-zinc-100 cursor-pointer">
           <Link href="#">Sports</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="text-xl text-white focus:text-white focus:bg-slate-600 cursor-pointer">
+        <DropdownMenuItem className="text-xl dark:text-white text-black dark:focus:text-white focus:text-black dark:focus:bg-slate-600 focus:bg-zinc-100 cursor-pointer">
           <Link href="#">Concerts</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="text-xl text-white focus:text-white focus:bg-slate-600 cursor-pointer">
+        <DropdownMenuItem className="text-xl dark:text-white text-black dark:focus:text-white focus:text-black dark:focus:bg-slate-600 focus:bg-zinc-100 cursor-pointer">
           <Link href="#">Movies</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="text-xl text-white focus:text-white focus:bg-slate-600 cursor-pointer">
+        <DropdownMenuItem className="text-xl dark:text-white text-black dark:focus:text-white focus:text-black dark:focus:bg-slate-600 focus:bg-zinc-100 cursor-pointer">
           <Link href="#">Theatres</Link>
         </DropdownMenuItem>
       </DropdownMenuContent>

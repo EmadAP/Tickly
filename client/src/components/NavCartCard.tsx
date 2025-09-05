@@ -14,12 +14,12 @@ function NavCartCard({ item, onRemove }: NavCartCardProps) {
     : item.section.price;
 
   return (
-    <div className="flex flex-col w-full rounded-lg px-2 py-3  bg-slate-900">
+    <div className="flex flex-col w-full rounded-lg px-2 py-3  dark:bg-slate-900 bg-zinc-200">
       <div className="flex flex-row items-center justify-between">
         <p className=" text-lg font-bold text-orange-400">{item.event.title}</p>
         <button
           onClick={onRemove}
-          className="text-red-500 hover:bg-slate-800 px-1 py-1 rounded-full cursor-pointer"
+          className="text-red-500 dark:hover:bg-slate-800 hover:bg-white px-1 py-1 rounded-full cursor-pointer"
         >
           <X />
         </button>

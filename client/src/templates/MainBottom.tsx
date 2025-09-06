@@ -47,7 +47,7 @@ function MainBottom() {
   if (isError) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="px-5 py-10 bg-slate-800 rounded-2xl ">
+    <div className="px-5 py-10 dark:bg-slate-800 bg-zinc-200 rounded-2xl ">
       <div className="mb-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {["Categories", "Country"].map((label, index) => (
           <button
@@ -55,8 +55,8 @@ function MainBottom() {
             onClick={() => setActiveFilter(label)}
             className={`p-3 rounded-2xl flex flex-row justify-between items-center cursor-pointer ${
               activeFilter === label
-                ? "bg-slate-700 text-orange-500"
-                : "bg-slate-900 hover:bg-slate-700"
+                ? "dark:bg-slate-700 bg-zinc-100 text-orange-500"
+                : "dark:bg-slate-900 bg-white dark:hover:bg-slate-700 hover:bg-zinc-100"
             } ${index === 0 ? "lg:col-start-2" : "lg:col-start-3"}`}
           >
             <span className="text-xl font-semibold">{label}</span>

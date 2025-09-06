@@ -9,13 +9,13 @@ interface EventCardProps {
 }
 
 const BottomEventCard: React.FC<EventCardProps> = ({ event }) => {
-  const { data: sections} = useGetSectionsByEventId()
+  const { data: sections } = useGetSectionsByEventId();
 
-  const onSellSection = sections?.map((section) => section.onSell)
-  const discountSection = sections?.map((section) => section.discountPercent)
+  const onSellSection = sections?.map((section) => section.onSell);
+  const discountSection = sections?.map((section) => section.discountPercent);
   return (
     <Link href={`/event/${event._id}`} className="group">
-      <div className="relative flex flex-col rounded-2xl h-96 bg-slate-900 justify-between cursor-pointer">
+      <div className="relative flex flex-col rounded-2xl h-96 dark:bg-slate-900 bg-white justify-between cursor-pointer">
         {onSellSection && discountSection ? (
           <div className="absolute top-0 left-0 bg-red-500 text-white px-2 py-1 text-sm font-semibold rounded-lg shadow z-10">
             {discountSection}% OFF

@@ -25,13 +25,15 @@ export const Ticket: React.FC<TicketProps> = ({
   discount,
 }) => {
   return (
-    <div className="relative bg-white rounded-3xl shadow-2xl overflow-visible md:p-2 px-2 py-6 m-4 text-slate-900">
+    <div className="relative bg-zinc-200 rounded-3xl md:p-2 px-2 py-6 m-4 text-slate-900 ">
       {/* Background watermark */}
-      <div className="absolute inset-0 flex items-center justify-center rotate-[-25deg] md:rotate-[-15deg] opacity-10 pointer-events-none select-none">
-        <span className="text-8xl md:text-9xl font-extrabold text-slate-700 mr-4">
-          Tickly
-        </span>
-        <Tickets className="text-orange-500" size={100} />
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden rounded-3xl">
+        <div className="flex items-center justify-center rotate-[-25deg] md:rotate-[-15deg] opacity-10 w-full h-full">
+          <span className="text-8xl md:text-9xl font-extrabold text-slate-700 mr-4">
+            Tickly
+          </span>
+          <Tickets className="text-orange-500" size={100} />
+        </div>
       </div>
 
       {/* Total Tickets */}
@@ -61,11 +63,11 @@ export const Ticket: React.FC<TicketProps> = ({
 
         {/* Perforation */}
         <div className="relative flex md:flex-col flex-row justify-center items-center">
-          <div className="hidden md:block w-5 h-5 rounded-full bg-slate-900 absolute -top-5 left-1/2 -translate-x-1/2"></div>
-          <div className="block md:hidden w-5 h-5 rounded-full bg-slate-900 absolute -left-2 -translate-x-1/2"></div>
-          <div className="block md:hidden w-5 h-5 rounded-full bg-slate-900 absolute -right-2 translate-x-1/2"></div>
-          <div className="hidden md:block w-5 h-5 rounded-full bg-slate-900 absolute -bottom-5 left-1/2 -translate-x-1/2"></div>
-          <div className="h-full w-full border-b-2 md:border-r-2 border-dashed border-slate-900"></div>
+          <div className="hidden md:block w-5 h-5 rounded-full dark:bg-slate-900 bg-white absolute -top-5 left-1/2 -translate-x-1/2"></div>
+          <div className="block md:hidden w-5 h-5 rounded-full dark:bg-slate-900 bg-white absolute -left-2 -translate-x-1/2"></div>
+          <div className="block md:hidden w-5 h-5 rounded-full dark:bg-slate-900 bg-white absolute -right-2 translate-x-1/2"></div>
+          <div className="hidden md:block w-5 h-5 rounded-full dark:bg-slate-900 bg-white absolute -bottom-5 left-1/2 -translate-x-1/2"></div>
+          <div className="h-full w-full border-b-2 md:border-r-2 border-dashed dark:border-slate-900 border-white"></div>
         </div>
 
         {/* RIGHT */}

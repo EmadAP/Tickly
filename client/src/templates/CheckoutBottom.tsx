@@ -23,7 +23,7 @@ const CheckoutBottom = () => {
   }
 
   return (
-    <div className="px-5 mt-10 pt-10 bg-slate-800 rounded-2xl">
+    <div className="mt-20 bg-slate-800 rounded-2xl">
       <MainCarouselCards
         title="Recommended"
         link="/explore"

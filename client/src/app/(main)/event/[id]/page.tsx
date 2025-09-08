@@ -33,7 +33,7 @@ function Page() {
   if (isError) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="bg-slate-900">
+    <div className="dark:bg-slate-900 bg-white">
       <div className="flex flex-col items-center">
         <DetailBanner event={event} />
         <MaxWidthWrapper className="flex flex-col gap-10 my-15">

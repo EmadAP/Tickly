@@ -62,7 +62,7 @@ const SectionCardDetail: React.FC<SectionCardDetailProps> = ({
   };
 
   return (
-    <div className="text-white w-full flex flex-col py-5">
+    <div className="dark:text-white text-black  w-full flex flex-col py-5">
       <div className="flex flex-col items-center justify-between w-full gap-5">
         <div className="flex flex-col gap-5 justify-between w-full">
           <div className="space-y-5">
@@ -119,7 +119,7 @@ const SectionCardDetail: React.FC<SectionCardDetailProps> = ({
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center gap-3">
                       <button
-                        className="px-3 py-1 bg-gray-600 hover:bg-gray-500 rounded text-lg cursor-pointer"
+                        className="px-3 py-1 dark:bg-gray-500 bg-gray-300 hover:bg-gray-400 dark:hover:bg-gray-600 rounded text-lg cursor-pointer"
                         onClick={() => handleDecrease(sec._id)}
                         disabled={selectedQty <= 1}
                       >
@@ -130,7 +130,7 @@ const SectionCardDetail: React.FC<SectionCardDetailProps> = ({
                       </span>{" "}
                       {/* selected quantity */}
                       <button
-                        className="px-3 py-1 bg-gray-600 hover:bg-gray-500 rounded text-lg cursor-pointer"
+                        className="px-3 py-1 dark:bg-gray-500 bg-gray-300 hover:bg-gray-400 dark:hover:bg-gray-600 rounded text-lg cursor-pointer"
                         onClick={() => handleIncrease(sec._id, available)}
                         disabled={selectedQty >= available}
                       >
@@ -145,7 +145,7 @@ const SectionCardDetail: React.FC<SectionCardDetailProps> = ({
                   </div>
                   <Button
                     onClick={() => addToCart(event._id, sec._id, selectedQty)}
-                    className="bg-orange-500 text-lg hover:bg-orange-400 cursor-pointer"
+                    className="bg-orange-500  text-white text-lg hover:bg-orange-400 cursor-pointer"
                   >
                     Add to Cart
                   </Button>
@@ -188,11 +188,11 @@ const SectionCardDetail: React.FC<SectionCardDetailProps> = ({
                     "bg-orange-500 rounded-lg text-white hover:bg-orange-600",
                   today: "bg-orange-400 rounded-lg text-white",
                 }}
-                className=" rounded-lg border border-orange-500 bg-slate-900 [&_.rdp-day]:pointer-events-none"
+                className=" rounded-lg border border-orange-500 dark:bg-slate-900 bg-white [&_.rdp-day]:pointer-events-none"
               />
 
               {/* Days left */}
-              <p className="mt-2 text-sm text-gray-400">
+              <p className="mt-2 text-sm dark:text-gray-400 text-gray-700">
                 {isEventToday
                   ? "Event is today 🎉"
                   : daysLeft > 0

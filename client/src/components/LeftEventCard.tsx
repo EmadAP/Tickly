@@ -25,13 +25,13 @@ const LeftEventCard: React.FC<EventCardProps> = ({ event }) => {
         <div className="flex-1 py-2 px-2 flex flex-col gap-2">
           <p className="text-lg font-semibold truncate">{event.title}</p>
           <div className="flex flex-row items-center justify-between">
-            <p className="text-sm text-gray-400 truncate">
+            <p className="text-sm dark:text-gray-400 text-gray-700 truncate">
               {event.country},{" "}
               {event.address && event.address.split(",")[0]
                 ? `${event.address.split(",")[0].trim()}`
                 : ""}
             </p>
-            <span className="text-sm text-gray-400 whitespace-nowrap">
+            <span className="text-sm dark:text-gray-400 text-gray-700 whitespace-nowrap">
               {new Date(event.eventDate).toLocaleDateString()}
             </span>
           </div>

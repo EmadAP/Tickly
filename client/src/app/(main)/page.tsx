@@ -20,7 +20,7 @@ export default function Home() {
           <MainBottom />
         </div>
       </MaxWidthWrapper>
-      <div className="bg-slate-900 py-20">
+      <div className="dark:bg-slate-900 bg-white py-20">
         <MainTestimonial />
       </div>
     </div>

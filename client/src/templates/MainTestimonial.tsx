@@ -13,7 +13,7 @@ function MainTestimonial() {
           What our{" "}
           <span className="relative px-2 text-orange-500">
             customers{" "}
-            <IconMP.underline className="hidden sm:block pointer-events-none absolute inset-x-0 -bottom-3 text-white" />
+            <IconMP.underline className="hidden sm:block pointer-events-none absolute inset-x-0 -bottom-3  dark:text-white text-black" />
           </span>{" "}
           say
         </h2>
@@ -54,35 +54,35 @@ function MainTestimonial() {
                 height={40}
                 width={40}
                 alt="user image"
-                className="inline-block rounded-full ring-2 ring-slate-800"
+                className="inline-block rounded-full ring-2 dark:ring-slate-800 ring-white"
               />
               <Image
                 src="/user/user-26.png"
                 height={40}
                 width={40}
                 alt="user image"
-                className="inline-block rounded-full ring-2 ring-slate-800"
+                className="inline-block rounded-full ring-2 dark:ring-slate-800 ring-white"
               />
               <Image
                 src="/user/user-27.png"
                 height={40}
                 width={40}
                 alt="user image"
-                className="inline-block rounded-full ring-2 ring-slate-800"
+                className="inline-block rounded-full ring-2 dark:ring-slate-800 ring-white"
               />
               <Image
                 src="/user/user-28.jpg"
                 height={40}
                 width={40}
                 alt="user image"
-                className="inline-block rounded-full ring-2 ring-slate-800"
+                className="inline-block rounded-full ring-2 dark:ring-slate-800 ring-white"
               />
               <Image
                 src="/user/user-29.jpg"
                 height={40}
                 width={40}
                 alt="user image"
-                className="inline-block object-cover rounded-full ring-2 ring-slate-800"
+                className="inline-block object-cover rounded-full ring-2 dark:ring-slate-800 ring-white"
               />
             </div>
             <div className="flex flex-col justify-between items-center sm:items-start">

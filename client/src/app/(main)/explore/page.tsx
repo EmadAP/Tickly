@@ -32,14 +32,14 @@ function Page() {
   }, [initialDate, initialCategory, initialCountry]);
 
   return (
-    <div className="bg-slate-900 text-white relative min-h-screen">
+    <div className="dark:bg-slate-900 bg-white dark:text-white text-black relative min-h-screen">
       <MaxWidthWrapper className="flex flex-col lg:flex-row gap-10 max-w-screen-4xl ">
         <div className="w-full lg:w-1/5 lg:sticky lg:top-20 lg:h-[calc(100vh-5rem)] overflow-y-auto ">
-          <div className="bg-slate-800 mt-10 lg:my-10 px-5 rounded-2xl ">
+          <div className="dark:bg-slate-800 bg-zinc-200 mt-10 lg:my-10 px-5 rounded-2xl ">
             <ExploreSide filters={filters} setFilters={setFilters} />
           </div>
         </div>
-        <div className="w-full lg:w-4/5 bg-slate-900">
+        <div className="w-full lg:w-4/5 dark:bg-slate-900 bg-white">
           <ExploreTemp filters={filters} />
         </div>
       </MaxWidthWrapper>

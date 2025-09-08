@@ -25,8 +25,8 @@ const MainCarouselCards: React.FC<MainCarouselCardsProps> = ({
   const preview = events.slice(0, 8);
 
   return (
-    <section>
-      <div className="mb-4 flex justify-between items-center">
+    <section className="bg-zinc-200 dark:bg-slate-800 rounded-xl py-4 px-2 ">
+      <div className="mb-4 flex justify-between items-center ">
         <Link
           href={link}
           className="text-2xl font-semibold capitalize hover:text-orange-500"

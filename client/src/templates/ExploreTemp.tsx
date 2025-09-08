@@ -87,7 +87,7 @@ function ExploreTemp({ filters }: ExploreTempProps) {
   });
 
   return (
-    <div className="bg-slate-800 px-5 rounded-2xl py-5 mb-10  lg:my-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 2xl:grid-cols-3 gap-4">
+    <div className="dark:bg-slate-800 bg-zinc-200 px-5 rounded-2xl py-5 mb-10  lg:my-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 2xl:grid-cols-3 gap-4">
       {filteredEvents.length > 0 ? (
         filteredEvents.map((event) => (
           <LeftEventCard key={event._id} event={event} />

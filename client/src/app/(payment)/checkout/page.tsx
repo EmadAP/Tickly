@@ -7,7 +7,7 @@ import React from "react";
 
 function Page() {
   return (
-    <div className="text-white bg-slate-900 ">
+    <div className="dark:text-white text-black bg-white dark:bg-slate-900 ">
       <MaxWidthWrapper className="flex flex-col items-center gap-5 py-10">
         {/* top side */}
         <div className="w-full">

@@ -9,7 +9,7 @@ function CheckoutRight() {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="bg-slate-800 rounded-2xl mt-4 p-5 text-white space-y-4">
+      <div className="dark:bg-slate-800 bg-zinc-200 rounded-2xl mt-4 p-5 dark:text-white text-black  space-y-4">
         <div className="flex justify-between">
           <span>Total tickets:</span>
           <span>{totalTickets}</span>

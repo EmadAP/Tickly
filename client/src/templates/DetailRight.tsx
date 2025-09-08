@@ -27,11 +27,11 @@ const DetailRight: React.FC<DetailRightProps> = ({
     const selectedSection = sections.filter((s) => s.name === selectedName);
 
     return (
-      <div className="bg-slate-800 p-4 rounded-lg text-white flex flex-col gap-3">
+      <div className="dark:bg-slate-800 bg-zinc-200 p-4 rounded-lg dark:text-white text-black flex flex-col gap-3">
         <SectionCardDetail event={event} section={selectedSection} />
         <div className="flex gap-3 mt-4">
           <button
-            className="bg-gray-500 px-4 py-2 rounded-lg cursor-pointer"
+            className="dark:bg-gray-500 bg-gray-300 hover:bg-gray-400 dark:hover:bg-gray-600 px-4 py-2 rounded-lg cursor-pointer"
             onClick={onReset}
           >
             Show All Sections
@@ -63,13 +63,13 @@ const DetailRight: React.FC<DetailRightProps> = ({
             onClick={() => !isSoldOut && onSelect(section.name)}
           >
             {isSoldOut ? (
-              <div className="text-gray-400">Sold Out</div>
+              <div className="dark:text-gray-400 text-gray-700">Sold Out</div>
             ) : (
               <div className="flex flex-row items-center justify-between">
                 <div className="flex flex-row gap-2">
-                  <p>{section.name}</p>
-                  <span>-</span>
-                  <p>€{section.price}</p>
+                  <p className="dark:text-white text-black">{section.name}</p>
+                  <span className="dark:text-white text-black">-</span>
+                  <p className="dark:text-white text-black">€{section.price}</p>
                 </div>
                 {section.discountPercent && (
                   <p className="bg-red-500 text-white px-2 py-1 text-sm font-semibold rounded-lg shadow">

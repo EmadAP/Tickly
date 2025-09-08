@@ -23,8 +23,8 @@ export function CheckoutLeftDetails() {
       className="w-full relative md:pl-8 "
     >
       <div className="hidden absolute left-3 mt-2 md:flex flex-col justify-around z-10  h-full gap-4">
-        <CarouselPrevious className="static w-auto h-auto p-2 border-0 bg-white text-slate-900  hover:bg-orange-300 cursor-pointer" />
-        <CarouselNext className="static w-auto h-auto p-2 border-0 bg-white text-slate-900  hover:bg-orange-300 cursor-pointer" />
+        <CarouselPrevious className="static w-auto h-auto p-2 border-0 dark:bg-white bg-slate-900 dark:text-slate-900 text-white  hover:bg-orange-300 cursor-pointer" />
+        <CarouselNext className="static w-auto h-auto p-2 border-0 dark:bg-white bg-slate-900 dark:text-slate-900 text-white  hover:bg-orange-300 cursor-pointer" />
       </div>
       <CarouselContent className="h-[450px]">
         {cart.map((item) => (
@@ -46,8 +46,8 @@ export function CheckoutLeftDetails() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="md:hidden p-2 border-0 bg-white text-slate-900  hover:bg-orange-300 cursor-pointer" />
-      <CarouselNext className="md:hidden p-2 border-0 bg-white text-slate-900  hover:bg-orange-300 cursor-pointer" />
+      <CarouselPrevious className="md:hidden p-2 border-0 dark:bg-white bg-slate-900 dark:text-slate-900 text-white  hover:bg-orange-300 cursor-pointer" />
+      <CarouselNext className="md:hidden p-2 border-0 dark:bg-white bg-slate-900 dark:text-slate-900 text-white  hover:bg-orange-300 cursor-pointer" />
     </Carousel>
   );
 }

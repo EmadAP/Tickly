@@ -94,7 +94,7 @@ function NavSideCart({ isOpen }: NavSideCartProps) {
               </p>
               <button
                 onClick={handleCheckoutClick}
-                className="mt-3 w-full bg-orange-500 py-2 rounded hover:bg-orange-400 cursor-pointer"
+                className="mt-3 w-full bg-orange-500 py-2 rounded hover:bg-orange-400 text-white cursor-pointer"
                 disabled={isPending}
               >
                 {isPending ? "Reserving..." : "Checkout"}

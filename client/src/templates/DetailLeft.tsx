@@ -40,7 +40,7 @@ const DetailLeft: React.FC<DetailLeftProps> = ({
   const layout = categoryMap[event.category] || concertMap;
 
   return (
-    <div className="relative bg-slate-200 w-full h-[725px] rounded-lg">
+    <div className="relative bg-zinc-200 w-full h-[725px] rounded-lg">
       {layout.map((sectionLayout) => {
         const isStage = sectionLayout.type === "stage";
 

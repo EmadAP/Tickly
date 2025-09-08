@@ -64,7 +64,7 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
                   category: f.category === cat ? null : cat,
                 }))
               }
-              className={`block w-full text-left px-2 py-2 rounded hover:bg-slate-800 ${
+              className={`block w-full text-left px-2 py-2 rounded dark:hover:bg-slate-800 hover:bg-zinc-100 ${
                 filters.category === cat ? "bg-orange-500 text-white" : ""
               }`}
             >
@@ -89,7 +89,7 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
                   date: f.date === date ? null : date,
                 }))
               }
-              className={`block w-full text-left px-2 py-2 rounded hover:bg-slate-800 ${
+              className={`block w-full text-left px-2 py-2 rounded dark:hover:bg-slate-800 hover:bg-zinc-100 ${
                 filters.date === date ? "bg-orange-500 text-white" : ""
               }`}
             >
@@ -206,30 +206,6 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
             Clear filters
           </Button>
         </div>
-        
-
-        {/* <AccordionTrigger className=" text-lg flex  items-center text-slate-900 px-2 bg-orange-500 py-2 my-2 ">
-          <Button
-            onClick={() => setFilters(defaultFilters)}
-            className=" w-full text-lg flex items-center text-slate-900 px-2 bg-orange-500 py-2 mt-4 mb-4  "
-          >
-            Clear filters
-          </Button>
-        </AccordionTrigger>
-        <AccordionContent className="flex flex-col gap-4 text-balance"></AccordionContent> */}
-
-        {/*         
-        <AccordionTrigger
-          onClick={() => setFilters(defaultFilters)}
-          hideIcon
-          className=" text-lg flex  items-center text-slate-900 px-2 bg-orange-500 py-2 my-2 "
-        >
-          Clear filters <Delete size={15}  className=""/>
-        </AccordionTrigger>
-        <AccordionContent className="flex flex-col gap-4 text-balance"><Button
-          onClick={() => setFilters(defaultFilters)}
-          className=" w-full text-lg flex items-center text-slate-900 px-2 bg-orange-500 py-2 mt-4 mb-4  "
-        >Clear filters</Button></AccordionContent> */}
       </AccordionItem>
     </Accordion>
   );

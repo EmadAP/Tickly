@@ -18,15 +18,7 @@ function MainLeft() {
   const visibleCount = is2xl ? 9 : 8;
 
   if (isLoading || !events) {
-    return (
-      <div className="flex-2/3 2xl:flex-3/4 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4">
-          {Array.from({ length: 12 }).map((_, i) => (
-            <EventCardSkeleton key={i} />
-          ))}
-        </div>
-      </div>
-    );
+    return <EventCardSkeleton />;
   }
   if (isError) return <div>Error: {error.message}</div>;
 

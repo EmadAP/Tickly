@@ -27,7 +27,7 @@ const CheckoutBottom = () => {
       <MainCarouselCards
         title="Recommended"
         link="/explore"
-        events={events} // ✅ just pass all events here
+        events={events}
       />
     </div>
   );

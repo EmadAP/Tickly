@@ -54,18 +54,18 @@ function NavAuth({ onClose }: NavAuthProps) {
   };
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-6">
-      <Tabs defaultValue="login" className="bg-slate-900">
-        <TabsList className="bg-slate-900">
+    <div className="flex w-full max-w-sm flex-col gap-6 ">
+      <Tabs defaultValue="login" className="dark:bg-slate-900 bg-white">
+        <TabsList className="dark:bg-slate-900 bg-white">
           <TabsTrigger
             value="login"
-            className="text-lg bg-slate-800 text-white cursor-pointer data-[state=active]:bg-orange-500"
+            className="text-lg border-0 dark:hover:bg-slate-800 dark:bg-slate-900  bg-white hover:bg-zinc-200  cursor-pointer dark:data-[state=active]:bg-orange-500 data-[state=active]:bg-orange-500 data-[state=active]:text-white"
           >
             Login
           </TabsTrigger>
           <TabsTrigger
             value="signup"
-            className="text-lg bg-slate-800 text-white cursor-pointer data-[state=active]:bg-orange-500"
+            className="text-lg border-0 dark:hover:bg-slate-800 dark:bg-slate-900  bg-white hover:bg-zinc-200  cursor-pointer dark:data-[state=active]:bg-orange-500 data-[state=active]:bg-orange-500 data-[state=active]:text-white"
           >
             Sign up
           </TabsTrigger>
@@ -73,7 +73,7 @@ function NavAuth({ onClose }: NavAuthProps) {
 
         <TabsContent value="login">
           <form onSubmit={handleLoginSubmit}>
-            <Card className="bg-slate-800 border-slate-800 text-white">
+            <Card className="dark:bg-slate-800 bg-zinc-200 dark:border-slate-800 border-zinc-200 dark:text-white text-black">
               <CardHeader>
                 <CardTitle className="text-orange-500 text-lg">Login</CardTitle>
                 <CardDescription>

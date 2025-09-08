@@ -10,9 +10,12 @@ import {
 } from "@/components/ui/carousel";
 import { Ticket } from "./CheckoutLeftCard";
 import { useCart } from "@/lib/hooks/useCart";
+import CheckoutLeftSkeleton from "./skeletons/CheckoutLeftSkeleton";
 
 export function CheckoutLeftDetails() {
-  const { cart } = useCart();
+  const { cart , isLoading } = useCart();
+
+  if (isLoading || !cart) return <CheckoutLeftSkeleton />;
 
   return (
     <Carousel

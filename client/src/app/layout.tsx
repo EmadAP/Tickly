@@ -6,6 +6,8 @@ import QueryProvider from "@/lib/context/QueryProvider";
 import { Toaster } from "@/components/ui/sonner";
 import { UserProvider } from "@/lib/context/UserContext";
 import { ThemeProvider } from "@/lib/context/ThemeProvider";
+import Navbar from "@/templates/Navbar";
+import Footer from "@/templates/Footer";
 
 const robotoSans = Roboto({
   variable: "--font-roboto-sans",
@@ -39,7 +41,11 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <QueryProvider>
-            <UserProvider>{children}</UserProvider>
+            <UserProvider>
+              <Navbar />
+              <div className="flex flex-col min-h-screen w-full">{children}</div>
+              <Footer />
+            </UserProvider>
           </QueryProvider>
           <Toaster />
         </ThemeProvider>

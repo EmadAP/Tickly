@@ -1,7 +1,7 @@
 "use client";
 
 import LeftEventCard from "@/components/LeftEventCard";
-import EventCardSkeleton from "@/components/skeletons/EventCardSkeleton";
+import ExploreSkeleton from "@/components/skeletons/ExploreSkeleton";
 import { GetAllEvents, useGetAllSections } from "@/lib/api/main/queries";
 import { ExploreFilters } from "@/lib/types/types";
 import React from "react";
@@ -17,9 +17,9 @@ function ExploreTemp({ filters }: ExploreTempProps) {
   if (isLoading || !events || !sections) {
     return (
       <div className="flex-2/3 2xl:flex-3/4 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4 p-5 rounded-xl dark:bg-slate-800 bg-zinc-200">
           {Array.from({ length: 12 }).map((_, i) => (
-            <EventCardSkeleton key={i} />
+            <ExploreSkeleton key={i} />
           ))}
         </div>
       </div>

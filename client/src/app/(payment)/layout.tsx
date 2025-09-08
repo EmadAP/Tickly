@@ -24,11 +24,9 @@ const PaymentLayout = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <main className="flex flex-col min-h-screen w-full">
-      <Navbar />
-      <div className="flex-1 flex flex-col h-full">{children}</div>
-      <Footer />
-    </main>
+    <div>
+      <main className="flex-1 flex flex-col h-full">{children}</main>
+    </div>
   );
 };
 

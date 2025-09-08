@@ -37,11 +37,7 @@ function MainBottom() {
 
   if (isLoading || !events) {
     return (
-      <div className="py-20 border-t-2 border-orange-500 lg:border-b-0 space-y-10">
-        {Array.from({ length: 3 }).map((_, i) => (
-          <MainCarouselSkeleton key={i} />
-        ))}
-      </div>
+      <MainCarouselSkeleton />
     );
   }
   if (isError) return <div>Error: {error.message}</div>;

@@ -8,9 +8,10 @@ import React from "react";
 
 interface ExploreTempProps {
   filters: ExploreFilters;
+  setFilters: React.Dispatch<React.SetStateAction<ExploreFilters>>;
 }
 
-function ExploreTemp({ filters }: ExploreTempProps) {
+function ExploreTemp({ filters, setFilters }: ExploreTempProps) {
   const { data: events, isLoading, isError, error } = GetAllEvents();
   const { data: sections } = useGetAllSections();
 
@@ -87,14 +88,90 @@ function ExploreTemp({ filters }: ExploreTempProps) {
   });
 
   return (
-    <div className="dark:bg-slate-800 bg-zinc-200 px-5 rounded-2xl py-5 mb-10  lg:my-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 2xl:grid-cols-3 gap-4">
-      {filteredEvents.length > 0 ? (
-        filteredEvents.map((event) => (
-          <LeftEventCard key={event._id} event={event} />
-        ))
-      ) : (
-        <p className="text-center col-span-full text-lg">No event for</p>
-      )}
+    <div className="flex flex-col gap-5 dark:bg-slate-800 bg-zinc-200 px-5 rounded-2xl py-5 mb-10  lg:my-10">
+      <div className="border-b-2 border-b-orange-500 mx-5 pt-10 mb-5 flex flex-wrap gap-2">
+        {/* Category */}
+        {filters.category && (
+          <span
+            className="flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500 text-white text-sm cursor-pointer hover:bg-orange-400 transition"
+            onClick={() => setFilters((f) => ({ ...f, category: null }))}
+          >
+            {filters.category}
+            <button className="ml-1 text-xs font-bold">✕</button>
+          </span>
+        )}
+
+        {/* Date */}
+        {filters.date && (
+          <span
+            className="flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500 text-white text-sm cursor-pointer hover:bg-orange-400 transition"
+            onClick={() => setFilters((f) => ({ ...f, date: null }))}
+          >
+            {filters.date}
+            <button className="ml-1 text-xs font-bold">✕</button>
+          </span>
+        )}
+
+        {/* Country */}
+        {filters.country && (
+          <span
+            className="flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500 text-white text-sm cursor-pointer hover:bg-orange-400 transition"
+            onClick={() => setFilters((f) => ({ ...f, country: null }))}
+          >
+            {filters.country}
+            <button className="ml-1 text-xs font-bold">✕</button>
+          </span>
+        )}
+
+        {/* Price Range */}
+        {filters.priceRange &&
+          (filters.priceRange[0] > 0 || filters.priceRange[1] < 500) && (
+            <span
+              className="flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500 text-white text-sm cursor-pointer hover:bg-orange-400 transition"
+              onClick={() =>
+                setFilters((f) => ({
+                  ...f,
+                  priceRange: [0, 500] as [number, number],
+                }))
+              }
+            >
+              ${filters.priceRange[0]} - ${filters.priceRange[1]}
+              <button className="ml-1 text-xs font-bold">✕</button>
+            </span>
+          )}
+
+        {/* On Sale */}
+        {filters.onSale && (
+          <span
+            className="flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500 text-white text-sm cursor-pointer hover:bg-orange-400 transition"
+            onClick={() => setFilters((f) => ({ ...f, onSale: false }))}
+          >
+            On Sale
+            <button className="ml-1 text-xs font-bold">✕</button>
+          </span>
+        )}
+
+        {/* Available */}
+        {filters.available && (
+          <span
+            className="flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500 text-white text-sm cursor-pointer hover:bg-orange-400 transition"
+            onClick={() => setFilters((f) => ({ ...f, available: false }))}
+          >
+            Available
+            <button className="ml-1 text-xs font-bold">✕</button>
+          </span>
+        )}
+      </div>
+
+      <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 2xl:grid-cols-3 gap-4">
+        {filteredEvents.length > 0 ? (
+          filteredEvents.map((event) => (
+            <LeftEventCard key={event._id} event={event} />
+          ))
+        ) : (
+          <p className="text-center col-span-full text-lg">No event for</p>
+        )}
+      </div>
     </div>
   );
 }

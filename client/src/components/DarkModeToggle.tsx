@@ -21,15 +21,16 @@ export function ModeToggle() {
   };
 
   return (
-    <div className="flex w-11 h-11 justify-center items-center dark:bg-slate-800 bg-white p-2 rounded-full dark:hover:bg-slate-700 hover:bg-zinc-200 text-2xl outline-none cursor-pointer">
-      <button onClick={handleToggle} className="z-20 cursor-pointer">
-        {isDark ? (
-          <Moon className="text-orange-500" size={27} />
-        ) : (
-          <Sun className="text-orange-500" />
-        )}
-        <span className="sr-only">Toggle theme</span>
-      </button>
-    </div>
+    <button
+      onClick={handleToggle}
+      className="flex w-11 h-11 z-200 justify-center items-center dark:bg-slate-800 bg-white p-2 rounded-full dark:hover:bg-slate-700 hover:bg-zinc-200 text-2xl outline-none cursor-pointer"
+    >
+      {isDark ? (
+        <Moon className="text-orange-500" size={27} />
+      ) : (
+        <Sun className="text-orange-500" />
+      )}
+      <span className="sr-only">Toggle theme</span>
+    </button>
   );
 }

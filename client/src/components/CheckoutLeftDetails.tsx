@@ -29,7 +29,7 @@ export function CheckoutLeftDetails() {
         <CarouselPrevious className="static w-auto h-auto p-2 border-0 dark:bg-white bg-slate-900 dark:text-slate-900 text-white  hover:bg-orange-300 cursor-pointer" />
         <CarouselNext className="static w-auto h-auto p-2 border-0 dark:bg-white bg-slate-900 dark:text-slate-900 text-white  hover:bg-orange-300 cursor-pointer" />
       </div>
-      <CarouselContent className="h-[450px]">
+      <CarouselContent className="">
         {cart.map((item) => (
           <CarouselItem key={item.section._id} className="px-1 pt-5 basis-1/5">
             <Ticket

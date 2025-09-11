@@ -99,14 +99,14 @@ function TestimonialReviews() {
               </div>
             </HoverCardTrigger>
 
-            <HoverCardContent className="dark:bg-slate-700 bg-zinc-200 dark:border-slate-700 border-zinc-200  dark:text-white text-black lg:w-lg md:w-md z-10">
+            <HoverCardContent className="shadow-lg dark:bg-slate-700 bg-zinc-200 dark:border-slate-700 border-zinc-200  dark:text-white text-black lg:w-lg md:w-md z-10">
               <div className="flex flex-col gap-2">
                 <div className="flex flex-row justify-between">
                   <h3 className="text-lg text-orange-500">{testimonial.name}</h3>
                   <p className="text-sm font-light">{testimonial.time}</p>
                 </div>
                 <div className="border-b-1 border-orange-500" />
-                <p className="text-sm dark:text-slate-300 text-gray-600">{testimonial.message}</p>
+                <p className="text-sm dark:text-slate-300 text-gray-700">{testimonial.message}</p>
               </div>
             </HoverCardContent>
           </HoverCard>

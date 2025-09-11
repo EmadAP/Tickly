@@ -61,7 +61,7 @@ function Navbar() {
             <div className="hidden lg:flex">
               <Link
                 href="/explore"
-                className="h-9 px-3 py-2 items-center rounded-md flex flex-row justify-between w-full bg-white dark:bg-slate-800 text-2xl dark:hover:bg-slate-700 hover:bg-zinc-200 hover:shadow-2xl outline-none cursor-pointer"
+                className=" h-9 px-3 py-2 items-center rounded-md flex flex-row justify-between w-full bg-white dark:bg-slate-800 text-2xl dark:hover:bg-slate-700 hover:bg-zinc-200  outline-none cursor-pointer"
               >
                 <p className="text-orange-500 font-semibold">Events</p>
               </Link>
@@ -77,7 +77,7 @@ function Navbar() {
               {user?.username && (
                 <Button
                   onClick={handleLogout}
-                  className="text-orange-500 font-semibold dark:bg-slate-800 bg-white text-2xl dark:hover:bg-slate-700 hover:bg-zinc-200 outline-none cursor-pointer"
+                  className=" text-orange-500 font-semibold dark:bg-slate-800 bg-white text-2xl dark:hover:bg-slate-700 hover:bg-zinc-200 outline-none cursor-pointer"
                 >
                   Logout
                 </Button>
@@ -85,7 +85,7 @@ function Navbar() {
               {!user?.username && (
                 <Button
                   onClick={() => setLoginOpen(true)}
-                  className="text-orange-500 font-semibold dark:bg-slate-800 bg-white text-2xl dark:hover:bg-slate-700 hover:bg-zinc-200 outline-none cursor-pointer"
+                  className=" text-orange-500 font-semibold dark:bg-slate-800 bg-white text-2xl dark:hover:bg-slate-700 hover:bg-zinc-200 outline-none cursor-pointer"
                 >
                   Login
                 </Button>
@@ -96,14 +96,15 @@ function Navbar() {
 
             <ModeToggle />
 
-            <div className="flex w-11 h-11 justify-center items-center dark:bg-slate-800 bg-white p-2 rounded-full dark:hover:bg-slate-700 hover:bg-zinc-200 text-2xl outline-none cursor-pointer">
-              <button onClick={toggleShopCart} className="z-20  cursor-pointer">
-                <ShoppingCart
-                  size={27}
-                  className="text-orange-500 w-full h-full "
-                />
-              </button>
-            </div>
+            <button
+              onClick={toggleShopCart}
+              className=" z-20 flex w-11 h-11 justify-center items-center dark:bg-slate-800 bg-white p-2 rounded-full dark:hover:bg-slate-700 hover:bg-zinc-200 text-2xl outline-none cursor-pointer"
+            >
+              <ShoppingCart
+                size={27}
+                className="text-orange-500 w-full h-full "
+              />
+            </button>
           </div>
         </div>
 
@@ -111,7 +112,7 @@ function Navbar() {
 
         {/* Mobile Sidebar Overlay */}
         <div
-          className={`fixed border-l-2 border-l-orange-500 inset-y-0 z-20 right-0 top-20 w-96 dark:bg-slate-800 bg-white dark:text-white text-black transform transition-transform duration-300 ease-in-out lg:hidden shadow-lg ${
+          className={`fixed border-l-2 border-l-orange-500 inset-y-0 z-20 right-0 top-20 w-96 dark:bg-slate-800 bg-white dark:text-white text-black transform transition-transform duration-300 ease-in-out lg:hidden  ${
             isSidebarOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >

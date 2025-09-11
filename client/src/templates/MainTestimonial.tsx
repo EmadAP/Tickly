@@ -9,7 +9,7 @@ function MainTestimonial() {
   return (
     <div className="flex flex-col items-center gap-15">
       <MaxWidthWrapper>
-        <h2 className="tracking-tight text-center text-balance !leading-tight font-bold text-4xl md:text-5xl lg:text-7xl">
+        <h2 className="text-shadow-lg tracking-tight text-center text-balance !leading-tight font-bold text-4xl md:text-5xl lg:text-7xl">
           What our{" "}
           <span className="relative px-2 text-orange-500">
             customers{" "}

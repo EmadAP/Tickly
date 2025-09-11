@@ -43,7 +43,7 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
       defaultValue="item-1"
     >
       {/* Category filter */}
-      <AccordionItem value="item-1">
+      <AccordionItem value="item-1" className="border-b-orange-500">
         <AccordionTrigger className="text-lg flex items-center hover:text-orange-500">
           Category
         </AccordionTrigger>
@@ -64,8 +64,8 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
                   category: f.category === cat ? null : cat,
                 }))
               }
-              className={`block w-full text-left px-2 py-2 rounded dark:hover:bg-slate-800 hover:bg-zinc-100 ${
-                filters.category === cat ? "bg-orange-500 text-white" : ""
+              className={`block w-full text-left px-2 py-2 rounded dark:hover:bg-slate-800 hover:bg-zinc-100 cursor-pointer ${
+                filters.category === cat ? "bg-orange-500 text-black" : ""
               }`}
             >
               {cat}
@@ -75,7 +75,7 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
       </AccordionItem>
 
       {/* Date Filter */}
-      <AccordionItem value="item-2">
+      <AccordionItem value="item-2" className="border-b-orange-500">
         <AccordionTrigger className="text-lg flex items-center hover:text-orange-500">
           Date
         </AccordionTrigger>
@@ -89,8 +89,8 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
                   date: f.date === date ? null : date,
                 }))
               }
-              className={`block w-full text-left px-2 py-2 rounded dark:hover:bg-slate-800 hover:bg-zinc-100 ${
-                filters.date === date ? "bg-orange-500 text-white" : ""
+              className={`block w-full text-left px-2 py-2 rounded dark:hover:bg-slate-800 hover:bg-zinc-100 cursor-pointer ${
+                filters.date === date ? "bg-orange-500 text-black" : ""
               }`}
             >
               {date}
@@ -100,12 +100,12 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
       </AccordionItem>
 
       {/* Location Filter */}
-      <AccordionItem value="item-3">
+      <AccordionItem value="item-3" className="border-b-orange-500">
         <AccordionTrigger className="text-lg flex items-center hover:text-orange-500">
           Country
         </AccordionTrigger>
         <AccordionContent className="flex flex-col gap-4 text-balance">
-          <Command className="bg-slate-700 text-white ">
+          <Command className="dark:bg-slate-700 dark:text-white bg-white text-black ">
             <CommandInput placeholder="Search country..." className="h-9 " />
             <CommandList>
               <CommandEmpty>No country found.</CommandEmpty>
@@ -117,7 +117,7 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
                     onSelect={() =>
                       setFilters((f) => ({ ...f, country: country.label }))
                     }
-                    className="text-white data-[selected=true]:bg-slate-900 data-[selected=true]:text-white"
+                    className="dark:text-white text-black dark:data-[selected=true]:bg-slate-900 data-[selected=true]:bg-zinc-100 dark:data-[selected=true]:text-white data-[selected=true]:text-black data-[selected=true]:shadow-lg"
                   >
                     {country.label}
                     {filters.country === country.value && (
@@ -140,7 +140,7 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
       </AccordionItem>
 
       {/* Price Range */}
-      <AccordionItem value="item-4">
+      <AccordionItem value="item-4" className="border-b-orange-500">
         <AccordionTrigger className="text-lg flex items-center hover:text-orange-500">
           Price
         </AccordionTrigger>
@@ -170,7 +170,7 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
       </AccordionItem>
 
       {/* Toggles: On Sale & Availability */}
-      <AccordionItem value="item-5">
+      <AccordionItem value="item-5" className="border-b-orange-500">
         <AccordionTrigger className="text-lg flex items-center hover:text-orange-500">
           Options
         </AccordionTrigger>
@@ -197,11 +197,11 @@ function ExploreSide({ filters, setFilters }: ExploreSideProps) {
           </div>
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem value="item-6">
+      <AccordionItem value="item-6" className="border-b-orange-500">
         <div className="py-4">
           <Button
             onClick={() => setFilters(defaultFilters)}
-            className="font-medium outline-none w-full text-lg flex items-center text-slate-900 px-2 bg-orange-500 hover:bg-orange-400 cursor-pointer py-4    "
+            className="font-medium outline-none w-full text-lg flex items-center text-white px-2 bg-orange-500 hover:bg-orange-400 cursor-pointer py-4    "
           >
             Clear filters
           </Button>

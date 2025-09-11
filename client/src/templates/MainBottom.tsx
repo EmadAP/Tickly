@@ -49,7 +49,7 @@ function MainBottom() {
           <button
             key={label}
             onClick={() => setActiveFilter(label)}
-            className={`p-3 rounded-2xl flex flex-row justify-between items-center cursor-pointer ${
+            className={`shadow-lg p-3 rounded-2xl flex flex-row justify-between items-center cursor-pointer ${
               activeFilter === label
                 ? "dark:bg-slate-700 bg-zinc-100 text-orange-500"
                 : "dark:bg-slate-800 bg-zinc-200 dark:hover:bg-slate-700 hover:bg-zinc-100"

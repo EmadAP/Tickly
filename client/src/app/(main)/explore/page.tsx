@@ -40,7 +40,7 @@ function Page() {
           </div>
         </div>
         <div className="w-full lg:w-4/5 dark:bg-slate-900 bg-white">
-          <ExploreTemp filters={filters} />
+          <ExploreTemp filters={filters} setFilters={setFilters} />
         </div>
       </MaxWidthWrapper>
     </div>

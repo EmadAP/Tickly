@@ -22,7 +22,7 @@ const RightEventCard: React.FC<EventCardProps> = ({
       }}
       className="group"
     >
-      <div className="relative w-full h-40 dark:bg-slate-900 bg-white rounded-2xl overflow-hidden cursor-pointer">
+      <div className="relative shadow-lg  w-full h-40 dark:bg-slate-900 bg-white rounded-2xl overflow-hidden cursor-pointer">
         <div className="absolute inset-0">
           <Image
             src={`http://localhost:5000/${event.image}`}

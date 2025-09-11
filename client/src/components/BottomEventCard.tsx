@@ -15,7 +15,7 @@ const BottomEventCard: React.FC<EventCardProps> = ({ event }) => {
   const discountSection = sections?.map((section) => section.discountPercent);
   return (
     <Link href={`/event/${event._id}`} className="group">
-      <div className="flex flex-col justify-between rounded-2xl h-96 dark:bg-slate-900 bg-white cursor-pointer overflow-hidden">
+      <div className="shadow-lg flex flex-col justify-between rounded-2xl h-96 dark:bg-slate-900 bg-white cursor-pointer overflow-hidden">
         {/* Sell */}
         {onSellSection && discountSection ? (
           <div className="relative bg-red-500 text-white px-2 py-1 rounded-lg shadow z-10">

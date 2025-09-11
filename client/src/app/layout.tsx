@@ -43,7 +43,7 @@ export default function RootLayout({
           <QueryProvider>
             <UserProvider>
               <Navbar />
-              <div className="flex flex-col min-h-screen w-full">{children}</div>
+              <div>{children}</div>
               <Footer />
             </UserProvider>
           </QueryProvider>

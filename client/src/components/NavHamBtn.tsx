@@ -12,16 +12,16 @@ function NavHamBtn({ onClick, isOpen }: NavHamBtnProps) {
     <button
       onClick={onClick}
       type="button"
-      className="z-20 flex lg:hidden w-11 h-11 justify-center items-center dark:hover:bg-slate-700 hover:bg-zinc-200 rounded-full cursor-pointer "
+      className="flex lg:hidden z-20  w-11 h-11 justify-center items-center dark:bg-slate-800 bg-white p-2 rounded-full dark:hover:bg-slate-700 hover:bg-zinc-200 text-2xl outline-none cursor-pointer"
     >
       <Menu
-        size={30}
+        size={27}
         className={`text-orange-500 w-full h-full ${
           isOpen ? "hidden" : "flex"
         }`}
       />
       <X
-        size={30}
+        size={27}
         className={`text-orange-500 w-full h-full ${
           isOpen ? "flex" : "hidden"
         }`}

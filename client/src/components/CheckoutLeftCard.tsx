@@ -25,11 +25,11 @@ export const Ticket: React.FC<TicketProps> = ({
   discount,
 }) => {
   return (
-    <div className="relative bg-zinc-200 rounded-3xl md:p-2 px-2 py-6 m-4 text-slate-900 ">
+    <div className="relative bg-zinc-200 dark:bg-slate-800 rounded-3xl md:p-2 px-2 py-6 m-4 text-slate-900 dark:text-white ">
       {/* Background watermark */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden rounded-3xl">
         <div className="flex items-center justify-center rotate-[-25deg] md:rotate-[-15deg] opacity-10 w-full h-full">
-          <span className="text-8xl md:text-9xl font-extrabold text-slate-700 mr-4">
+          <span className="text-8xl md:text-9xl font-extrabold text-slate-700 dark:text-slate-300 mr-4">
             Tickly
           </span>
           <Tickets className="text-orange-500" size={100} />
@@ -37,7 +37,7 @@ export const Ticket: React.FC<TicketProps> = ({
       </div>
 
       {/* Total Tickets */}
-      <div className="absolute -top-1 -left-5 rotate-[-25deg]  bg-orange-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md z-20 pointer-events-none select-none">
+      <div className="absolute -top-1 -left-5 rotate-[-25deg]  bg-orange-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md z-10 pointer-events-none select-none">
         x{total} Tickets
       </div>
 

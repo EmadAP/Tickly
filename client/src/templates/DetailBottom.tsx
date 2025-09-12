@@ -41,23 +41,27 @@ const DetailBottom: React.FC<DetailBottomProps> = ({ event }) => {
   console.log("Filtered category events:", sameCategoryEvents);
 
   return (
-    <div className="my-5 dark:bg-slate-800 bg-zinc-200 rounded-2xl space-y-12 dark:text-white text-black">
+    <div className="my-5 dark:bg-slate-900 bg-white space-y-12 dark:text-white text-black">
       {sameCountryEvents.length > 0 && (
-        <MainCarouselCards
-          key={`country-${event.country}`}
-          title={`Events in ${event.country}`}
-          link={`/explore?country=${encodeURIComponent(event.country)}`}
-          events={sameCountryEvents}
-        />
+        <div className="rounded-2xl bg-zinc-200 dark:bg-slate-800">
+          <MainCarouselCards
+            key={`country-${event.country}`}
+            title={`Events in ${event.country}`}
+            link={`/explore?country=${encodeURIComponent(event.country)}`}
+            events={sameCountryEvents}
+          />
+        </div>
       )}
 
       {sameCategoryEvents.length > 0 && (
-        <MainCarouselCards
-          key={`category-${event.category}`}
-          title={`${event.category} events`}
-          link={`/explore?category=${encodeURIComponent(event.category)}`}
-          events={sameCategoryEvents}
-        />
+        <div className="rounded-2xl bg-zinc-200 dark:bg-slate-800">
+          <MainCarouselCards
+            key={`category-${event.category}`}
+            title={`${event.category} events`}
+            link={`/explore?category=${encodeURIComponent(event.category)}`}
+            events={sameCategoryEvents}
+          />
+        </div>
       )}
     </div>
   );

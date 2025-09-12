@@ -77,7 +77,7 @@ function Navbar() {
               {user?.username && (
                 <Button
                   onClick={handleLogout}
-                  className=" text-orange-500 font-semibold dark:bg-slate-800 bg-white text-2xl dark:hover:bg-slate-700 hover:bg-zinc-200 outline-none cursor-pointer"
+                  className="shadow-none text-orange-500 font-semibold dark:bg-slate-800 bg-white text-2xl dark:hover:bg-slate-700 hover:bg-zinc-200 outline-none cursor-pointer"
                 >
                   Logout
                 </Button>
@@ -85,7 +85,7 @@ function Navbar() {
               {!user?.username && (
                 <Button
                   onClick={() => setLoginOpen(true)}
-                  className=" text-orange-500 font-semibold dark:bg-slate-800 bg-white text-2xl dark:hover:bg-slate-700 hover:bg-zinc-200 outline-none cursor-pointer"
+                  className="shadow-none text-orange-500 font-semibold dark:bg-slate-800 bg-white text-2xl dark:hover:bg-slate-700 hover:bg-zinc-200 outline-none cursor-pointer"
                 >
                   Login
                 </Button>

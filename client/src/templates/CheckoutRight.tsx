@@ -8,7 +8,7 @@ function CheckoutRight() {
   const { totalTickets, totalRawPrice, totalDiscount, totalPrice } = useCart();
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 px-4 lg:px-0">
       <div className="dark:bg-slate-800 bg-zinc-200 rounded-2xl mt-4 p-5 dark:text-white text-black  space-y-4">
         <div className="flex justify-between">
           <span>Total tickets:</span>

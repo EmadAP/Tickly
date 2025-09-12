@@ -58,7 +58,7 @@ function NavSideCart({ isOpen }: NavSideCartProps) {
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex flex-col h-full px-2 py-4">
+        <div className="flex flex-col gap-4 h-full px-2 py-4">
           {/* Cart items area */}
           <div className="flex-1 overflow-y-auto space-y-4">
             {isLoading ? (

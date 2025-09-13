@@ -1,5 +1,5 @@
 import { CartItem } from "@/lib/types/types";
-import { X } from "lucide-react";
+import { Trash } from "lucide-react";
 import React from "react";
 
 interface NavCartCardProps {
@@ -21,7 +21,7 @@ function NavCartCard({ item, onRemove }: NavCartCardProps) {
           onClick={onRemove}
           className="text-red-500 dark:hover:bg-slate-800 hover:bg-white px-1 py-1 rounded-full cursor-pointer"
         >
-          <X />
+          <Trash size={20} />
         </button>
       </div>
       <p className="text-lg">

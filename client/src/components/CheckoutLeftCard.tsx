@@ -1,7 +1,9 @@
-import { Tickets } from "lucide-react";
+import { useCart } from "@/lib/hooks/useCart";
+import { Tickets, Trash } from "lucide-react";
 import React from "react";
 
 interface TicketProps {
+  sectionId: string;
   eventTitle: string;
   section: string;
   country: string;
@@ -14,6 +16,7 @@ interface TicketProps {
 }
 
 export const Ticket: React.FC<TicketProps> = ({
+  sectionId,
   eventTitle,
   section,
   country,
@@ -24,76 +27,121 @@ export const Ticket: React.FC<TicketProps> = ({
   price,
   discount,
 }) => {
+  const { removeFromCart, updateTotal } = useCart();
+
+  const handleRemove = () => {
+    removeFromCart(sectionId);
+  };
+
+  const handleDecrease = () => {
+    if (total > 1) {
+      updateTotal(sectionId, total - 1);
+    }
+  };
+
+  const handleIncrease = () => {
+    updateTotal(sectionId, total + 1);
+  };
+
   return (
-    <div className="relative bg-zinc-200 dark:bg-slate-800 rounded-3xl md:p-2 px-2 py-6 m-4 text-slate-900 dark:text-white ">
-      {/* Background watermark */}
-      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden rounded-3xl">
-        <div className="flex items-center justify-center rotate-[-25deg] md:rotate-[-15deg] opacity-10 w-full h-full">
-          <span className="text-8xl md:text-9xl font-extrabold text-slate-700 dark:text-slate-300 mr-4">
-            Tickly
-          </span>
-          <Tickets className="text-orange-500" size={100} />
-        </div>
-      </div>
-
-      {/* Total Tickets */}
-      <div className="absolute -top-1 -left-5 rotate-[-25deg]  bg-orange-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md z-10 pointer-events-none select-none">
-        x{total} Tickets
-      </div>
-
-      {/* Foreground content */}
-      <div className="relative z-10 min-h-44 flex flex-col md:flex-row gap-6 lg:gap-2 xl:gap-4">
-        {/* LEFT */}
-        <div className="md:w-full flex flex-col justify-between md:py-4">
-          <h2 className="text-2xl font-bold capitalize">{eventTitle}</h2>
-          <span className="text-orange-500 font-semibold text-lg">
-            {section}
-          </span>
+    <div className="flex flex-col mx-4 gap-1">
+      <div className="relative md:p-2 px-2 py-6  bg-zinc-200 dark:bg-slate-800 rounded-3xl text-slate-900 dark:text-white ">
+        {/* Background watermark */}
+        <div className="absolute inset-0 pointer-events-none select-none overflow-hidden rounded-3xl">
+          <div className="flex items-center justify-center rotate-[-25deg] md:rotate-[-15deg] opacity-10 w-full h-full">
+            <span className="text-8xl md:text-9xl font-extrabold text-slate-700 dark:text-slate-300 mr-4">
+              Tickly
+            </span>
+            <Tickets className="text-orange-500" size={100} />
+          </div>
         </div>
 
-        {/* MIDDLE */}
-        <div className="md:w-full flex md:flex-col flex-row justify-between gap-2 md:py-4">
-          <p className="text-sm flex flex-col sm:items-center sm:flex-row lg:flex-col lg:items-start gap-1">
-            Country: <span className="font-semibold text-lg">{country}</span>
-          </p>
-          <p className="text-sm flex flex-col sm:items-center sm:flex-row lg:flex-col lg:items-start gap-1">
-            City: <span className="font-semibold text-lg">{city}</span>
-          </p>
+        {/* Total Tickets */}
+        <div className="absolute -top-1 -left-5 rotate-[-25deg]  bg-orange-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-lg z-10 pointer-events-none select-none">
+          x{total} Tickets
         </div>
 
-        {/* Perforation */}
-        <div className="relative flex md:flex-col flex-row justify-center items-center">
-          <div className="hidden md:block w-5 h-5 rounded-full dark:bg-slate-900 bg-white absolute -top-5 left-1/2 -translate-x-1/2"></div>
-          <div className="block md:hidden w-5 h-5 rounded-full dark:bg-slate-900 bg-white absolute -left-2 -translate-x-1/2"></div>
-          <div className="block md:hidden w-5 h-5 rounded-full dark:bg-slate-900 bg-white absolute -right-2 translate-x-1/2"></div>
-          <div className="hidden md:block w-5 h-5 rounded-full dark:bg-slate-900 bg-white absolute -bottom-5 left-1/2 -translate-x-1/2"></div>
-          <div className="h-full w-full border-b-2 md:border-r-2 border-dashed dark:border-slate-900 border-white"></div>
-        </div>
+        {/* Delete tickets */}
+        <button
+          onClick={handleRemove}
+          className="absolute -top-2 -right-2 text-white bg-red-500 hover:bg-red-400 p-1.5 rounded-full  z-10 cursor-pointer"
+        >
+          <Trash size={20} />
+        </button>
 
-        {/* RIGHT */}
-        <div className="flex w-full md:w-1/2 flex-row md:flex-col items-center gap-6 justify-between md:py-4">
-          {/* Price with discount logic */}
-          <div className="flex flex-col items-center">
-            {discount && discount > 0 ? (
-              <>
-                <span className="text-sm line-through text-slate-500">
-                  {price.toFixed(2)} $
-                </span>
-                <span className="font-bold text-orange-600">
-                  {(price - (price * discount) / 100).toFixed(2)} $
-                </span>
-              </>
-            ) : (
-              <span className="text-lg font-semibold">
-                {price.toFixed(2)} $
-              </span>
-            )}
+        {/* Foreground content */}
+        <div className="relative z-10 min-h-44 flex flex-col md:flex-row gap-6 lg:gap-2 xl:gap-4">
+          {/* LEFT */}
+          <div className="md:w-full flex flex-col justify-between md:py-4">
+            <h2 className="text-2xl font-bold capitalize">{eventTitle}</h2>
+            <span className="text-orange-500 font-semibold text-lg">
+              {section}
+            </span>
           </div>
 
-          {/* Date & time */}
-          <span className="font-semibold">{date}</span>
-          <span className="font-semibold">{time}</span>
+          {/* MIDDLE */}
+          <div className="md:w-full flex md:flex-col flex-row justify-between gap-2 md:py-4">
+            <p className="text-sm flex flex-col sm:items-center sm:flex-row lg:flex-col lg:items-start gap-1">
+              Country: <span className="font-semibold text-lg">{country}</span>
+            </p>
+            <p className="text-sm flex flex-col sm:items-center sm:flex-row lg:flex-col lg:items-start gap-1">
+              City: <span className="font-semibold text-lg">{city}</span>
+            </p>
+          </div>
+
+          {/* Perforation */}
+          <div className="relative flex md:flex-col flex-row justify-center items-center">
+            <div className="hidden md:block w-5 h-5 rounded-full dark:bg-slate-900 bg-white absolute -top-5 left-1/2 -translate-x-1/2"></div>
+            <div className="block md:hidden w-5 h-5 rounded-full dark:bg-slate-900 bg-white absolute -left-2 -translate-x-1/2"></div>
+            <div className="block md:hidden w-5 h-5 rounded-full dark:bg-slate-900 bg-white absolute -right-2 translate-x-1/2"></div>
+            <div className="hidden md:block w-5 h-5 rounded-full dark:bg-slate-900 bg-white absolute -bottom-5 left-1/2 -translate-x-1/2"></div>
+            <div className="h-full w-full border-b-2 md:border-r-2 border-dashed dark:border-slate-900 border-white"></div>
+          </div>
+
+          {/* RIGHT */}
+          <div className="flex w-full md:w-1/2 flex-row md:flex-col items-center gap-6 justify-between md:py-4">
+            {/* Price with discount logic */}
+            <div className="flex flex-col items-center">
+              {discount && discount > 0 ? (
+                <>
+                  <span className="text-sm line-through text-slate-500">
+                    {price.toFixed(2)} $
+                  </span>
+                  <span className="font-bold text-orange-600">
+                    {(price - (price * discount) / 100).toFixed(2)} $
+                  </span>
+                </>
+              ) : (
+                <span className="text-lg font-semibold">
+                  {price.toFixed(2)} $
+                </span>
+              )}
+            </div>
+
+            {/* Date & time */}
+            <span className="font-semibold">{date}</span>
+            <span className="font-semibold">{time}</span>
+          </div>
         </div>
+      </div>
+
+      {/* Control total btn */}
+      <div className="flex flex-row justify-center items-center gap-3">
+        <button
+          className="shadow-lg h-7 w-7 dark:bg-slate-800 bg-zinc-200 rounded-full hover:bg-zinc-100 dark:hover:bg-slate-700 text-orange-500 text-lg cursor-pointer"
+          onClick={handleDecrease}
+          disabled={total <= 1}
+        >
+          –
+        </button>
+        <span className="text-lg font-semibold text-orange-500">{total}</span>{" "}
+        {/* selected quantity */}
+        <button
+          className="shadow-lg h-7 w-7 dark:bg-slate-800 bg-zinc-200 rounded-full hover:bg-zinc-100 dark:hover:bg-slate-700 text-orange-500 text-lg cursor-pointer"
+          onClick={handleIncrease}
+        >
+          +
+        </button>
       </div>
     </div>
   );

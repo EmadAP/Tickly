@@ -22,12 +22,7 @@ function NavSideCart({ isOpen }: NavSideCartProps) {
   const queryClient = useQueryClient();
   const [showAuthPopup, setShowAuthPopup] = useState(false);
 
-  const {
-    mutate: createTickets,
-    isError,
-    error,
-    isPending,
-  } = CreatePendingTickets();
+  const { mutate: createTickets, isPending } = CreatePendingTickets();
 
   const handleCheckoutClick = () => {
     if (!user) {
@@ -99,13 +94,6 @@ function NavSideCart({ isOpen }: NavSideCartProps) {
               >
                 {isPending ? "Reserving..." : "Checkout"}
               </button>
-
-              {isError && (
-                <p className="text-red-500 mt-2 text-sm">
-                  {(error as any)?.response?.data?.message ||
-                    "Reservation failed"}
-                </p>
-              )}
             </div>
           )}
         </div>

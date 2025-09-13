@@ -13,10 +13,11 @@ const CheckoutLeft = () => {
   return (
     <div className="dark:bg-slate-900 bg-white lg:px-5 my-10 lg:my-0">
       <div className="w-full">
-        <div className="flex flex-col gap-10 w-full">
+        <div className="flex flex-col gap-10 w-full mt-4">
           {cart.map((item) => (
             <Ticket
               key={item.section._id}
+              sectionId={item.section._id}
               eventTitle={item.event.title}
               section={item.section.name}
               country={item.event.country}

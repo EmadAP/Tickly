@@ -15,10 +15,8 @@ export const useCart = () => {
   const updateCartMutation = useUpdateCartItem();
   const clearCartMutation = useClearCart();
 
-  // ✅ Memoize items separately to avoid ESLint warning
   const items: CartItem[] = useMemo(() => data?.items || [], [data]);
 
-  // ✅ Totals calculation based only on `items`
   const totals = useMemo(() => {
     const totalTickets = items.reduce((sum, item) => sum + item.total, 0);
 

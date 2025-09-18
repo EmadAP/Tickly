@@ -35,7 +35,6 @@ export const createPendingTickets = async (req: Request, res: Response) => {
   try {
     const userId = (req as any).user.id;
     const { items } = req.body;
-    // items = [{ eventId, sectionId, quantity }]
 
     if (!Array.isArray(items) || items.length === 0) {
       res.status(400).json({ message: "No items in checkout" });
@@ -59,7 +58,27 @@ export const createPendingTickets = async (req: Request, res: Response) => {
         return;
       }
 
-      // Create N tickets for quantity
+      const activeCount = await Ticket.countDocuments({
+        section: item.sectionId,
+        status: "active",
+      });
+
+      const pendingCount = await Ticket.countDocuments({
+        section: item.sectionId,
+        status: "pending",
+        expiresAt: { $gt: new Date() },
+      });
+
+      const alreadyTaken = activeCount + pendingCount;
+      const available = section.quantity - alreadyTaken;
+
+      if (item.quantity > available) {
+        res.status(400).json({
+          message: `Not enough tickets left in section ${section.name}. Only ${available} available.`,
+        });
+        return;
+      }
+
       for (let i = 0; i < item.quantity; i++) {
         ticketsToCreate.push({
           user: userId,
@@ -67,6 +86,7 @@ export const createPendingTickets = async (req: Request, res: Response) => {
           section: item.sectionId,
           pricePaid: section.price,
           status: "pending",
+          expiresAt: new Date(Date.now() + 15 * 60 * 1000),
         });
       }
     }
@@ -82,15 +102,19 @@ export const createPendingTickets = async (req: Request, res: Response) => {
 
 export const confirmPayment = async (req: Request, res: Response) => {
   try {
-    const { ticketIds } = req.body; 
+    const { ticketIds } = req.body;
     if (!ticketIds || !Array.isArray(ticketIds)) {
       res.status(400).json({ message: "No ticket IDs provided" });
       return;
     }
 
     const result = await Ticket.updateMany(
-      { _id: { $in: ticketIds }, status: "pending" },
-      { $set: { status: "active", purchaseDate: new Date() } }
+      {
+        _id: { $in: ticketIds },
+        status: "pending",
+        expiresAt: { $gt: new Date() },
+      },
+      { $set: { status: "active", purchaseDate: new Date(), expiresAt: null } }
     );
 
     res.status(200).json({

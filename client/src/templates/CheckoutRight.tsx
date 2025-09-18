@@ -1,11 +1,15 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { CreatePendingTickets } from "@/lib/api/main/mutations";
 import { useCart } from "@/lib/hooks/useCart";
 import React from "react";
 
 function CheckoutRight() {
   const { totalTickets, totalRawPrice, totalDiscount, totalPrice } = useCart();
+  const { mutate: reserveTickets, isPending } = CreatePendingTickets();
+
+  const handleCheckout = () => {};
 
   return (
     <div className="flex flex-col gap-5 px-4 lg:px-0">
@@ -31,8 +35,12 @@ function CheckoutRight() {
         </div>
       </div>
       <div className="flex justify-end">
-        <Button className="bg-green-500 text-white hover:bg-green-400 w-fit text-lg font-semibold cursor-pointer ">
-          Checkout
+        <Button
+          disabled={isPending}
+          onClick={handleCheckout}
+          className="bg-green-500 text-white hover:bg-green-400 w-fit text-lg font-semibold cursor-pointer "
+        >
+          {isPending ? "Reserving..." : "Checkout"}
         </Button>
       </div>
     </div>

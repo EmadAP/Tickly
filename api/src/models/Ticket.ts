@@ -9,6 +9,7 @@ export interface ITicket extends Document {
   pricePaid: number; // Price at purchase time
   status: "pending" | "active" | "canceled" | "refunded" | "used";
   purchaseDate: Date | null; // Null until payment is complete
+  expiresAt: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -48,12 +49,17 @@ const TicketSchema = new Schema<ITicket>(
     },
     status: {
       type: String,
-      enum: ["pending", "active", "canceled", "refunded", "used"],
+      enum: ["pending", "active", "canceled", "refunded"],
       default: "pending",
     },
     purchaseDate: {
       type: Date,
       default: null,
+    },
+    expiresAt: {
+      type: Date,
+      default: null,
+      index: { expires: 0 },
     },
   },
   { timestamps: true }

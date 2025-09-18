@@ -59,13 +59,13 @@ function NavAuth({ onClose }: NavAuthProps) {
         <TabsList className="dark:bg-slate-900 bg-white">
           <TabsTrigger
             value="login"
-            className="text-lg border-0 dark:hover:bg-slate-800 dark:bg-slate-900  bg-white hover:bg-zinc-200  cursor-pointer dark:data-[state=active]:bg-orange-500 data-[state=active]:bg-orange-500 data-[state=active]:text-white"
+            className="text-lg shadow-lg border-0 dark:hover:bg-slate-800 dark:bg-slate-900  bg-white hover:bg-zinc-200  cursor-pointer dark:data-[state=active]:bg-orange-500 data-[state=active]:bg-orange-500 data-[state=active]:text-white"
           >
             Login
           </TabsTrigger>
           <TabsTrigger
             value="signup"
-            className="text-lg border-0 dark:hover:bg-slate-800 dark:bg-slate-900  bg-white hover:bg-zinc-200  cursor-pointer dark:data-[state=active]:bg-orange-500 data-[state=active]:bg-orange-500 data-[state=active]:text-white"
+            className="text-lg shadow-lg border-0 dark:hover:bg-slate-800 dark:bg-slate-900  bg-white hover:bg-zinc-200  cursor-pointer dark:data-[state=active]:bg-orange-500 data-[state=active]:bg-orange-500 data-[state=active]:text-white"
           >
             Sign up
           </TabsTrigger>
@@ -85,6 +85,7 @@ function NavAuth({ onClose }: NavAuthProps) {
                 <div className="grid gap-3">
                   <Label htmlFor="tabs-demo-username">Username</Label>
                   <Input
+                    className="border-gray-400 shadow-lg"
                     id="tabs-demo-username"
                     value={loginData.username}
                     onChange={(e) =>
@@ -95,6 +96,7 @@ function NavAuth({ onClose }: NavAuthProps) {
                 <div className="grid gap-3">
                   <Label htmlFor="tabs-demo-password">Password</Label>
                   <Input
+                    className="border-gray-400 shadow-lg"
                     id="tabs-demo-password"
                     type="password"
                     value={loginData.password}
@@ -107,7 +109,7 @@ function NavAuth({ onClose }: NavAuthProps) {
               <CardFooter>
                 <Button
                   type="submit"
-                  className="bg-green-500 hover:bg-green-400 text-lg"
+                  className="bg-green-500 hover:bg-green-400 text-lg text-white shadow-lg"
                 >
                   Submit
                 </Button>
@@ -118,7 +120,7 @@ function NavAuth({ onClose }: NavAuthProps) {
 
         <TabsContent value="signup">
           <form onSubmit={handleSignupSubmit}>
-            <Card className="bg-slate-800 border-slate-800 text-white">
+            <Card className="dark:bg-slate-800 bg-zinc-200 dark:border-slate-800 border-zinc-200 dark:text-white text-black">
               <CardHeader>
                 <CardTitle className="text-orange-500 text-lg">
                   Sign up
@@ -131,6 +133,7 @@ function NavAuth({ onClose }: NavAuthProps) {
                 <div className="grid gap-3">
                   <Label htmlFor="tabs-demo-username">Username</Label>
                   <Input
+                    className="border-gray-400 shadow-lg"
                     id="tabs-demo-username"
                     value={signupData.username}
                     onChange={(e) =>
@@ -141,6 +144,7 @@ function NavAuth({ onClose }: NavAuthProps) {
                 <div className="grid gap-3">
                   <Label htmlFor="tabs-demo-email">Email</Label>
                   <Input
+                    className="border-gray-400 shadow-lg"
                     id="tabs-demo-email"
                     type="email"
                     value={signupData.email}
@@ -152,6 +156,7 @@ function NavAuth({ onClose }: NavAuthProps) {
                 <div className="grid gap-3">
                   <Label htmlFor="tabs-demo-password">Password</Label>
                   <Input
+                    className="border-gray-400 shadow-lg"
                     id="tabs-demo-password"
                     type="password"
                     value={signupData.password}
@@ -164,7 +169,7 @@ function NavAuth({ onClose }: NavAuthProps) {
               <CardFooter>
                 <Button
                   type="submit"
-                  className="bg-green-500 hover:bg-green-400 text-lg"
+                  className="bg-green-500 hover:bg-green-400 text-lg text-white shadow-lg"
                 >
                   Submit
                 </Button>

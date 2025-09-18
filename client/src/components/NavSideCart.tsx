@@ -8,8 +8,7 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@/lib/context/UserContext";
 import Popup from "./Popup";
 import NavAuth from "./NavAuth";
-import { useQueryClient } from "@tanstack/react-query";
-import { CreatePendingTickets } from "@/lib/api/main/mutations";
+import { toast } from "sonner";
 
 interface NavSideCartProps {
   isOpen: boolean;
@@ -19,10 +18,7 @@ function NavSideCart({ isOpen }: NavSideCartProps) {
   const router = useRouter();
   const { cart, totalPrice, removeFromCart, isLoading } = useCart();
   const { user } = useUser();
-  const queryClient = useQueryClient();
   const [showAuthPopup, setShowAuthPopup] = useState(false);
-
-  const { mutate: createTickets, isPending } = CreatePendingTickets();
 
   const handleCheckoutClick = () => {
     if (!user) {
@@ -30,20 +26,12 @@ function NavSideCart({ isOpen }: NavSideCartProps) {
       return;
     }
 
-    if (cart.length === 0) return;
+    if (cart.length === 0) {
+      toast.error("No tickets in the cart");
+      return;
+    }
 
-    const items = cart.map((item) => ({
-      eventId: item.event._id,
-      sectionId: item.section._id,
-      quantity: item.total,
-    }));
-
-    createTickets(items, {
-      onSuccess: () => {
-        queryClient.setQueryData(["hasCreatedTickets"], true);
-        router.push("/checkout");
-      },
-    });
+    router.push("/checkout");
   };
 
   return (
@@ -90,9 +78,8 @@ function NavSideCart({ isOpen }: NavSideCartProps) {
               <button
                 onClick={handleCheckoutClick}
                 className="mt-3 w-full bg-orange-500 py-2 rounded hover:bg-orange-400 text-white cursor-pointer"
-                disabled={isPending}
               >
-                {isPending ? "Reserving..." : "Checkout"}
+                Checkout
               </button>
             </div>
           )}

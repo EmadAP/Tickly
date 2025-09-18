@@ -9,10 +9,10 @@ function MainBanner() {
       <BannerBg />
       <MaxWidthWrapper>
         <div className="flex flex-col relative z-10 bg-transparent">
-          <p className="leading-15 text-5xl font-semibold py-20 text-center text-white drop-shadow-xl">
+          <h1 className="leading-15 text-5xl lg:text-7xl font-extrabold py-20 text-center text-white drop-shadow-xl">
             The <span className="text-orange-500">safest</span> way to buy
             Tickets
-          </p>
+          </h1>
           <BannerSearch />
         </div>
       </MaxWidthWrapper>

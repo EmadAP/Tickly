@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
-import { Roboto_Mono } from "next/font/google";
+import { Montserrat, Comic_Neue } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "@/lib/context/QueryProvider";
 import { Toaster } from "@/components/ui/sonner";
@@ -9,14 +8,18 @@ import { ThemeProvider } from "@/lib/context/ThemeProvider";
 import Navbar from "@/templates/Navbar";
 import Footer from "@/templates/Footer";
 
-const robotoSans = Roboto({
-  variable: "--font-roboto-sans",
+const comicNeue = Comic_Neue({
+  variable: "--font-comic-neue",
   subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
 });
 
-const robotoMono = Roboto_Mono({
-  variable: "--font-roboto-mono",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -32,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${robotoSans.variable} ${robotoMono.variable} antialiased`}
+        className={`${montserrat.variable} ${comicNeue.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"

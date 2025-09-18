@@ -45,7 +45,7 @@ export const Ticket: React.FC<TicketProps> = ({
 
   return (
     <div className="flex flex-col mx-4 gap-1">
-      <div className="relative md:p-2 px-2 py-6  bg-zinc-200 dark:bg-slate-800 rounded-3xl text-slate-900 dark:text-white ">
+      <div className="relative md:p-4 px-4 py-6  bg-zinc-200 dark:bg-slate-800 rounded-3xl text-slate-900 dark:text-white ">
         {/* Background watermark */}
         <div className="absolute inset-0 pointer-events-none select-none overflow-hidden rounded-3xl">
           <div className="flex items-center justify-center rotate-[-25deg] md:rotate-[-15deg] opacity-10 w-full h-full">
